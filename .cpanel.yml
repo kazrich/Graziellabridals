@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DJANGO_SETTINGS_MODULE=website.settings
+    - /usr/local/cpanel/3rdparty/bin/python3 manage.py migrate
+    - /usr/local/cpanel/3rdparty/bin/python3 manage.py collectstatic --noinput

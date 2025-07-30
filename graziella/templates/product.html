@@ -1,0 +1,1583 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products|Graziella Bridals</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Favicon (Browser tab icon) -->
+      <link rel="icon" type="image/png" href="{% static 'bridals/img/logo.png' %}" />
+
+      <!-- Open Graph meta tags for link sharing preview -->
+      <meta property="og:title" content="Graziella Bridals" />
+      <meta property="og:description" content="A Legacy Of Excellence " />
+      <meta property="og:image" content="https://yourdomain.com/static/bridals/img/logo.png" />
+      <meta property="og:url" content="https://yourdomain.com/" />
+      <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+    /* navbar */
+    .navbar-nav .nav-link {
+    position: relative;
+    color: #ffffff;
+    padding: 8px 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #d4af37;
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #d4af37;
+  }
+
+  .navbar-nav .nav-link:hover::after {
+    width: 80%;
+  }
+
+
+   /* General Styles for Top Contact Bar */
+    .top-contact-bar {
+    font-size: 1em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+    transition: top 0.3s ease, padding 0.3s ease;
+    }
+
+    .top-contact-bar .contact-item {
+    color: #f5f5f5;
+    padding: 1px 10px;
+    }
+
+    .gold-icon {
+    color: gold;
+    margin-right: 6px;
+    }
+
+    /* Shrink the Top Contact Bar when scrolling down */
+    .shrink-contact-bar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.9em;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+    margin-top: 30px;  /* Add margin to prevent overlap with top contact bar */
+    transition: padding 0.3s ease, height 0.3s ease;
+    }
+
+    .navbar-expand-lg {
+    padding: 20px 0; /* Increased navbar height */
+    }
+
+    .navbar.shrink {
+    padding: 10px 0; /* Shrunk navbar height */
+    transition: padding 0.3s ease;
+    }
+
+    /* Reduce spacing between contact items on small screens */
+    @media (max-width: 768px) {
+      .top-contact-bar .contact-item {
+        margin-right: 5px; /* Reduce space between items */
+        padding: 4px 0;     /* Reduce top/bottom padding */
+        font-size: 10px;    /* Optional: reduce text size */
+      }
+
+      .top-contact-bar .container {
+        gap: 5px; /* If you're using flex-wrap and want to reduce vertical spacing */
+      }
+
+      /* Ensure the Top Contact Bar doesn't overlap with content on mobile */
+      .top-contact-bar {
+          padding-top: 10px;  /* Adjust padding to make it look better on small screens */
+          padding-bottom: 5px; /* Adjust padding */
+      }
+      
+    }
+   
+    /* navbar button*/
+    @media (max-width: 768px) {
+      .navbar-toggler {
+        display: block;
+        margin: 0 auto;           /* Horizontally center */
+        padding: 10px 20px;       /* Top-bottom 10px, left-right 20px */
+        border: none;
+        background-color: #ffffff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .brand-name {
+        font-size: 14px;
+      }
+
+      .brand-tagline {
+        font-size: 10px;
+      }
+    }
+
+
+/* =========================== 
+    PRODUCTS SELECTION
+  =========================== */
+.product-section {
+  padding: 40px 20px;
+  background-color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.filter-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-heading h3 {
+  font-size: 60px;
+  color: #d4af37;
+  font-family: 'Killery Bentom DEMO VERSION';
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: -30px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+}
+
+.filter-btn img {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+}
+
+.filter-btn span {
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+.filter-btn.active {
+  border-color: #d4af37;
+}
+
+.filter-btn:hover {
+  transform: scale(1.05);
+  border-color: #d4af37;
+}
+
+/* PRODUCT GRID */
+/* PRODUCT section */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 0 10px;
+}
+
+/* Anchor scroll target above grid */
+#product-anchor {
+  display: block;
+  height: 1px;
+  margin-bottom: 150px; /* Creates breathing room when scrolling */
+}
+
+.product-card {
+  padding: 15px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.product-card h3 {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #222;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* RESPONSIVE: Small Screens */
+@media screen and (max-width: 600px) {
+  /* FILTER section */
+  .filter-heading h3 {
+    font-size: 1rem;
+  }
+
+  .filter-btn span {
+    font-size: 12px;
+  }
+
+  .filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 16px;
+    justify-content: flex-start;
+    padding: 0 10px;
+  }
+
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-bar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* PRODUCT section */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* Override only columns */
+    gap: 16px;
+    padding: 0 10px;
+  }
+
+  .product-card img {
+    max-height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .product-card h3 {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+}
+
+
+
+/* BANNER WRAPPER */
+.category-banner-wrapper {
+  display: block;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto; /* centers the whole block */
+}
+
+/* SPLIT LAYOUT */
+.category-banner-split {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  border: none;
+  overflow: hidden;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+/* IMAGE SIDE */
+.banner-image {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.banner-image img {
+  width: 100%;
+  max-width: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* TEXT SIDE */
+.banner-text {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.banner-text h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-family: 'Georgia', serif;
+}
+
+.banner-text p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* 💡 MOBILE FRIENDLY */
+@media screen and (max-width: 600px) {
+  .category-banner-split {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .banner-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .banner-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .banner-text p {
+    font-size: 1rem;
+  }
+
+  /* 🧼 Extra spacing cleanup */
+  .banner-text {
+    margin-bottom: 0.5rem; /* tighten space below text */
+  }
+
+  /* If there's a container below the banner */
+  .category-banner-wrapper {
+    padding-bottom: 0.5rem; /* reduce bottom space on wrapper */
+  }
+
+  .category-banner-split + div {
+    margin-top: 100px; /* reduce top margin of next section */
+  }
+}
+
+
+
+/* 🧼 PAGINATION css code */
+#pagination {
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* adds spacing between buttons */
+  margin-top: 24px;
+}
+
+#pagination button {
+  padding: 10px 20px; /* more horizontal space for arrow */
+  font-size: 18px;    /* slightly smaller for sophistication */
+  border-radius: 6px; /* subtle curve for softness */
+  min-width: 60px;    /* ensures consistent width */
+  height: 48px;
+  background-color: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#pagination button:hover {
+  background-color: #000000;
+  color: #fff;
+  transform: scale(1.03);
+}
+
+
+/* 🪞 Subtle reflection under each arrow */
+#pagination button::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 8px;
+  pointer-events: none;
+}
+
+
+
+/* 🖱 Tooltip-style labels on hover (large screens only) */
+@media (hover: hover) and (pointer: fine) {
+  #pagination button::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  #pagination button:hover::before {
+    opacity: 1;
+  }
+}
+
+/* 📱 Tap-friendly styling for small screens */
+@media (hover: none) and (pointer: coarse) {
+  #pagination button:active {
+    background-color: #f0f0f0;
+  }
+}
+
+
+/* SHOW MORE */
+#show-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+#show-more-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#show-more-button:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+
+
+/* 💎 Inquiry Button Styling */
+.btn-inquire {
+  background-color: #d4af37; /* Luxe gold */
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-inquire i {
+  margin-right: 10px;
+}
+
+.btn-inquire:hover {
+  background-color: #ffffff;
+  color: #d4af37;
+  transform: translateY(-2px);
+  border: 1px solid #d4af37;
+}
+
+
+/* ----------------------------------------------------
+   🧁 Popup Overlay – Fullscreen with Blur (Desktop)
+---------------------------------------------------- */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.4s ease-in-out;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ----------------------------------------------------
+   💌 Popup Content – Default Desktop Layout
+---------------------------------------------------- */
+.popup-content {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  font-family: 'Quicksand', sans-serif;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+/* ----------------------------------------------------
+   📱 Mobile Layout Adjustments
+---------------------------------------------------- */
+@media (max-width: 600px) {
+  .popup-overlay {
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  .popup-content {
+    max-width: 480px;
+    padding: 1.5rem;
+    box-shadow: none;
+    margin-top: 3rem;
+    height: auto;
+  }
+
+  .popup-content input,
+  .popup-content select,
+  .popup-content textarea {
+    margin-bottom: 0.75rem;
+  }
+
+  .popup-content button {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 30px;
+    background-color: #d4af37;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  }
+
+  .popup-content button:hover {
+    background-color: #ffffff;
+  }
+
+}
+
+/* ----------------------------------------------------
+   ❌ Close Button
+---------------------------------------------------- */
+.close-btn {
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background-color: #000;
+  border-radius: 50px;
+}
+
+.close-btn:hover {
+  background-color: #ff0000;
+}
+
+/* ----------------------------------------------------
+   🧴 Form Elements
+---------------------------------------------------- */
+.popup-content input,
+.popup-content select,
+.popup-content textarea {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.popup-content input:focus,
+.popup-content select:focus,
+.popup-content textarea:focus {
+  border-color: #d4af37;
+  outline: none;
+}
+
+/* ----------------------------------------------------
+   📩 Submit Button
+---------------------------------------------------- */
+.btn-submit {
+  background-color: #d4af37;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #ffffff;
+}
+
+/* ----------------------------------------------------
+   🌟 Animations
+---------------------------------------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+/* social media...links in the footer */
+  .social-icons a {
+    color: #6d6868;
+    transition: color 0.3s ease;
+  }
+  .social-icons a:hover {
+    color: #ffffff;
+  }
+
+@media (max-width: 768px) {
+  .footer-left,
+  .footer-middle,
+  .footer-right {
+    margin-bottom: 30px;
+  }
+}
+
+
+
+</style>
+
+  
+</head>
+<body>
+
+<!-- Top Contact Bar -->
+<div class="top-contact-bar text-light py-1" style="background-color: #000000;">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+    <div class="contact-item">
+        <i class="fas fa-phone-alt gold-icon"></i> +256 772 463889
+    </div>
+    <div class="contact-item">
+        <i class="fas fa-envelope gold-icon"></i> graziellab889@gmail.com
+    </div>
+    </div>
+</div>
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #000000;">
+<div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}" style="gap: 10px;">
+    <img src="{% static 'bridals/img/logo.png' %}" alt="Logo" style="height: 60px; width: auto;">
+    <div style="display: flex; flex-direction: column;">
+        <strong style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold; ">Graziella Bridals</strong>
+        <small style="font-size: 12px; color: #d4af37;">A Legacy Of Excellence</small>
+    </div>
+    </a>
+    
+    <div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" style="margin: 0 auto;">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+    
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+                <li class="nav-item">
+        <a class="nav-link" href="#about" id="aboutLink">About Us</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#product">Products</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+        </li>
+    </ul>
+    </div>      
+</div>
+</nav>
+<!-- Navbar End -->
+
+<div class="prodct_selection"></div>
+<!-- Product -->
+<section class="product-section" style="padding-top: 120px;">
+    <section class="product-section">
+    <div class="filter-heading">
+        <h3 style="font-family: 'Killery Bentom DEMO VERSION'; color: #d4af37; font-size: 60px;">Filter</h3>
+    </div>
+
+    <div class="filter-bar" style="font-family: 'Georgia', serif;">
+        <button class="filter-btn active" data-filter="all">
+          <img src="{% static 'bridals/img/all.png' %}" alt="All" style="width:80px; height:auto;" />
+          <span>All</span>
+        </button>
+
+        <button class="filter-btn" data-filter="dresses">
+          <img src="{% static 'bridals/img/dress.png' %}" alt="Graziella Dresses"  style="width:80px; height:auto;"/>
+          <span>Second Looks</span>
+        </button>
+
+        <button class="filter-btn" data-filter="sets">
+          <img src="{% static 'bridals/img/jewle.png' %}" alt="Graziella Serenity Sets" style="width:80px; height:auto;" />
+          <span>Serenity Sets</span>
+        </button>
+
+
+        <button class="filter-btn" data-filter="cosmetics">
+          <img src="{% static 'bridals/img/cos.png' %}" alt="Graziella cosmetics" style="width:80px; height:auto;" />
+          <span>Cosmetics</span>
+        </button>
+
+        <button class="filter-btn" data-filter="sign">
+          <img src="{% static 'bridals/img/sign.png' %}" alt="Graziella Signature Details" style="width:80px; height:auto;"/>
+          <span>Signature Details</span>
+        </button>
+
+        <button class="filter-btn" data-filter="int">
+          <img src="{% static 'bridals/img/braz.png' %}" alt="Graziella Intimates" style="width:80px; height:auto;"/>
+          <span>Intimates</span>
+        </button>
+
+    </div>
+    </section>
+
+
+    <section class="category-banner-wrapper" data-category="all">
+        <div class="category-banner-split">
+            <div class="banner-image">
+                <img src="{% static 'bridals/img/bg.png' %}" alt="Elegant Bag" />
+            </div>
+            <div class="banner-text" style="font-family: 'Courier New'; font-weight: bold;">
+                <h2 style="font-family: 'Killery Bentom DEMO VERSION'; color: #d4af37; font-size: 60px;">Our Collections</h2>
+                <p>
+                    At Graziella Bridals, your journey goes beyond the gown. We offer a curated collection of 
+                    <span style="color: #d4af37;">Accessories</span>, stylish 
+                    <span style="color: #d4af37;">Maid dresses</span>, graceful 
+                    <span style="color: #d4af37;">Changing gowns</span>, and statement-making 
+                    <span style="color: #d4af37;">evening</span> and 
+                    <span style="color: #d4af37;">prom dresses</span>. Whether it's the perfect veil, coordinated bridal party outfits, or a show-stopping dress for a gala or send-off, each piece is chosen to enhance your moment with beauty and ease.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+<div id="product-anchor"></div>
+  <div class="product-grid">
+
+    <!-- Second Looks -->
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/maid5.jpeg' %}" alt="Graziella Maids" />
+      <h3>Maids Outfit</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/maid4.jpeg' %}" alt="Graziella Maids" />
+      <h3>Maids Outfit</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/maid3.jpeg' %}" alt="Graziella Maids" />
+      <h3>Maids Outfit</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/maid2.jpeg' %}" alt="Graziella Maids" />
+      <h3>Maids Outfit</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/maid1.jpeg' %}" alt="Graziella Maids" />
+      <h3>Maids Outfit</h3>
+    </div>
+
+
+
+
+      <!-- Dresses -->
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/evening4.jpeg' %}" alt="Graziella Evening" />
+      <h3>Dresses Outfits</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/evening1.jpeg' %}" alt="Graziella Evening" />
+      <h3>Dresses Outfits</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/evening3.jpeg' %}" alt="Graziella Evening" />
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card bra">
+      <img src="{% static 'bridals/img/evening2.jpeg' %}" alt="Graziella Evening" />
+      <h3>Dresses Outfits</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/evening5.jpeg' %}" alt="Graziella Evening" />
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <!-- Dresses -->
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/prom1.jpeg' %}" alt="Graziella Dresses" />
+      <h3>Dresses Outfits</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/prom5.jpeg' %}" alt="Graziella Dresses" />
+      <h3>Dresses Outfits</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/prom4.jpeg' %}" alt="Graziella Dresses" />
+      <h3>Dresses Outfits</h3>
+    </div>
+    <div class="product-card dresses">
+      <img src="{% static 'bridals/img/prom3.jpeg' %}" alt="Graziella Dresses" />
+      <h3>Dresses Outfits</h3>
+    </div>
+    <div class="product-card ">
+      <img src="{% static 'bridals/img/prom2.jpeg' %}" alt="Graziella Dresses" />
+      <h3>Dresses Outfits</h3>
+    </div>
+
+
+
+
+    <!-- Cosmetics -->
+         <!-- perfume -->
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/perfumes6.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Perfume</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/perfumes1.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Perfume</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/perfumes4.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Perfume</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/perfumes3.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Perfume</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/perfumes5.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Perfume</h3>
+    </div>
+
+
+         <!-- lip stick -->
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/lip2.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipstick</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/lip1.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipstick</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/lip4.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipstick</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/lip3.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipstick</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/lip5.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipstick</h3>
+    </div>
+
+         <!-- Lip Gloss -->
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/Lipg2.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipgloss</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/Lipg1.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipgloss</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/Lipg4.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipgloss</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/Lipg3.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipgloss</h3>
+    </div>
+    <div class="product-card cosmetics">
+      <img src="{% static 'bridals/img/Lipg5.jpeg' %}" alt="Graziella cosmetics" />
+      <h3>Lipgloss</h3>
+    </div>
+
+
+
+    <!-- intimates -->
+         <!-- Nickers -->
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nic1.jpeg' %}" alt="Graziella Nickers" />
+      <h3>Nickers</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nic2.jpeg' %}" alt="Graziella Nickers" />
+      <h3>Nickers</h3>
+    </div>
+
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nic4.jpeg' %}" alt="Graziella Nickers" />
+      <h3>Nickers</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nic3.jpeg' %}" alt="Graziella Nickers" />
+      <h3>Nickers</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nic5.jpeg' %}" alt="Graziella Nickers" />
+      <h3>Nickers</h3>
+    </div>
+
+         <!-- Nickers & Bras -->
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nite1.jpeg' %}" alt="Graziella Nights" />
+      <h3>Nights</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nite2.jpeg' %}" alt="Graziella Nights" />
+      <h3>Nights</h3>
+    </div>
+
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nite4.jpeg' %}" alt="Graziella Nights" />
+      <h3>Nights</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nite3.jpeg' %}" alt="Graziella Nights" />
+      <h3>Nights</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/nite5.jpeg' %}" alt="Graziella Nights" />
+      <h3>Nights</h3>
+    </div>
+
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/bras1.jpeg' %}" alt="Graziella Bra" />
+      <h3>Bra</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/bras2.jpeg' %}" alt="Graziella Bra" />
+      <h3>Bra</h3>
+    </div>
+
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/bras4.jpeg' %}" alt="Graziella Bra" />
+      <h3>Bra</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/bras3.jpeg' %}" alt="Graziella Bra" />
+      <h3>Bra</h3>
+    </div>
+    <div class="product-card int">
+      <img src="{% static 'bridals/img/bras5.jpeg' %}" alt="Graziella Bra" />
+      <h3>Bra</h3>
+    </div>
+
+
+    <!-- Serenity Sets/ Jewlerry -->
+         <!-- Rings -->
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/a.jpeg' %}" alt="Graziella rings" />
+      <h3>Ring</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ring2.jpeg' %}" alt="Graziella Ring" />
+      <h3>Ring</h3>
+    </div>
+
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ring4.jpeg' %}" alt="Graziella Ring" />
+      <h3>Ring</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ring3.jpeg' %}" alt="Graziella Ring" />
+      <h3>Ring</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ring5.jpeg' %}" alt="Graziella Ring" />
+      <h3>Ring</h3>
+    </div>
+
+
+         <!-- Earrings -->
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ear1.jpeg' %}" alt="Graziella Earrings" />
+      <h3>Earrings</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ear2.jpeg' %}" alt="Graziella Earrings" />
+      <h3>Earrings</h3>
+    </div>
+
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ear4.jpeg' %}" alt="Graziella Earrings" />
+      <h3>Earrings</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/ear3.jpeg' %}" alt="Graziella Earrings" />
+      <h3>Earrings</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/a3.jpeg' %}" alt="Graziella Earrings" />
+      <h3>Earrings</h3>
+    </div>
+
+         <!-- Necklaces -->
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/neck1.jpeg' %}" alt="Graziella Necklace" />
+      <h3>Necklace</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/neck2.jpeg' %}" alt="Graziella Necklace" />
+      <h3>Necklace</h3>
+    </div>
+
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/neck4.jpeg' %}" alt="Graziella Necklace" />
+      <h3>Necklace</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/neck3.jpeg' %}" alt="Graziella Necklace" />
+      <h3>Necklace</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/neck5.jpeg' %}" alt="Graziella Necklace" />
+      <h3>Necklace</h3>
+    </div>
+
+         <!-- Bracelets and B -->
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/brace1.jpeg' %}" alt="Graziella Bracelets" />
+      <h3>Bracelets</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/brace2.jpeg' %}" alt="Graziella Bracelets" />
+      <h3>Bracelets</h3>
+    </div>
+
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/brace4.jpeg' %}" alt="Graziella Bracelets" />
+      <h3>Bracelets</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/brace3.jpeg' %}" alt="Graziella Bracelets" />
+      <h3>Bracelets</h3>
+    </div>
+    <div class="product-card sets">
+      <img src="{% static 'bridals/img/brace5.jpeg' %}" alt="Graziella Bracelets" />
+      <h3>Bracelets</h3>
+    </div>
+
+
+    <!-- Signature Details -->
+         <!-- Gloves -->
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/glove1.jpeg' %}" alt="Graziella Glove" />
+      <h3>Glove</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/glove2.jpeg' %}" alt="Graziella Glove" />
+      <h3>Glove</h3>
+    </div>
+
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/glove4.jpeg' %}" alt="Graziella Glove" />
+      <h3>Glove</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/glove3.jpeg' %}" alt="Graziella Glove" />
+      <h3>Glove</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/glove5.jpeg' %}" alt="Graziella Glove" />
+      <h3>Glove</h3>
+    </div>
+
+         <!-- Clutch-->
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Clutch1.jpeg' %}" alt="Graziella Clutch" />
+      <h3>Clutch</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Clutch2.jpeg' %}" alt="Graziella Clutch" />
+      <h3>Clutch</h3>
+    </div>
+
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Clutch4.jpeg' %}" alt="Graziella Clutch" />
+      <h3>Clutch</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Clutch3.jpeg' %}" alt="Graziella Clutch" />
+      <h3>Clutch</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Clutch5.jpeg' %}" alt="Graziella Clutch" />
+      <h3>Clutch</h3>
+    </div>
+
+         <!-- Bags -->
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/bag1.jpeg' %}" alt="Graziella Hand bag" />
+      <h3>Hand bag</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/bag2.jpeg' %}" alt="Graziella Hand bag" />
+      <h3>Hand bag</h3>
+    </div>
+
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/bag4.jpeg' %}" alt="Graziella Hand bag" />
+      <h3>Hand bag</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/bag3.jpeg' %}" alt="Graziella Hand bag" />
+      <h3>Hand bag</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/bag5.jpeg' %}" alt="Graziella Hand bag" />
+      <h3>Hand bag</h3>
+    </div>
+
+         <!-- Shades -->
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Shade1.jpeg' %}" alt="Graziella Shades" />
+      <h3>Shades</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Shade2.jpeg' %}" alt="Graziella Shades" />
+      <h3>Shades</h3>
+    </div>
+
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Shade4.jpeg' %}" alt="Graziella Shades" />
+      <h3>Shades</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Shade3.jpeg' %}" alt="Graziella Shades" />
+      <h3>Shades</h3>
+    </div>
+    <div class="product-card sign">
+      <img src="{% static 'bridals/img/Shade5.jpeg' %}" alt="Graziella Shades" />
+      <h3>Shades</h3>
+    </div>
+
+
+    <!-- More product images -->
+  </div>
+
+    <!-- Pagination -->
+<div id="pagination">
+  <button onclick="changePage('prev')" data-label="Prev" data-direction="prev">
+    <span>←</span>
+  </button>
+  <button onclick="changePage('next')" data-label="Next" data-direction="next">
+    <span>→</span>
+  </button>
+</div>
+
+<div class="my-5"></div> <!-- Adds vertical space -->
+
+<!-- ASK Button -->
+<div class="text-center mb-5">
+  <a href="#" class="btn btn-inquire" id="askBtn">
+    <i class="fas fa-question-circle"></i> Ask
+  </a>
+</div>
+
+<!-- Popup Form -->
+<div id="askPopup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn" id="closePopup">&times;</span>
+    <form>
+      <h1 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px;">Feel Free And Ask Us</h1>
+      <p style=" font-size: 'Courier New'; text-align: center; font-size: 20px;">...We will answer you back in no time...</p>
+      
+    <div style="font-family: 'Georgia';">
+            <input type="text" name="name" placeholder="Name" required>
+          <input type="email" name="email" placeholder="Email (optional)">
+          <input type="text" name="contact" placeholder="Contact" required>
+
+          <select name="questionType" required>
+            <option value="" disabled selected>Choose question type</option>
+            <option>Bridal gowns</option>
+            <option>Prom Dresses</option>
+            <option>Maids Dresses</option>
+            <option>Evening Dresses</option>
+            <option>Changing Dresses</option>
+            <option>Second looks</option>
+            <option>Cosmetics</option>
+            <option>Intimates</option>
+            <option>Serenity set</option>
+            <option>Signature details</option>
+          </select>
+
+          <textarea name="message" placeholder="Tell us more..." rows="4" required></textarea>
+    </div>
+
+      <p style=" font-size: 'Courier New'; text-align: center;">Customer your Information is safe with us</p>
+
+      <button type="submit" class="btn btn-submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!-- Footer -->
+<footer class="text-white py-4 mt-5" style="background-color: #1a1a1a; border-top: 1px solid #444;">
+  <div class="footer" style="display: flex; flex-direction: column;padding: 40px; color: #6d6868;">
+
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+      
+      <!-- Left Section: Working Days & Hours -->
+      <div class="footer-left" style="flex: 1; min-width: 250px;">
+        <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Working Hours</h2>
+        <p style="font-size: 18px;">Monday - Friday: <span style="color: #ffffff;">08:00 AM – 6:00 PM</span></p>
+        <p style="font-size: 18px;">Saturday: <span style="color: #ffffff;">10:00 AM – 6:00 PM</span></p>
+        <p style="font-size: 18px;">Sunday: <span style="color: #ffffff;">for only those with bookings</span></p>
+
+      </div>
+
+      <!-- Middle Section: Social Media Icons -->
+        <div  class="footer-middle" style="flex: 1; min-width: 250px; text-align: center;">
+          <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Follow Us</h2>
+          <div class="social-icons" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 30px;">
+            <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          </div>
+
+        </div>
+        
+
+      <!-- Right Section: Location and Contact -->
+      <div class="footer-right" style="flex: 1; min-width: 250px;">
+        <p>If you have any questions regarding our products or our service, please contact our customer service.</p>
+        <div class="contact-info">
+          <h3 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Contact Us</h3>
+          <p><strong>Phone:</strong><span style="color: #ffffff;">+256 772 463889</span></p>
+          <p><strong>Email:</strong> 
+            <a href="mailto:graziellab889@gmail.com" style="color: #ffffff; text-decoration: none;">
+              graziellab889@gmail.com
+            </a>
+          </p>
+
+        </div>
+        <div class="address-info">
+          <h4 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Address</h4>
+          <p><span style="color: #ffffff;">Shop No.L16, Ivory Plaza,<br>Plot 4, 23 Wilson Rd, Kampala</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Centered Copyright -->
+    <div style="text-align: center; margin-top: 40px;">
+      <p class="mb-1" style="color: #d4af37;">© 2025 Graziella Bridals. All rights reserved.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+
+// ASK pop up js code
+const askBtn = document.getElementById("askBtn");
+const askPopup = document.getElementById("askPopup");
+const closePopup = document.getElementById("closePopup");
+
+askBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  askPopup.style.display = "flex";
+  document.body.classList.add("popup-active");
+});
+
+closePopup.addEventListener("click", () => {
+  askPopup.style.display = "none";
+  document.body.classList.remove("popup-active");
+});
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const pagination = document.getElementById("pagination");
+  const productGrid = document.querySelector(".product-grid");
+
+setTimeout(() => {
+  const scrollTarget = document.querySelector(".prodct_selection");
+  if (scrollTarget) {
+    window.scrollTo({
+      top: scrollTarget.offsetTop,
+      behavior: "auto" // or "smooth" if you want it animated
+    });
+  }
+}, 50); // slight delay ensures layout is complete
+
+
+  // Setup Show More container
+  const showMoreContainer = document.createElement("div");
+  showMoreContainer.id = "show-more-container";
+  showMoreContainer.innerHTML = `<button id="show-more-button">Show More</button>`;
+  productGrid.after(showMoreContainer);
+
+  const showMoreBtn = document.getElementById("show-more-button");
+  const previewLimit = 5;
+  const itemsPerPage = 10;
+  let currentFilter = "all";
+  let isExpanded = false;
+  let currentPage = 1;
+
+  // 🔍 Get all filtered product cards
+  function getFilteredCards() {
+    const allCards = Array.from(document.querySelectorAll(".product-card"));
+    return currentFilter === "all"
+      ? allCards
+      : allCards.filter(card => card.classList.contains(currentFilter));
+  }
+
+  // 📦 Show filtered cards based on view mode
+  function updateGrid() {
+    const filteredCards = getFilteredCards();
+
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.style.display = "none";
+    });
+
+    isExpanded = false;
+    showMoreBtn.textContent = "Show More";
+    showMoreBtn.style.display = "none";
+    pagination.style.display = "none";
+
+    if (currentFilter === "all") {
+      pagination.style.display = "flex";
+      showPage(currentPage, filteredCards);
+    } else {
+      currentPage = 1;
+
+      if (filteredCards.length > previewLimit) {
+        filteredCards.slice(0, previewLimit).forEach(card => {
+          card.style.display = "block";
+        });
+        showMoreBtn.style.display = "block";
+      } else {
+        filteredCards.forEach(card => {
+          card.style.display = "block";
+        });
+      }
+    }
+  }
+
+  // 📄 Show pagination page & scroll above product grid
+  function showPage(page, filteredCards) {
+    const totalPages = Math.ceil(filteredCards.length / itemsPerPage);
+    currentPage = Math.min(Math.max(1, page), totalPages);
+
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.style.display = "none";
+    });
+
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = currentPage * itemsPerPage;
+    filteredCards.slice(start, end).forEach(card => {
+      card.style.display = "block";
+    });
+
+    const prevBtn = pagination.querySelector("button[data-direction='prev']");
+    const nextBtn = pagination.querySelector("button[data-direction='next']");
+    prevBtn.style.display = currentPage > 1 ? "inline-block" : "none";
+    nextBtn.style.display = currentPage < totalPages ? "inline-block" : "none";
+
+    prevBtn.onclick = () => showPage(currentPage - 1, filteredCards);
+    nextBtn.onclick = () => showPage(currentPage + 1, filteredCards);
+
+    // ⬆️ Scroll slightly above product grid
+    const anchor = document.getElementById("product-anchor");
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  // 🔁 Toggle Show More / Show Less
+  showMoreBtn.addEventListener("click", () => {
+    const filteredCards = getFilteredCards();
+
+    if (isExpanded) {
+      filteredCards.forEach(card => card.style.display = "none");
+      filteredCards.slice(0, previewLimit).forEach(card => card.style.display = "block");
+      showMoreBtn.textContent = "Show More";
+      isExpanded = false;
+    } else {
+      filteredCards.forEach(card => card.style.display = "block");
+      showMoreBtn.textContent = "Show Less";
+      isExpanded = true;
+    }
+  });
+
+  // 🎯 Filter buttons click logic
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.dataset.filter;
+      currentPage = 1;
+      updateGrid();
+    });
+  });
+
+  // 🧹 Initialize grid
+  updateGrid();
+});
+
+
+
+
+    // js for closing the small screen button
+    document.addEventListener('click', function (event) {
+    const navbarCollapse = document.getElementById('mainNavbar');
+    const isClickInsideNavbar = navbarCollapse.contains(event.target);
+    const isToggler = event.target.closest('.navbar-toggler');
+
+    if (!isClickInsideNavbar && !isToggler && navbarCollapse.classList.contains('show')) {
+      new bootstrap.Collapse(navbarCollapse).hide();
+    }
+  });
+
+  // js overlay form
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector(".contact-banner form");
+      form.addEventListener("submit", function (e) {
+        alert("Your message has been sent. Thank you!");
+      });
+    });
+
+
+    // navbar
+    // Get elements
+    const contactBar = document.querySelector('.top-contact-bar');
+    const navbar = document.querySelector('.navbar');
+    let prevScrollPos = window.pageYOffset;
+
+    // Event listener for scroll
+    window.onscroll = function () {
+        let currentScrollPos = window.pageYOffset;
+
+        // Check if the user scrolls down
+        if (currentScrollPos > prevScrollPos) {
+        // When scrolling down, shrink both the top contact bar and the navbar
+        contactBar.classList.add('shrink-contact-bar');
+        navbar.classList.add('shrink');
+        } else {
+        // When scrolling up, reset both to normal size
+        contactBar.classList.remove('shrink-contact-bar');
+        navbar.classList.remove('shrink');
+        }
+
+        prevScrollPos = currentScrollPos;
+    };
+
+
+
+
+
+
+
+// filter for BANNER
+  document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const productSections = document.querySelectorAll(".product-section");
+    const bannerWrapper = document.querySelector(".category-banner-wrapper");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const selectedFilter = button.getAttribute("data-filter").toLowerCase();
+
+        // Toggle active button class
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        // Hide the banner if not 'all'
+        if (selectedFilter === "all") {
+          bannerWrapper.style.display = "block";
+        } else {
+          bannerWrapper.style.display = "none";
+        }
+
+        // Toggle product sections
+        productSections.forEach(section => {
+          const category = section.getAttribute("data-category").toLowerCase();
+          section.style.display = (selectedFilter === "all" || selectedFilter === category)
+            ? "block"
+            : "none";
+        });
+      });
+    });
+  });
+
+</script>
+  
+</body>
+</html>

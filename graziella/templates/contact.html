@@ -1,0 +1,485 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact|Graziella Bridals</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Favicon (Browser tab icon) -->
+      <link rel="icon" type="image/png" href="{% static 'bridals/img/logo.png' %}" />
+
+      <!-- Open Graph meta tags for link sharing preview -->
+      <meta property="og:title" content="Graziella Bridals" />
+      <meta property="og:description" content="A Legacy Of Excellence" />
+      <meta property="og:image" content="https://yourdomain.com/static/bridals/img/logo.png" />
+      <meta property="og:url" content="https://yourdomain.com/" />
+      <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+    /* navbar */
+    .navbar-nav .nav-link {
+    position: relative;
+    color: #ffffff;
+    padding: 8px 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #d4af37;
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #d4af37;
+  }
+
+  .navbar-nav .nav-link:hover::after {
+    width: 80%;
+  }
+
+
+   /* General Styles for Top Contact Bar */
+    .top-contact-bar {
+    font-size: 1em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+    transition: top 0.3s ease, padding 0.3s ease;
+    }
+
+    .top-contact-bar .contact-item {
+    color: #f5f5f5;
+    padding: 1px 10px;
+    }
+
+    .gold-icon {
+    color: gold;
+    margin-right: 6px;
+    }
+
+    /* Shrink the Top Contact Bar when scrolling down */
+    .shrink-contact-bar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.9em;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+    margin-top: 30px;  /* Add margin to prevent overlap with top contact bar */
+    transition: padding 0.3s ease, height 0.3s ease;
+    }
+
+    .navbar-expand-lg {
+    padding: 20px 0; /* Increased navbar height */
+    }
+
+    .navbar.shrink {
+    padding: 10px 0; /* Shrunk navbar height */
+    transition: padding 0.3s ease;
+    }
+
+    /* Reduce spacing between contact items on small screens */
+    @media (max-width: 768px) {
+      .top-contact-bar .contact-item {
+        margin-right: 5px; /* Reduce space between items */
+        padding: 4px 0;     /* Reduce top/bottom padding */
+        font-size: 10px;    /* Optional: reduce text size */
+      }
+
+      .top-contact-bar .container {
+        gap: 5px; /* If you're using flex-wrap and want to reduce vertical spacing */
+      }
+
+      /* Ensure the Top Contact Bar doesn't overlap with content on mobile */
+      .top-contact-bar {
+          padding-top: 10px;  /* Adjust padding to make it look better on small screens */
+          padding-bottom: 5px; /* Adjust padding */
+      }
+      
+    }
+   
+    /* navbar button*/
+    @media (max-width: 768px) {
+      .navbar-toggler {
+        display: block;
+        margin: 0 auto;           /* Horizontally center */
+        padding: 10px 20px;       /* Top-bottom 10px, left-right 20px */
+        border: none;
+        background-color: #ffffff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .brand-name {
+        font-size: 14px;
+      }
+
+      .brand-tagline {
+        font-size: 10px;
+      }
+    }
+
+
+/* =========================== 
+    CONTACT BANNER CONTAINER
+  =========================== */
+  .contact-banner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px 5%;
+  color: #fff;
+  width: 100%;
+  margin-top: 150px; /* Default spacing for larger screens */
+}
+
+
+.banner-left, .banner-right {
+  flex: 1 1 300px;
+}
+
+.banner-left h2, .banner-left h3, .banner-left h4,
+.form-header h1, .thank-you {
+  color: goldenrod;
+  font-size: 'Courier New';
+}
+
+.banner-left p, .form-header p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.banner-left a {
+  color: goldenrod;
+  text-decoration: none;
+}
+
+.banner-right iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-section {
+  padding: 50px 5%;
+  background-color: #fff;
+}
+
+.form-overlay {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.privacy-note {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 10px;
+  color: #333;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: goldenrod;
+  color: rgb(0, 0, 0);
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+
+}
+
+button:hover {
+  background-color: #ffffff;
+  box-shadow:  rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .contact-banner {
+    flex-direction: column;
+  }
+}
+
+
+/* social media...links in the footer */
+  .social-icons a {
+    color: #6d6868;
+    transition: color 0.3s ease;
+  }
+  .social-icons a:hover {
+    color: #ffffff;
+  }
+
+@media (max-width: 768px) {
+  .footer-left,
+  .footer-middle,
+  .footer-right {
+    margin-bottom: 30px;
+  }
+}
+
+
+
+</style>
+
+  
+</head>
+<body>
+
+<!-- Top Contact Bar -->
+    <div class="top-contact-bar text-light py-1" style="background-color: #000000;">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <div class="contact-item">
+            <i class="fas fa-phone-alt gold-icon"></i> +256 772 463889
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-envelope gold-icon"></i> graziellab889@gmail.com
+        </div>
+        </div>
+    </div>
+  
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #000000;">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}" style="gap: 10px;">
+        <img src="{% static 'bridals/img/logo.png' %}" alt="Logo" style="height: 60px; width: auto;">
+        <div style="display: flex; flex-direction: column;">
+          <strong style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold; ">Graziella Bridals</strong>
+          <small style="font-size: 12px; color: #d4af37;">A Legacy Of Excellence</small>
+        </div>
+      </a>
+      
+      <div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" style="margin: 0 auto;">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      
+  
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+          </li>
+                    <li class="nav-item">
+            <a class="nav-link" href="#about" id="aboutLink">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'product' %}">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>      
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+
+
+
+<!-- Contact Banner Start -->
+<section class="contact-banner">
+  <!-- Left: Contact Info -->
+  <div class="banner-left" style="color: #000000;">
+    <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 60px;">Contact Us</h2>
+    <p>For more help, feel free to fill the form below. We’ll get to you in no time.</p>
+
+    <div class="contact-info">
+      <h3 style="font-family: 'Cinzel', serif;font-size: 20px; font-weight: bold;">GRAZIELLA BRIDALS</h3>
+      <p><strong>Phone:</strong> +256 772 463889</p>
+      <p><strong>Email:</strong> <a href="mailto:graziellab889@gmail.com">graziellab889@gmail.com</a></p>
+    </div>
+
+    <div class="address-info">
+      <h4 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Address</h4>
+      <p>Shop No.L16, Ivory Plaza,<br>Plot 4, 23 Wilson Rd, Kampala</p>
+    </div>
+  </div>
+
+  <!-- Right: Embedded Map -->
+  <div class="banner-right">
+    <iframe
+      loading="lazy"
+      allowfullscreen
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3849.4935045339353!2d32.57480281034807!3d0.31388266402877196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbdd4ddf594fd%3A0x5721d5a0a0b03ba2!2sGraziella&#39;S%20Fashion%20Hub!5e1!3m2!1sen!2sug!4v1753356434054!5m2!1sen!2sug"
+    ></iframe>
+  </div>
+</section>
+
+<!-- Form Section -->
+<section class="form-section">
+  <div class="form-overlay">
+    <div class="form-header">
+      <h1 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 60px;">Send Your Question</h1>
+      <p>Reach out for guidance, opportunities or assistance — we’re here for you.</p>
+    </div>
+    {% if name %}
+      <h3 class="thank-you">Thank you, {{ name }}!</h3>
+    {% endif %}
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="tel" name="number" placeholder="Your Contact" required pattern="[0-9]{10}" title="Enter a 10-digit phone number">
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+
+      <p class="privacy-note">Client, your information is safe with us.</p>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- Footer -->
+<footer class="text-white py-4 mt-5" style="background-color: #1a1a1a; border-top: 1px solid #444;">
+  <div class="footer" style="display: flex; flex-direction: column;padding: 40px; color: #6d6868;">
+
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+      
+      <!-- Left Section: Working Days & Hours -->
+      <div class="footer-left" style="flex: 1; min-width: 250px;">
+        <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Working Hours</h2>
+        <p style="font-size: 18px;">Monday - Friday: <span style="color: #ffffff;">08:00 AM – 6:00 PM</span></p>
+        <p style="font-size: 18px;">Saturday: <span style="color: #ffffff;">10:00 AM – 6:00 PM</span></p>
+        <p style="font-size: 18px;">Sunday: <span style="color: #ffffff;">for only those with bookings</span></p>
+
+      </div>
+
+      <!-- Middle Section: Social Media Icons -->
+        <div  class="footer-middle" style="flex: 1; min-width: 250px; text-align: center;">
+          <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Follow Us</h2>
+          <div class="social-icons" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 30px;">
+            <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          </div>
+
+        </div>
+        
+
+      <!-- Right Section: Location and Contact -->
+      <div class="footer-right" style="flex: 1; min-width: 250px;">
+        <p>If you have any questions regarding our products or our service, please contact our customer service.</p>
+        <div class="contact-info">
+          <h3 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Contact Us</h3>
+          <p><strong>Phone:</strong><span style="color: #ffffff;">+256 772 463889</span></p>
+          <p><strong>Email:</strong> 
+            <a href="mailto:graziellab889@gmail.com" style="color: #ffffff; text-decoration: none;">
+              graziellab889@gmail.com
+            </a>
+          </p>
+
+        </div>
+        <div class="address-info">
+          <h4 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Address</h4>
+          <p><span style="color: #ffffff;">Shop No.L16, Ivory Plaza,<br>Plot 4, 23 Wilson Rd, Kampala</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Centered Copyright -->
+    <div style="text-align: center; margin-top: 40px;">
+      <p class="mb-1" style="color: #d4af37;">© 2025 Graziella Bridals. All rights reserved.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    // js for closing the small screen button
+    document.addEventListener('click', function (event) {
+    const navbarCollapse = document.getElementById('mainNavbar');
+    const isClickInsideNavbar = navbarCollapse.contains(event.target);
+    const isToggler = event.target.closest('.navbar-toggler');
+
+    if (!isClickInsideNavbar && !isToggler && navbarCollapse.classList.contains('show')) {
+      new bootstrap.Collapse(navbarCollapse).hide();
+    }
+  });
+
+  // js overlay form
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector(".contact-banner form");
+      form.addEventListener("submit", function (e) {
+        alert("Your message has been sent. Thank you!");
+      });
+    });
+
+
+    // navbar
+    // Get elements
+    const contactBar = document.querySelector('.top-contact-bar');
+    const navbar = document.querySelector('.navbar');
+    let prevScrollPos = window.pageYOffset;
+
+    // Event listener for scroll
+    window.onscroll = function () {
+        let currentScrollPos = window.pageYOffset;
+
+        // Check if the user scrolls down
+        if (currentScrollPos > prevScrollPos) {
+        // When scrolling down, shrink both the top contact bar and the navbar
+        contactBar.classList.add('shrink-contact-bar');
+        navbar.classList.add('shrink');
+        } else {
+        // When scrolling up, reset both to normal size
+        contactBar.classList.remove('shrink-contact-bar');
+        navbar.classList.remove('shrink');
+        }
+
+        prevScrollPos = currentScrollPos;
+    };
+</script>
+  
+</body>
+</html>

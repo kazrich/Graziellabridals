@@ -1,0 +1,1615 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home|Graziella Bridals</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Favicon (Browser tab icon) -->
+  <link rel="icon" type="image/png" href="{% static 'bridals/img/logo.png' %}" />
+
+  <!-- Open Graph meta tags for link sharing preview -->
+  <meta property="og:title" content="Graziella Bridals" />
+  <meta property="og:description" content="A Legacy Of Excellence " />
+  <meta property="og:image" content="https://yourdomain.com/static/bridals//img/logo.png" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+
+
+  <style>
+
+    /* navbar */
+    .navbar-nav .nav-link {
+    position: relative;
+    color: #ffffff;
+    padding: 8px 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #d4af37;
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #d4af37;
+  }
+
+  .navbar-nav .nav-link:hover::after {
+    width: 80%;
+  }
+
+
+   /* General Styles for Top Contact Bar */
+    .top-contact-bar {
+    font-size: 1em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+    transition: top 0.3s ease, padding 0.3s ease;
+    }
+
+    .top-contact-bar .contact-item {
+    color: #f5f5f5;
+    padding: 1px 10px;
+    }
+
+    .gold-icon {
+    color: gold;
+    margin-right: 6px;
+    }
+
+    /* Shrink the Top Contact Bar when scrolling down */
+    .shrink-contact-bar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.9em;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+    margin-top: 30px;  /* Add margin to prevent overlap with top contact bar */
+    transition: padding 0.3s ease, height 0.3s ease;
+    }
+
+    .navbar-expand-lg {
+    padding: 20px 0; /* Increased navbar height */
+    }
+
+    .navbar.shrink {
+    padding: 10px 0; /* Shrunk navbar height */
+    transition: padding 0.3s ease;
+    }
+
+    /* Reduce spacing between contact items on small screens */
+    @media (max-width: 768px) {
+      .top-contact-bar .contact-item {
+        margin-right: 5px; /* Reduce space between items */
+        padding: 4px 0;     /* Reduce top/bottom padding */
+        font-size: 10px;    /* Optional: reduce text size */
+      }
+
+      .top-contact-bar .container {
+        gap: 5px; /* If you're using flex-wrap and want to reduce vertical spacing */
+      }
+
+      /* Ensure the Top Contact Bar doesn't overlap with content on mobile */
+      .top-contact-bar {
+          padding-top: 10px;  /* Adjust padding to make it look better on small screens */
+          padding-bottom: 5px; /* Adjust padding */
+      }
+      
+    }
+   
+    /* navbar button*/
+    @media (max-width: 768px) {
+      .navbar-toggler {
+        display: block;
+        margin: 0 auto;           /* Horizontally center */
+        padding: 10px 20px;       /* Top-bottom 10px, left-right 20px */
+        border: none;
+        background-color: #ffffff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .brand-name {
+        font-size: 14px;
+      }
+
+      .brand-tagline {
+        font-size: 10px;
+      }
+    }
+
+
+
+/* General Banner Layout */
+/* Large screen overlay blending */
+@media screen and (min-width: 992px) {
+  .overlay-container {
+    top: 30%;
+    right: -80px; /* push it inward toward main image */
+    opacity: 0.92;
+  }
+
+  .overlay-slide {
+    box-shadow: none;
+    border: 2px solid rgba(255,255,255,0.6);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .overlay-slide:hover {
+    transform: scale(1.03);
+  }
+}
+
+/* Initial hidden position */
+.overlay-slide,
+.main-slide {
+  opacity: 0;
+  transform: translateX(150px);
+  transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 2.5s ease;
+}
+
+.reveal .overlay-slide,
+.reveal .main-slide {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
+/* === Banner Layout === */
+/* === Banner Layout === */
+.banner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 150px 20px;
+  background-color: #fff;
+  gap: 20px;
+}
+
+/* === Text Styling === */
+.banner-text {
+  flex: 1 1 30%;
+  padding: 20px;
+}
+
+.about-heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  margin-top: 20px;
+}
+
+.banner-text h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.banner-text span {
+  color: gold;
+}
+
+.banner-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #000;
+  font-family: 'Courier New';
+}
+
+/* === Overlay Image Block === */
+.overlay-container {
+  flex: 0 0 220px; /* Gave more space for the image */
+  position: relative;
+  text-align: center;
+  z-index: 6;
+  overflow: visible;
+}
+
+.overlay-slide {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 220px; /* Increased size from 160px */
+  height: auto; /* Optional: preserve aspect ratio */
+  border-radius: 16px; /* Slightly smoother corners for visual elegance */
+  object-fit: contain;
+  box-shadow: 0 10px 32px rgba(255, 215, 0, 0.4); /* More depth */
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+
+/* === Main Image Block === */
+.main-container {
+  flex: 1 1 40%;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.main-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateX(150px);
+  transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 2.5s ease;
+}
+
+/* === Scroll Reveal Trigger === */
+.reveal .overlay-slide,
+.reveal .main-slide {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+
+  .banner-text,
+  .main-container,
+  .overlay-container {
+    flex: 1 1 100%;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .main-container {
+    min-height: 300px;
+    padding-bottom: 100px;
+  }
+
+  /* 📸 Larger Overlay Image */
+  .overlay-slide {
+    width: 160px;             /* Increased from 110px */
+    top: 380px;               /* Slightly higher for balance */
+    transform: translate(-50%, -50%) translateX(100px);
+  }
+
+  /* ✨ Reveal Animation */
+  .reveal .overlay-slide {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+}
+
+
+
+
+
+    /* preloader css */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1.about-heading {
+    display: inline-block;
+    position: relative;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+
+  h1.about-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 3px;
+    background-color: red;
+    transition: width 0.3s ease;
+  }
+
+  h1.about-heading:hover::after {
+    width: 100%;
+  }
+
+
+/* === Bridal Collection Section === */
+#bridal-collection {
+  background-color: #fef6f8;
+  padding: 60px 20px;
+}
+
+/* === Heading Styles === */
+#bridal-collection h2 {
+  font-family: 'Killery Bentom DEMO VERSION', cursive;
+  font-size: 36px;
+  color: #222;
+  text-align: center;
+  margin-bottom: 40px;
+}
+#bridal-collection h2 span {
+  display: block;
+  font-size: 42px;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #d4af37;
+}
+
+/* === Collection Cards === */
+.collection-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.collection-item .card {
+  height: 100%;
+  min-height: 340px; /* Optional fix for height consistency */
+}
+
+/* === Image Container Styling === */
+/* === Image Container with Aspect Ratio for Uniform Shape === */ 
+.image-container { 
+  width: 100%; aspect-ratio: 4 / 3; /* Maintain consistent shape */ 
+  height: 100%; 
+  overflow: hidden; 
+  position: relative;
+  border-radius: 12px; 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+/* === Image Styling with Object Fit === */ 
+.gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Show full image, no cropping */
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+}
+
+.gallery-image.active {
+  display: block;
+  opacity: 1;
+  position: relative;
+}
+
+.gallery-image:hover { 
+  transform: scale(1.05); 
+} 
+/* === Text Styling Below Image === */ 
+.text-container { 
+  text-align: center;
+  margin-top: 15px; 
+  } 
+
+  .gallery-title { 
+    font-size: 20px; font-weight: 600; 
+    color: #000000; margin-bottom: 10px; 
+  }
+
+  .gallery-link { 
+    text-decoration: none; 
+    color: #d4af37; 
+    font-weight: 500; 
+    transition: color 0.3s ease;
+  } 
+
+  .gallery-link:hover { 
+    color: #000000; 
+  } 
+  
+  /* === Responsive Tweaks === */ 
+  @media (max-width: 768px) { 
+    .gallery-title { font-size: 18px; } 
+    #bridal-collection h2 { font-size: 28px; } 
+    #bridal-collection h2 span { font-size: 32px; } 
+    .image-container { aspect-ratio: 3 / 4; /* Slightly taller for vertical styles */ 
+    max-height: 180px; } 
+  }
+
+
+/* Banner Area */
+.bridal-banner {
+  background-color: #fef6f8;
+  padding: 50px 20px;
+}
+
+.banner-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch; /* improves vertical alignment */
+}
+
+/* Text Area */
+.banner-t {
+  flex: 1 1 45%;
+  padding: 20px;
+}
+
+.banner-t h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #d4af37;
+  font-family: 'Killery Bentom DEMO VERSION';
+  font-size: 60px;
+}
+
+.banner-text p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.book-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #d4af37;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.book-button:hover{
+  background-color: #ffffff;
+}
+
+/* Dots */
+.dot-controls {
+  margin-top: 20px;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin: 0 6px;
+  background-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.spinner {
+  border-top-color: transparent; /* Gives that spinner illusion */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* Image Area */
+.banner-img {
+  flex: 1 1 50%;
+  position: relative;
+  height: 500px; /* Increased height for bigger screens */
+  min-width: 300px;
+}
+
+.banner-img .slide {
+  position: absolute; /* keeps all images stacked */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  opacity: 0;
+   pointer-events: none; /* prevents clicks on hidden images */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.banner-img .slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Responsive - Small Screens */
+@media (max-width: 768px) {
+  .banner-wrapper {
+    flex-direction: column;
+  }
+
+  .banner-t, .banner-img {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .banner-img {
+    position: relative;
+    height: 300px; /* Slightly larger than before */
+    margin-top: 30px;
+  }
+
+  .banner-img .slide {
+    position: absolute; /* fix for small screen stacking */
+    opacity: 0;
+  }
+
+  .banner-img .slide.active {
+    opacity: 1;
+    position: relative;
+  }
+}
+
+
+/* bridal gowns */
+.image-container {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.photo-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.text-container {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.photo-title {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+}
+
+.photo-link {
+    color: #777;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+/* Responsive - Two images per row on small screens */
+@media (max-width: 768px) {
+    .collection-item {
+        max-width: 48%;
+        flex: 1 1 48%;
+    }
+
+    .photo-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .collection-item {
+        max-width: 50%;
+    }
+
+    .photo-image {
+        height: 200px;
+    }
+}
+
+/* Increase image height on large screens */
+@media (min-width: 1200px) {
+    .photo-image {
+        height: 400px;
+    }
+}
+
+
+/* WRAPPERS FOR NEW PRODUCTS */
+.category-card .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.category-card .image-wrapper:hover {
+    transform: scale(1.03);
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-count {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.photo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.photo-item {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.photo-item:hover img {
+    transform: scale(1.1);
+}
+
+.caption {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #d4af37(255, 102, 153, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.photo-item:hover .caption {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .photo {
+        gap: 10px;
+    }
+
+    .photo-item {
+        max-width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .photo-item {
+        max-width: 48%;
+        flex: 1 1 48%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .photo-item img {
+        height: 400px;
+    }
+}
+
+
+
+/* 💎 Inquiry Button Styling */
+.btn-inquire {
+  background-color: #d4af37; /* Luxe gold */
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-inquire i {
+  margin-right: 10px;
+}
+
+.btn-inquire:hover {
+  background-color: #ffffff;
+  color: #d4af37;
+  transform: translateY(-2px);
+  border: 1px solid #d4af37;
+}
+
+
+
+/* ----------------------------------------------------
+   🧁 Popup Overlay – Fullscreen with Blur (Desktop)
+---------------------------------------------------- */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.4s ease-in-out;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ----------------------------------------------------
+   💌 Popup Content – Default Desktop Layout
+---------------------------------------------------- */
+.popup-content {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  font-family: 'Quicksand', sans-serif;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+/* ----------------------------------------------------
+   📱 Mobile Layout Adjustments
+---------------------------------------------------- */
+@media (max-width: 600px) {
+  .popup-overlay {
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  .popup-content {
+    max-width: 480px;
+    padding: 1.5rem;
+    box-shadow: none;
+    margin-top: 3rem;
+    height: auto;
+  }
+
+  .popup-content input,
+  .popup-content select,
+  .popup-content textarea {
+    margin-bottom: 0.75rem;
+  }
+
+  .popup-content button {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 30px;
+    background-color: #d4af37;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  }
+
+  .popup-content button:hover {
+    background-color: #ffffff;
+  }
+
+}
+
+/* ----------------------------------------------------
+   ❌ Close Button
+---------------------------------------------------- */
+.close-btn {
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background-color: #000;
+  border-radius: 50px;
+}
+
+.close-btn:hover {
+  background-color: #ff0000;
+}
+
+/* ----------------------------------------------------
+   🧴 Form Elements
+---------------------------------------------------- */
+.popup-content input,
+.popup-content select,
+.popup-content textarea {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.popup-content input:focus,
+.popup-content select:focus,
+.popup-content textarea:focus {
+  border-color: #d4af37;
+  outline: none;
+}
+
+/* ----------------------------------------------------
+   📩 Submit Button
+---------------------------------------------------- */
+.btn-submit {
+  background-color: #d4af37;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #ffffff;
+}
+
+/* ----------------------------------------------------
+   🌟 Animations
+---------------------------------------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+
+/* social media...links in the footer */
+  .social-icons a {
+    color: #6d6868;
+    transition: color 0.3s ease;
+  }
+  .social-icons a:hover {
+    color: #ffffff;
+  }
+
+@media (max-width: 768px) {
+  .footer-left,
+  .footer-middle,
+  .footer-right {
+    margin-bottom: 30px;
+  }
+}
+
+
+
+
+  </style>
+  
+</head>
+<body>
+
+
+
+
+
+<!-- Top Contact Bar -->
+    <div class="top-contact-bar text-light py-1" style="background-color: #000000;">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <div class="contact-item">
+            <i class="fas fa-phone-alt gold-icon"></i> +256 772 463889
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-envelope gold-icon"></i> graziellab889@gmail.com
+        </div>
+        </div>
+    </div>
+  
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #000000;">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}" style="gap: 10px;">
+        <img src="{% static 'bridals/img/logo.png' %}" alt="Logo" style="height: 60px; width: auto;">
+        <div style="display: flex; flex-direction: column;">
+          <strong style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold; ">Graziella Bridals</strong>
+          <small style="font-size: 12px; color: #d4af37;">A Legacy Of Excellence </small>
+        </div>
+      </a>
+      
+      <div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" style="margin: 0 auto;">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      
+  
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+                    <li class="nav-item">
+            <a class="nav-link" href="#about" id="aboutLink">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'product' %}">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+          </li>
+        </ul>
+      </div>      
+    </div>
+  </nav>
+  <!-- Navbar End -->
+  
+
+<!-- About-Us area -->
+<section id="about" class="banner">
+  <!-- Banner Text -->
+  <div class="banner-text">
+    <h1 class="about-heading" style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px; font-weight: lighter;">Welcome to <span style="font-size: 50px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold;"> <br>Graziella Bridals</span></h1>
+    <h2 style="font-family: 'Georgia', serif; font-size: 20px; font-weight: lighter;">Where dreams meet elegance</h2>
+    <p style="font-size: 'Courier New';">
+      We’re thrilled to have you here! At <strong style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold;">Graziella Bridals</strong>, every bride is a queen—
+      and we’re devoted to making your special day unforgettable.<br>
+      Explore our collection of timeless gowns, accessories, and bridal services tailored with love and detail.<br><br>
+      Step in, feel the magic, and let us help you shine!
+    </p>
+  </div>
+
+  <!-- Overlay Image Slider - centered piece -->
+  <div class="overlay-container">
+    <img class="overlay-slide active" src="{% static 'bridals/img/d.png' %}" alt="Overlay 1">
+  </div>
+
+  <!-- Main Image Slider -->
+  <div class="main-container">
+    <img class="main-slide active" src="{% static 'bridals/img/f.png' %}" alt="Main 1">
+  </div>
+</section>
+
+
+
+
+<!-- Premier Designers Section -->
+<section id="bridal-collection" style="background-color: #fef6f8; padding: 40px 20px;">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-family: 'Killery Bentom DEMO VERSION', cursive; font-size: 60px; color: #222;">
+      Our Collections<br>
+      <span style="font-size: 42px; font-weight: 500; font-family: 'Georgia', serif;">
+        ...Beyond Bridal: Explore More...
+      </span>
+      <p style="font-size: 15px; line-height: 1.6; color: #000000; font-family: 'Courier New'; max-width: 800px; margin: 0 auto;">
+        While bridal gowns may be our signature, we’re here for every dazzling moment. Browse through our <strong>Serenity Sets</strong> collection for stylish bags, sparkling jewelry, and more. For our prom queens and elegant evening looks, explore <strong>Second Looks</strong>  tailored to turn heads. Planning with your bridal squad? Our <strong>Prom, Changing, Evening Dresses</strong> & <strong>Maids Package</strong> are ready to make the prep just as picture-perfect.
+      </p>
+      <p style="font-size: 20px; line-height: 1.6; color: #000000; font-family: 'Courier New'; max-width: 800px; margin: 0 auto; font-weight: bolder;">...much more...</p>
+    </h2>
+
+    <div class="row justify-content-center align-items-stretch gy-5">
+      
+      <!-- Collection 1 -->
+      <div class="col-md-6 col-lg-4 collection-item">
+        <div class="card border-0 h-100 mx-auto" style="max-width: 90%; background-color: transparent;">
+          <div class="image-container">
+            <img src="{% static 'bridals/img/ring3.jpeg' %}" class="gallery-image active" alt="Prom 1" />
+            <img src="{% static 'bridals/img/neck3.jpeg' %}" class="gallery-image" alt="Prom 2" />
+            <img src="{% static 'bridals/img/ear1.jpeg' %}" class="gallery-image" alt="Prom 3" />
+            <img src="{% static 'bridals/img/brace2.jpeg' %}" class="gallery-image" alt="Prom 3" />
+          </div>
+          <div class="text-container">
+            <h4 class="gallery-title" style="font-family: 'Georgia', serif;">Serenity Sets</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collection 2 -->
+      <div class="col-md-6 col-lg-4 collection-item">
+        <div class="card border-0 h-100 mx-auto" style="max-width: 90%; background-color: transparent;">
+          <div class="image-container">
+            <img src="{% static 'bridals/img/maid2.jpeg' %}" class="gallery-image active" alt="Prom 1" />
+            <img src="{% static 'bridals/img/prom1.jpeg' %}" class="gallery-image" alt="Prom 2" />
+            <img src="{% static 'bridals/img/evening3.jpeg' %}" class="gallery-image" alt="Prom 3" />
+          </div>
+          <div class="text-container">
+            <h4 class="gallery-title" style="font-family: 'Georgia', serif;">Second Looks</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collection 3 -->
+      <div class="col-md-6 col-lg-4 collection-item">
+        <div class="card border-0 h-100 mx-auto" style="max-width: 90%; background-color: transparent;">
+          <div class="image-container">
+            <img src="{% static 'bridals/img/lip1.jpeg' %}" alt="Evening 1" class="gallery-image active" />
+            <img src="{% static 'bridals/img/perfumes5.jpeg' %}" alt="Evening 2" class="gallery-image" />
+            <img src="{% static 'bridals/img/lipg1.jpeg' %}" alt="Evening 3" class="gallery-image" />
+          </div>
+          <div class="text-container">
+            <h4 class="gallery-title" style="font-family: 'Georgia', serif;">Cosmetics</h4>
+          </div>
+        </div>
+      </div>
+
+        <div class="text-center mb-5">
+          <a href="{% url 'product' %}" class="btn btn-inquire">
+            <i class="fas fa-search"></i> Browse
+          </a>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- banner Area -->
+<section class="bridal-banner">
+  <div class="banner-wrapper">
+    <!-- Text Area -->
+    <div class="banner-t">
+      <h2 style="color: rgb(0, 0, 0);">Let us Help You Make a <br> <span style="font-size: 60px; color: #d4af37; font-family: 'Georgia', serif; text-align: left;">Statement</span> <br> on Your Special Day</h2>
+      <p style="font-family: 'Courier New'; font-size: 18px;">
+        We’re all about making bridal dreams shinefrom the stunning styles already on our racks to that one-of-a-kind gown with your name all over it. Your trust inspires us, and we can’t wait to help you glow through every unforgettable moment!
+      </p>
+      <p style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 28px;">Say to YES to Graziella Bridals & we serve you</p>
+      <a href="#" class="book-button" data-bs-toggle="modal" data-bs-target="#bookingModal" style="border-radius: 50px;">BOOK AN APPOINTMENT</a>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down"> <!-- Fullscreen on small screens -->
+    <div class="modal-content text-center p-3">
+      <!-- Modal Header -->
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="bookingModalLabel" style="font-size: 50px;  font-family: 'Killery Bentom DEMO VERSION';">
+          Book Your Appointment
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body px-2 px-md-4">
+        <p class="mb-3" style="font-size: 0.95rem; color: #666; font-family: Georgia, serif;">
+          Tell us your details, and let’s get you scheduled in style.
+        </p>
+
+        <form id="bookingForm" style="font-family: 'Georgia';">
+          <div class="mb-3">
+            <input type="text" class="form-control form-control-lg" placeholder="Full Name" required>
+          </div>
+
+          <div class="mb-3">
+            <input type="email" class="form-control form-control-lg" placeholder="Email Address" required>
+          </div>
+
+          <div class="mb-3">
+            <input type="tel" class="form-control form-control-lg" placeholder="Phone Number" required>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-md-row gap-3">
+            <input type="date" class="form-control form-control-lg" required>
+            <input type="time" class="form-control form-control-lg" required>
+          </div>
+
+          <div class="mb-3">
+            <select class="form-select form-select-lg" required>
+              <option selected disabled>Choose Appointment Type</option>
+              <option value="Bridal">Bridal Consultation</option>
+              <option value="Accessories">Accessories Try-On</option>
+              <option value="Prom">Prom/Evening Dress Fitting</option>
+              <option value="Maids">Maids Package Planning</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <textarea class="form-control" rows="3" placeholder="Any message or special request?"></textarea>
+          </div>
+
+          <button type="submit" class="btn w-100 py-2" style="color: #000000; background-color: #d4af37; border-radius: 50px;">
+            Submit Booking 💌
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- Navigation Dots -->
+      <div class="dot-controls">
+        <span class="dot active" onclick="changeSlide(0)"></span>
+        <span class="dot" onclick="changeSlide(1)"></span>
+        <span class="dot" onclick="changeSlide(2)"></span>
+      </div>
+    </div>
+
+    <!-- Image Area -->
+    <div class="banner-img">
+      <img src="{% static 'bridals/img/new.png' %}" alt="Bridal Image 1" class="slide active">
+      <img src="{% static 'bridals/img/new3.png' %}" alt="Bridal Image 2" class="slide">
+      <img src="{% static 'bridals/img/new2.png' %}" alt="Bridal Image 3" class="slide">
+    </div>
+  </div>
+</section>
+
+
+<!-- Bridal Gowns Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="text-card p-4 text-center">
+          <h3 class="category-title mb-2" style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">OUR GOWNS</h3>
+          <p class="product-count" style="color: #000; font-family: 'Courier New'">
+            Unveil your forever in a gown woven with dreams. Our bridal collection is a symphony of luxurious fabrics and timeless elegance, designed to make your walk down the aisle unforgettable. Whether you're ready to fall in love with a gown to call your own or wish to hire your perfect match for the day it’s all here, waiting to be part of your story.
+          </p>
+        </div>
+      </div>
+
+      <!-- Category Card -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="category-card text-center">
+          <div class="image-wrapper">
+            <img src="{% static 'bridals/img/9.jpg' %}" class="img-fluid rounded" alt="Bridal Gown">
+            <div class="overlay-text">
+              <h3 class="category-title">GRAZIELLA GOWNS</h3>
+              <p class="product-count">more below..</p>
+            </div>
+          </div>
+        </div>
+      </div>    
+    </div>
+</section>
+
+<!-- Bridal Gowns Gallery Section -->
+<section>
+  <div class="photo">
+    <div class="photo-item">
+      <img src="{% static 'bridals/img/1.jpg' %}" alt="Gaziella" >
+    </div>
+    <div class="photo-item">
+      <img src="{% static 'bridals/img/2.jpg' %}" alt="Gaziella">
+    </div>
+    <div class="photo-item">
+      <img src="{% static 'bridals/img/3.jpg' %}" alt="Gaziella">
+    </div>
+    <div class="photo-item">
+      <img src="{% static 'bridals/img/4.jpg' %}" alt="Gaziella">
+    </div>
+    <div class="photo-item">
+      <img src="{% static 'bridals/img/6.jpg' %}" alt="Gaziella">
+    </div>
+  </div>
+  <br>
+
+<!-- ASK Button -->
+<div class="text-center mb-5">
+  <a href="#" class="btn btn-inquire" id="askBtn">
+    <i class="fas fa-question-circle"></i> Ask
+  </a>
+</div>
+
+
+<!-- Popup Form -->
+<div id="askPopup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn" id="closePopup">&times;</span>
+    <form >
+      <h1 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 60px;">Feel Free And Ask Us</h1>
+      <p style=" font-size: 'Courier New'; text-align: center; font-size: 20px;">...We will answer you back in no time...</p>
+      
+    <div style="font-family: 'Georgia';">
+            <input type="text" name="name" placeholder="Name" required>
+          <input type="email" name="email" placeholder="Email (optional)">
+          <input type="text" name="contact" placeholder="Contact" required>
+
+          <select name="questionType" required>
+            <option value="" disabled selected>Choose question type</option>
+            <option>Bridal gowns</option>
+            <option>Prom Dresses</option>
+            <option>Maids Dresses</option>
+            <option>Evening Dresses</option>
+            <option>Changing Dresses</option>
+            <option>Second looks</option>
+            <option>Cosmetics</option>
+            <option>Intimates</option>
+            <option>Serenity set</option>
+            <option>Signature details</option>
+          </select>
+
+          <textarea name="message" placeholder="Tell us more..." rows="4" required></textarea>
+    </div>
+
+      <p style=" font-size: 'Courier New'; text-align: center;">Customer your Information is safe with us</p>
+
+      <button type="submit" class="btn btn-submit">Submit</button>
+    </form>
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- Space between blurred columns and gold rates section -->
+<div class="my-5"></div> <!-- Adds vertical space -->
+
+
+
+
+<div class="my-5"></div> <!-- Adds vertical space -->
+
+
+
+<!-- Footer -->
+<footer class="text-white py-4 mt-5" style="background-color: #1a1a1a; border-top: 1px solid #444;">
+  <div class="footer" style="display: flex; flex-direction: column;padding: 40px; color: #6d6868;">
+
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+      
+      <!-- Left Section: Working Days & Hours -->
+      <div class="footer-left" style="flex: 1; min-width: 250px;">
+        <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Working Hours</h2>
+        <p style="font-size: 18px;">Monday - Friday: <span style="color: #ffffff;">08:00 AM – 6:00 PM</span></p>
+        <p style="font-size: 18px;">Saturday: <span style="color: #ffffff;">10:00 AM – 6:00 PM</span></p>
+        <p style="font-size: 18px;">Sunday: <span style="color: #ffffff;">for only those with bookings</span></p>
+
+      </div>
+
+      <!-- Middle Section: Social Media Icons -->
+        <div  class="footer-middle" style="flex: 1; min-width: 250px; text-align: center;">
+          <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Follow Us</h2>
+          <div class="social-icons" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 30px;">
+            <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          </div>
+
+        </div>
+        
+
+      <!-- Right Section: Location and Contact -->
+      <div class="footer-right" style="flex: 1; min-width: 250px;">
+        <p>If you have any questions regarding our products or our service, please contact our customer service.</p>
+        <div class="contact-info">
+          <h3 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Contact Us</h3>
+          <p><strong>Phone:</strong><span style="color: #ffffff;">+256 772 463889</span></p>
+          <p><strong>Email:</strong> 
+            <a href="mailto:graziellab889@gmail.com" style="color: #ffffff; text-decoration: none;">
+              graziellab889@gmail.com
+            </a>
+          </p>
+
+        </div>
+        <div class="address-info">
+          <h4 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Address</h4>
+          <p><span style="color: #ffffff;">Shop No.L16, Ivory Plaza,<br>Plot 4, 23 Wilson Rd, Kampala</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Centered Copyright -->
+    <div style="text-align: center; margin-top: 40px;">
+      <p class="mb-1" style="color: #d4af37;">© 2025 Graziella Bridals. All rights reserved.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+// ASK pop up js code
+const askBtn = document.getElementById("askBtn");
+const askPopup = document.getElementById("askPopup");
+const closePopup = document.getElementById("closePopup");
+
+askBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  askPopup.style.display = "flex";
+});
+
+closePopup.addEventListener("click", () => {
+  askPopup.style.display = "none";
+});
+
+
+
+
+      // Image-Contaniers 4_Collections 
+  const containers = document.querySelectorAll('.image-container');
+  const baseInterval = window.innerWidth <= 768 ? 2000 : 4000;
+
+  containers.forEach(container => {
+    const images = container.querySelectorAll('.gallery-image');
+    let index = 0;
+
+    const showImage = () => {
+      images.forEach(img => img.classList.remove('active'));
+      images[index % images.length].classList.add('active');
+      index++;
+    };
+
+    showImage(); // Start with the first image visible
+    let rotate = setInterval(showImage, baseInterval);
+
+    // Optional: slow it down on mobile hover/touch
+    if (window.innerWidth <= 768) {
+      container.addEventListener('mouseenter', () => {
+        clearInterval(rotate);
+        rotate = setInterval(showImage, 4000);
+      });
+
+      container.addEventListener('touchstart', () => {
+        clearInterval(rotate);
+        rotate = setInterval(showImage, 4000);
+      });
+
+      container.addEventListener('mouseleave', () => {
+        clearInterval(rotate);
+        rotate = setInterval(showImage, 2000);
+      });
+    }
+  });
+
+
+      // BOOKING FORM
+document.addEventListener("DOMContentLoaded", function () {
+    const dateInput = document.querySelector('input[type="date"]');
+    const timeInput = document.querySelector('input[type="time"]');
+    const bookingForm = document.getElementById("bookingForm");
+
+    // Set min date to today
+    const today = new Date().toISOString().split("T")[0];
+    if (dateInput) {
+      dateInput.setAttribute("min", today);
+    }
+
+    // Prevent manual entry of invalid times
+    if (timeInput) {
+      timeInput.setAttribute("min", "08:00");
+      timeInput.setAttribute("max", "20:00");
+
+      timeInput.addEventListener("change", () => {
+        const timeValue = timeInput.value;
+        if (timeValue < "08:00" || timeValue > "20:00") {
+          alert("Available times: 08:00 AM to 08:00 PM only 🌸");
+          timeInput.value = ""; // Reset invalid input
+          timeInput.focus();
+        }
+      });
+    }
+
+    // Submit logic fallback for older browsers
+    bookingForm.addEventListener("submit", function (e) {
+      const timeValue = timeInput.value;
+      const [hour, minute] = timeValue.split(":").map(Number);
+      if (hour < 8 || hour > 20) {
+        e.preventDefault();
+        alert("Please choose a time between 08:00 AM and 08:00 PM.");
+        timeInput.focus();
+      }
+    });
+  });
+
+  // banner Area DOTS_LOADING
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+
+function changeSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+    dots[i].classList.toggle('active', i === index);
+    dots[i].classList.toggle('spinner', i === index); // Add spinner only to active dot
+  });
+  slideIndex = index;
+}
+
+function autoSlide() {
+  slideIndex = (slideIndex + 1) % slides.length;
+  changeSlide(slideIndex);
+}
+
+setInterval(autoSlide, 4000);
+
+
+  // js for closing the small screen button
+  document.addEventListener('click', function (event) {
+    const navbarCollapse = document.getElementById('mainNavbar');
+    const isClickInsideNavbar = navbarCollapse.contains(event.target);
+    const isToggler = event.target.closest('.navbar-toggler');
+
+    if (!isClickInsideNavbar && !isToggler && navbarCollapse.classList.contains('show')) {
+      new bootstrap.Collapse(navbarCollapse).hide();
+    }
+  });
+
+  //js for about us page content display
+  document.addEventListener("DOMContentLoaded", function () {
+    // Smooth scroll
+    document.querySelectorAll('a.nav-link[href^="#"]').forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Update active class
+        document.querySelectorAll(".nav-link").forEach(nav => nav.classList.remove("active-section"));
+        this.classList.add("active-section");
+      });
+    });
+
+    // Optional scroll highlight on load (when refreshing and already at section)
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute("id");
+        const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (entry.isIntersecting && navLink) {
+          document.querySelectorAll(".nav-link").forEach(nav => nav.classList.remove("active-section"));
+          navLink.classList.add("active-section");
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.6,
+    });
+
+    document.querySelectorAll("section[id]").forEach(section => {
+      observer.observe(section);
+    });
+  });
+
+ 
+
+  // js code for the preloader
+    const MIN_PRELOADER_TIME = 3500; // 3.5 seconds
+
+    const start = Date.now();
+    window.addEventListener("load", function () {
+      const preloader = document.getElementById("preloader");
+      const timeElapsed = Date.now() - start;
+      const remainingTime = Math.max(0, MIN_PRELOADER_TIME - timeElapsed);
+
+      setTimeout(() => {
+        preloader.style.opacity = "0";
+        setTimeout(() => preloader.style.display = "none", 500);
+      }, remainingTime);
+    });
+
+
+// About - us area  
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const parent = entry.target;
+
+    if (entry.isIntersecting) {
+      parent.classList.add('reveal');
+    } else {
+      parent.classList.remove('reveal'); // remove to allow repeat animation
+    }
+  });
+}, {
+  threshold: 0.4 // Trigger when ~40% of the section is visible
+});
+
+// Observe both containers
+document.querySelectorAll('.main-container, .overlay-container').forEach(el => {
+  observer.observe(el);
+});
+
+
+
+   
+
+   
+
+    // navbar
+    // Get elements
+    const contactBar = document.querySelector('.top-contact-bar');
+    const navbar = document.querySelector('.navbar');
+    let prevScrollPos = window.pageYOffset;
+
+    // Event listener for scroll
+    window.onscroll = function () {
+        let currentScrollPos = window.pageYOffset;
+
+        // Check if the user scrolls down
+        if (currentScrollPos > prevScrollPos) {
+        // When scrolling down, shrink both the top contact bar and the navbar
+        contactBar.classList.add('shrink-contact-bar');
+        navbar.classList.add('shrink');
+        } else {
+        // When scrolling up, reset both to normal size
+        contactBar.classList.remove('shrink-contact-bar');
+        navbar.classList.remove('shrink');
+        }
+
+        prevScrollPos = currentScrollPos;
+    };
+</script>
+  
+  
+</body>
+</html>
