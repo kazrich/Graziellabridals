@@ -114,6 +114,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # only define once
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'website/static')]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # for collectstatic
 
 # Media files (uploaded images, user content)
