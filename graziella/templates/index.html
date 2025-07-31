@@ -23,6 +23,54 @@
 
 
   <style>
+    
+@media (max-width: 768px) {
+  strong.graziella-title {
+    font-size: 16px !important;
+  }
+
+  small.graziella-subtitle {
+    font-size: 10px !important;
+  }
+}
+
+
+
+@font-face {
+  font-family: 'Killery Bentom';
+  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
+       url('/static/fonts/KilleryBentom.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Apply font globally */
+body, h1, h2, h3, h4, h5, h6, p, span, a {
+  font-family: 'Killery Bentom', sans-serif;
+}
+
+/* Responsive tweaks for mobile devices */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 15px;
+  }
+}
+
+
+
 
     /* navbar */
     .navbar-nav .nav-link {
@@ -982,10 +1030,14 @@
     <div class="container d-flex justify-content-between align-items-center">
       <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}" style="gap: 10px;">
         <img src="{% static 'bridals/img/logo.png' %}" alt="Logo" style="height: 60px; width: auto;">
-        <div style="display: flex; flex-direction: column;">
-          <strong style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold; ">Graziella Bridals</strong>
-          <small style="font-size: 12px; color: #d4af37;">A Legacy Of Excellence </small>
-        </div>
+      <div style="display: flex; flex-direction: column;">
+        <strong class="graziella-title" style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold;">
+          Graziella Bridals
+        </strong>
+        <small class="graziella-subtitle" style="font-size: 12px; color: #d4af37;">
+          A Legacy Of Excellence
+        </small>
+      </div>
       </a>
       
       <div>
