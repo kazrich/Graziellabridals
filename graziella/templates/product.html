@@ -11,12 +11,13 @@
       <!-- Favicon (Browser tab icon) -->
       <link rel="icon" type="image/png" href="{% static 'bridals/img/logo.png' %}" />
 
-      <!-- Open Graph meta tags for link sharing preview -->
-      <meta property="og:title" content="Graziella Bridals" />
-      <meta property="og:description" content="A Legacy Of Excellence " />
-      <meta property="og:image" content="https://yourdomain.com/static/bridals/img/logo.png" />
-      <meta property="og:url" content="https://yourdomain.com/" />
-      <meta name="twitter:card" content="summary_large_image" />
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Graziella Bridals – A Legacy of Excellence">
+    <meta property="og:description" content="Discover timeless bridal gowns and elegant accessories with heart-crafted services.">
+    <meta property="og:image" content="https://graziellabridals.onrender.com/static/bridals/img/logo.png">
+    <meta property="og:url" content="https://graziellabridals.onrender.com">
+    <meta property="og:type" content="website">
+
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
@@ -549,9 +550,8 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
   border: 1px solid #d4af37;
 }
 
-
 /* ----------------------------------------------------
-   🧁 Popup Overlay – Fullscreen with Blur (Desktop)
+   🧁 Popup Overlay – Fullscreen with Blur
 ---------------------------------------------------- */
 .popup-overlay {
   position: fixed;
@@ -566,11 +566,11 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
   z-index: 2000;
   animation: fadeIn 0.4s ease-in-out;
   overflow: hidden;
-  padding: 0;
+  padding: 1rem;
 }
 
 /* ----------------------------------------------------
-   💌 Popup Content – Default Desktop Layout
+   💌 Popup Content – Desktop & Mobile Layout
 ---------------------------------------------------- */
 .popup-content {
   background: #fff;
@@ -581,75 +581,46 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   font-family: 'Quicksand', sans-serif;
   animation: scaleUp 0.3s ease-in-out;
+  position: relative;
+}
+
+.popup-content h1 {
+  font-family: 'Killery Bentom DEMO VERSION', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.popup-content p {
+  text-align: center;
+  font-size: 1.1rem;
+  font-family: 'Courier New', monospace;
 }
 
 /* ----------------------------------------------------
-   📱 Mobile Layout Adjustments
----------------------------------------------------- */
-@media (max-width: 600px) {
-  .popup-overlay {
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #fff;
-    z-index: 9999;
-    display: none;
-    align-items: flex-start;
-    justify-content: center;
-    overflow-y: auto;
-    padding: 1rem;
-  }
-
-  .popup-content {
-    max-width: 480px;
-    padding: 1.5rem;
-    box-shadow: none;
-    margin-top: 3rem;
-    height: auto;
-  }
-
-  .popup-content input,
-  .popup-content select,
-  .popup-content textarea {
-    margin-bottom: 0.75rem;
-  }
-
-  .popup-content button {
-    display: block;
-    width: 100%;
-    margin-top: 1rem;
-    padding: 12px;
-    font-size: 1rem;
-    border-radius: 30px;
-    background-color: #d4af37;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-  }
-
-  .popup-content button:hover {
-    background-color: #ffffff;
-  }
-
-}
-
-/* ----------------------------------------------------
-   ❌ Close Button
+   ❌ Close Button – Elegant Corner Placement
 ---------------------------------------------------- */
 .close-btn {
-  float: right;
-  font-size: 30px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
   font-weight: bold;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
-  transition: color 0.2s ease;
   background-color: #000;
-  border-radius: 50px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .close-btn:hover {
-  background-color: #ff0000;
+  background-color: #d4af37;
+  transform: rotate(90deg);
+  color: #000;
 }
 
 /* ----------------------------------------------------
@@ -676,7 +647,7 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
 }
 
 /* ----------------------------------------------------
-   📩 Submit Button
+   📩 Submit Button – Golden Elegance
 ---------------------------------------------------- */
 .btn-submit {
   background-color: #d4af37;
@@ -690,12 +661,103 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
   font-weight: bold;
   font-family: 'Cinzel', serif;
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
-  background-color: #ffffff;
+  background-color: #fff;
+  color: #d4af37;
+  border: 2px solid #d4af37;
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px);
 }
+
+.btn-submit:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+/* ----------------------------------------------------
+   📱 Responsive Adjustments
+---------------------------------------------------- */
+@media (max-width: 600px) {
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+
+  .popup-content {
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 92vw;
+    padding: 1.5rem;
+    margin: auto;
+    text-align: center;
+    box-shadow: none;
+    border-radius: 10px;
+    background-color: #fff;
+    font-family: Georgia, serif;
+  }
+
+  .popup-content h1 {
+    font-size: 2rem;
+    font-family: 'Killery Bentom DEMO VERSION', serif;
+    margin-bottom: 1rem;
+  }
+
+  .popup-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.2rem;
+  }
+
+  .popup-content input,
+  .popup-content select,
+  .popup-content textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .popup-content button {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+    background-color: #d4af37;
+    color: #000;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+.close-btn {
+  position: absolute;
+  top: 2px; /* was 10px — now pushed up */
+  right: 10px;
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  z-index: 10000;
+}
+
+}
+
 
 /* ----------------------------------------------------
    🌟 Animations
