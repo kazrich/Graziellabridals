@@ -21,6 +21,8 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 
   <style>
@@ -1050,6 +1052,250 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
 
 
 
+/* Whatsapp floating button */
+
+  @media (max-width: 600px) {
+    #whatsapp-chat-text {
+      display: none;
+    }
+
+    #whatsapp-icon {
+      width: 45px !important;
+      height: 45px !important;
+      border-radius: 8px !important; /* Soft rounded corners */
+    }
+  }
+  
+
+#whatsapp-chat:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+
+ /* Boooking form & every valids */
+.gb-date-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.gb-date-input {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border: 2px solid #DAA520;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.gb-date-input:hover,
+.gb-date-input:focus {
+  border-color: #b38d10;
+  outline: none;
+}
+
+
+.gb-time-select {
+  padding: 0.6rem 1rem;
+  border: 2px solid #DAA520;
+  border-radius: 30px;
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+
+.modal-dialog {
+  max-width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+.modal-content {
+  height: 100vh;
+  border: none;
+  border-radius: 0;
+}
+
+.modal-body {
+  height: calc(100vh - 80px); /* Adjust based on header height */
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  flex: 1 1 45%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Button hover styles */
+.booking-submit {
+  border-radius: 30px;
+  background-color: #DAA520;
+  border: none;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.booking-submit:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.booking-cancel {
+  border-radius: 30px;
+  background-color: #ccc;
+  border: none;
+  color: #333;
+  padding: 0.6rem 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.booking-cancel:hover {
+  background-color: #aaa;
+}
+
+
+
+
+
+@media (max-width: 600px) {
+  .modal-dialog {
+    margin: 0;
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-lg {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden; /* prevent double scrollbars */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  }
+
+  .gb-booking-step {
+    display: block;
+    font-size: 0.95rem;
+  }
+
+  .gb-booking-step > div {
+    width: 100% !important;
+    padding: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .gb-date-input,
+  .gb-time-select {
+    width: 100%;
+  }
+
+  #gbAppointmentFormWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #ffffffec;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 1060;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #gbAppointmentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-bottom: 2rem; /* prevent clipping at bottom */
+  }
+
+  #gbAppointmentForm input,
+  #gbAppointmentForm textarea,
+  #gbAppointmentForm select {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    width: 100%;
+  }
+
+  #gbAppointmentForm .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .booking-submit,
+  .booking-cancel {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.8rem;
+    width: 100%;
+  }
+
+  .gb-info-panel {
+    width: 100% !important;
+    float: none !important;
+    text-align: center !important;
+    padding: 1rem !important;
+  }
+
+}
+
+
+
+
+
+
+
+
+
 
   </style>
   
@@ -1140,6 +1386,10 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
   </div>
 </section>
 
+<a href="https://wa.me/+256772463889" target="_blank" style="position:fixed; bottom:20px; right:20px; z-index:999; display:flex; align-items:center; gap:8px; background-color:#ffffff; padding:10px 15px; border-radius:30px; box-shadow:0 4px 8px rgba(0,0,0,0.15); text-decoration:none; font-family:'Cinzel', serif;">
+  <img id="whatsapp-icon" src="{% static 'bridals/img/whatsapp-icon.png' %}" alt="Chat with us" style="width:30px; height:30px;" />
+  <span id="whatsapp-chat-text" style="color:#d4af37; font-size:16px; font-weight:bold;">Let's Chat</span>
+</a>
 
 
 
@@ -1222,66 +1472,149 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
         We’re all about making bridal dreams shinefrom the stunning styles already on our racks to that one-of-a-kind gown with your name all over it. Your trust inspires us, and we can’t wait to help you glow through every unforgettable moment!
       </p>
       <p style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 28px;">Say to YES to Graziella Bridals & we serve you</p>
-      <a href="#" class="book-button" data-bs-toggle="modal" data-bs-target="#bookingModal" style="border-radius: 50px;">BOOK AN APPOINTMENT</a>
+      <a href="#" class="book-button" data-bs-toggle="modal" data-bs-target="#bookingModal" style="border-radius: 50px;">
+        BOOK AN APPOINTMENT
+      </a>
 
+<!-- Booking Modal Step 1 -->
 <!-- Booking Modal -->
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down"> <!-- Fullscreen on small screens -->
-    <div class="modal-content text-center p-3">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
       <!-- Modal Header -->
       <div class="modal-header border-0">
-        <h5 class="modal-title w-100" id="bookingModalLabel" style="font-size: 50px;  font-family: 'Killery Bentom DEMO VERSION';">
-          Book Your Appointment
+        <h5 class="modal-title w-100 text-center" id="bookingModalLabel" style="font-size: 2rem; font-family: 'Killery Bentom DEMO VERSION';">
+          Step : Make Your Appointment
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <!-- Modal Body -->
-      <div class="modal-body px-2 px-md-4">
-        <p class="mb-3" style="font-size: 0.95rem; color: #666; font-family: Georgia, serif;">
-          Tell us your details, and let’s get you scheduled in style.
-        </p>
+      <div class="modal-body">
+        <div class="gb-booking-step" style="max-width: 1200px; margin: auto; font-family: 'Segoe UI', sans-serif; color: #333;">
 
-        <form id="bookingForm" style="font-family: 'Georgia';">
-          <div class="mb-3">
-            <input type="text" class="form-control form-control-lg" placeholder="Full Name" required>
+          <!-- Left Panel: Info -->
+          <div class="gb-info-panel" style="width: 30%; padding: 2rem; float: left; text-align: left;">
+            <img src="{% static 'bridals/img/logo.png' %}" alt="Graziella Bridals Logo" style="width: 120px; margin-bottom: 1rem;" />
+            
+            <h2 style="font-size: 2rem; color: #000;">Client, meet Graziella B</h2>
+            <p><i class="fa fa-clock"></i> customer service within 30 minutes</p>
+            
+            <div style="margin-top: 1.5rem;">
+              <p><i class="fa fa-heart" style="color: #DAA520;"></i> With Graziella, you're in the right place — and at the right time — to begin your unforgettable bridal journey.</p>
+              <p><i class="fa fa-handshake" style="color: #DAA520;"></i> When we work hand in hand, magic happens. We listen, we care, and we bring your vision to life with devotion.</p>
+              <p><i class="fa fa-diamond" style="color: #DAA520; font-weight: bold;"></i> Our promise: to give you nothing less than the best — because every bride deserves a masterpiece tailored to her soul.</p>
+            </div>
           </div>
 
-          <div class="mb-3">
-            <input type="email" class="form-control form-control-lg" placeholder="Email Address" required>
+
+          <!-- Middle Panel: Date Picker -->
+          <div class="gb-date-panel" style="width: 40%;  padding: 2rem; text-align: center; float: left">
+            <h3 style="font-size: 1.2rem;">Select a Date</h3>
+            <p style="color: #777;"><i class="fa fa-globe"></i> (+03:00) EAT - Kampala</p>
+            <label for="appointmentDate" style="font-weight: bold;">Date of Event</label>
+            <input type="date" id="appointmentDate" class="gb-date-input" required>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #aaa;">View mutual availability</p>
           </div>
 
-          <div class="mb-3">
-            <input type="tel" class="form-control form-control-lg" placeholder="Phone Number" required>
-          </div>
-
-          <div class="mb-3 d-flex flex-column flex-md-row gap-3">
-            <input type="date" class="form-control form-control-lg" required>
-            <input type="time" class="form-control form-control-lg" required>
-          </div>
-
-          <div class="mb-3">
-            <select class="form-select form-select-lg" required>
-              <option selected disabled>Choose Appointment Type</option>
-              <option value="Bridal">Bridal Consultation</option>
-              <option value="Accessories">Accessories Try-On</option>
-              <option value="Prom">Prom/Evening Dress Fitting</option>
-              <option value="Maids">Maids Package Planning</option>
+          <!-- Right Panel: Time Picker -->
+          <div class="gb-time-panel" style="width: 30%; float: left; padding: 2rem; text-align: center;">
+            <h3 style="font-size: 1.2rem;">Select Time</h3>
+            <select id="gbAppointmentTime" class="gb-time-select">
+              <option disabled selected>Select a Time</option>
+              <option value="09:00">09:00 AM</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="11:00">11:00 AM</option>
+              <option value="12:00">12:00 PM</option>
+              <option value="13:00">01:00 PM</option>
+              <option value="14:00">02:00 PM</option>
+              <option value="15:00">03:00 PM</option>
+              <option value="16:00">04:00 PM</option>
+              <option value="17:00">05:00 PM</option>
+              <option value="18:00">06:00 PM</option>
+              <option value="19:00">07:00 PM</option>
+              <option value="20:00">08:00 PM</option>
             </select>
           </div>
 
-          <div class="mb-3">
-            <textarea class="form-control" rows="3" placeholder="Any message or special request?"></textarea>
-          </div>
+          <div style="clear: both;"></div>
 
-          <button type="submit" class="btn w-100 py-2" style="color: #000000; background-color: #d4af37; border-radius: 50px;">
-            Submit Booking 💌
-          </button>
-        </form>
+          <!-- BLUR OVERLAY (fixed, always covers modal) -->
+          <div id="gbOverlay" style="
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            backdrop-filter: blur(6px);
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1080;
+          "></div>
+
+          <!-- CENTERED FORM WRAPPER -->
+            <!-- CENTERED FORM WRAPPER -->
+            <div id="gbAppointmentFormWrapper" style="
+              display: none;
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 500px;
+              max-width: 90vw;
+              background-color: #ffffffec;
+              padding: 2rem;
+              z-index: 1060;
+              overflow-y: auto;
+              box-shadow: 0 0 30px rgba(0,0,0,0.2);
+              border-radius: 10px;
+            ">
+
+            <div style="max-width: 600px; margin: auto;">
+              <h4 style="text-align: center; margin-bottom: 2rem;">You're Booking a Virtual Meeting</h4>
+
+              <!-- Selected Info Display -->
+              <div style="margin-bottom: 1rem; font-weight: 500; color: #555;">
+                <p><i class="fa fa-calendar"></i> Date: <span id="selectedDateText"></span></p>
+                <p><i class="fa fa-clock"></i> Time: <span id="selectedTimeText"></span></p>
+                <p><i class="fa fa-globe"></i> Time Zone: Africa/Kampala</p>
+              </div>
+
+              <form id="gbAppointmentForm">
+                <div class="form-row">
+                  <input type="text" class="form-control mb-2" placeholder="Full Name" id="userName" required>
+                  <input type="email" class="form-control mb-2" placeholder="Email Address" id="userEmail" required>
+                  <input type="tel" class="form-control mb-2" placeholder="07XXXXXXXX" id="userPhone" required>
+                </div>
+
+                <div class="form-row">
+                  <input type="text" class="form-control mb-2" placeholder="Address" id="userAddress" required>
+                  <div style="width: 100%;">
+                    <label for="eventDate" style="font-weight: bold;">Date of Event</label>
+                    <input type="date" class="form-control mb-2" id="eventDate" required>
+                  </div>
+                </div>
+
+                <textarea class="form-control mb-2" rows="3" placeholder="Special request or message?" id="userMessage"></textarea>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                  <button type="submit" class="btn btn-primary booking-submit">Submit Booking</button>
+                  <button type="button" id="cancelFormBtn" class="btn btn-secondary booking-cancel">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
 
       <!-- Navigation Dots -->
       <div class="dot-controls">
@@ -1405,6 +1738,8 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
 
 
 
+
+
 <!-- Space between blurred columns and gold rates section -->
 <div class="my-5"></div> <!-- Adds vertical space -->
 
@@ -1477,6 +1812,114 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
 
 <script>
 
+
+// Elements
+const appointmentDate = document.getElementById("appointmentDate");
+const appointmentTime = document.getElementById("gbAppointmentTime");
+const timePanel = document.querySelector(".gb-time-panel");
+const formWrapper = document.getElementById("gbAppointmentFormWrapper");
+
+const selectedDateText = document.getElementById("selectedDateText");
+const selectedTimeText = document.getElementById("selectedTimeText");
+const cancelFormBtn = document.getElementById("cancelFormBtn");
+const appointmentForm = document.getElementById("gbAppointmentForm");
+
+// Step 1: Show time panel if valid date is selected (not Sunday, not past)
+appointmentDate.addEventListener("input", () => {
+  const selected = new Date(appointmentDate.value);
+  selected.setHours(0, 0, 0, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const isSunday = selected.getDay() === 0;
+
+  if (selected < today || isSunday) {
+    alert("Invalid date: Choose today or a future date (excluding Sundays).");
+    appointmentDate.value = "";
+    timePanel.style.display = "none";
+    formWrapper.style.display = "none";
+  } else {
+    timePanel.style.display = "block";
+    formWrapper.style.display = "none";
+  }
+});
+
+// Step 2: Show form with selected date & time
+appointmentTime.addEventListener("change", () => {
+  if (appointmentTime.value) {
+    const selectedDate = new Date(appointmentDate.value);
+    selectedDateText.textContent = selectedDate.toDateString();
+    selectedTimeText.textContent = appointmentTime.options[appointmentTime.selectedIndex].text;
+
+    formWrapper.style.display = "block";
+    formWrapper.scrollIntoView({ behavior: "smooth" });
+  } else {
+    formWrapper.style.display = "none";
+  }
+});
+
+// Cancel button behavior
+cancelFormBtn.addEventListener("click", () => {
+  formWrapper.style.display = "none";
+  appointmentTime.selectedIndex = 0;
+});
+
+// Submit with full validation
+appointmentForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("userEmail").value.trim();
+  const phone = document.getElementById("userPhone").value.trim();
+  const eventDateStr = document.getElementById("eventDate").value;
+  const appointmentDateStr = appointmentDate.value;
+
+  const emailValid = email.endsWith("@gmail.com");
+  const phoneValid = /^07\d{8}$/.test(phone);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const eventDate = new Date(eventDateStr);
+  eventDate.setHours(0, 0, 0, 0);
+  const eventDateValid = eventDate >= today;
+
+  const appointmentDateObj = new Date(appointmentDateStr);
+  appointmentDateObj.setHours(0, 0, 0, 0);
+  const isSunday = appointmentDateObj.getDay() === 0;
+  const appointmentDateValid = appointmentDateObj >= today && !isSunday;
+
+  if (!emailValid) {
+    alert("Invalid email: Please use a Gmail address.");
+    return;
+  }
+
+  if (!phoneValid) {
+    alert("Invalid phone: Must start with '07' followed by 8 digits.");
+    return;
+  }
+
+  if (!eventDateValid) {
+    alert("Invalid date: 'Date of Event' must be today or later.");
+    return;
+  }
+
+  if (!appointmentDateValid) {
+    alert("Invalid appointment date: Must be today or later, and not Sunday.");
+    return;
+  }
+
+  // Passed validation
+  alert("Your booking has been sent successfully! 💌");
+  appointmentForm.reset();
+  formWrapper.style.display = "none";
+  appointmentTime.selectedIndex = 0;
+});
+
+
+
+
+
+  
+
 // ASK pop up js code
 const askBtn = document.getElementById("askBtn");
 const askPopup = document.getElementById("askPopup");
@@ -1534,44 +1977,11 @@ closePopup.addEventListener("click", () => {
 
 
       // BOOKING FORM
-document.addEventListener("DOMContentLoaded", function () {
-    const dateInput = document.querySelector('input[type="date"]');
-    const timeInput = document.querySelector('input[type="time"]');
-    const bookingForm = document.getElementById("bookingForm");
 
-    // Set min date to today
-    const today = new Date().toISOString().split("T")[0];
-    if (dateInput) {
-      dateInput.setAttribute("min", today);
-    }
 
-    // Prevent manual entry of invalid times
-    if (timeInput) {
-      timeInput.setAttribute("min", "08:00");
-      timeInput.setAttribute("max", "20:00");
 
-      timeInput.addEventListener("change", () => {
-        const timeValue = timeInput.value;
-        if (timeValue < "08:00" || timeValue > "20:00") {
-          alert("Available times: 08:00 AM to 08:00 PM only 🌸");
-          timeInput.value = ""; // Reset invalid input
-          timeInput.focus();
-        }
-      });
-    }
 
-    // Submit logic fallback for older browsers
-    bookingForm.addEventListener("submit", function (e) {
-      const timeValue = timeInput.value;
-      const [hour, minute] = timeValue.split(":").map(Number);
-      if (hour < 8 || hour > 20) {
-        e.preventDefault();
-        alert("Please choose a time between 08:00 AM and 08:00 PM.");
-        timeInput.focus();
-      }
-    });
-  });
-
+      
   // banner Area DOTS_LOADING
 let slideIndex = 0;
 const slides = document.querySelectorAll('.slide');
