@@ -46,12 +46,14 @@ Graziella Bridal Website
             fail_silently=False
         )
 
-        return render(request, 'appoint.html', {
+        return render(request, 'index.html', {
             'full_name': full_name,
             'email': email
         })
 
     return render(request, 'index.html')
+
+
 
 # Contact view
 def contact(request):
