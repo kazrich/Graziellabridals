@@ -368,7 +368,13 @@ button:hover {
   <!-- Navbar End -->
 
 
-
+{% if messages %}
+  <div class="message-container">
+    {% for message in messages %}
+      <div class="toast-message">{{ message }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
 
 <!-- Contact Banner Start -->
 <section class="contact-banner">
@@ -500,12 +506,46 @@ button:hover {
   });
 
   // js overlay form
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.querySelector(".contact-banner form");
-      form.addEventListener("submit", function (e) {
-        alert("Your message has been sent. Thank you!");
-      });
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".contact-banner form");
+
+    form.addEventListener("submit", function (e) {
+      const name = form.querySelector('input[name="name"]').value.trim();
+      const email = form.querySelector('input[name="email"]').value.trim();
+      const number = form.querySelector('input[name="number"]').value.trim();
+      const message = form.querySelector('textarea[name="message"]').value.trim();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const numberRegex = /^[0-9]{10}$/;
+
+      let errors = [];
+
+      if (!name || name.length < 2) {
+        errors.push("Please enter your name (at least 2 characters).");
+      }
+
+      if (!emailRegex.test(email)) {
+        errors.push("Please enter a valid email address.");
+      }
+
+      if (!numberRegex.test(number)) {
+        errors.push("Contact number must be exactly 10 digits.");
+      }
+
+      if (!message || message.length < 10) {
+        errors.push("Your message must be at least 10 characters.");
+      }
+
+      if (errors.length > 0) {
+        e.preventDefault();
+        alert(errors.join("\n"));
+        return;
+      }
+
+      // If all validations pass
+      alert("✅ Your message has been sent. Thank you!");
     });
+  });
 
 
     // navbar

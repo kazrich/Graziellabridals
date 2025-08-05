@@ -15,3 +15,14 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.appointment_date} at {self.appointment_time}"
+    
+
+class Inquiry(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    number = models.CharField(max_length=15)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"Inquiry from {self.name}"
+
