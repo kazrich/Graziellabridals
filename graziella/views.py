@@ -68,14 +68,6 @@ def contact(request):
         number = request.POST.get('number')
         message_text = request.POST.get('message')
 
-        # Save to database
-        Inquiry.objects.create(
-            name=name,
-            email=email,
-            number=number,
-            message=message_text
-        )
-
         # Compose the email
         email_subject = "Question from Contact-us page"
         email_body = f"""
