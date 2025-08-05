@@ -307,6 +307,40 @@ button:hover {
 
 
 
+
+/* Comfirmation message to the user QUESTION contact-us */
+.message-container {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.toast-message {
+  background: #fff;
+  border-left: 4px solid #cc8e9e;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-weight: 500;
+  color: #333;
+  animation: fadeOut 6s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 </style>
 
   
