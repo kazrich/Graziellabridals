@@ -109,6 +109,11 @@ def product(request):
     return render(request, 'product.html')
 
 
+# form views
+def form(request):
+    return render(request, 'form.html')
+
+
 
 
 
