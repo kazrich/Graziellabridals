@@ -24,6 +24,24 @@
 
 
 <style>
+  
+/* Load Killery Bentom font */
+@font-face {
+  font-family: 'Killery Bentom';
+  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
+       url('/static/fonts/KilleryBentom.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Improves performance and fallback behavior */
+}
+
+/* Apply font to Graziella titles */
+strong.graziella-title,
+small.graziella-subtitle {
+  font-family: 'Killery Bentom', serif;
+}
+
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
   strong.graziella-title {
     font-size: 13px !important;
@@ -34,40 +52,11 @@
   }
 }
 
-
-
-  @font-face {
-  font-family: 'Killery Bentom';
-  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
-       url('/static/fonts/KilleryBentom.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+/* Optional: fallback styling for body to test font loading */
+body {
+  font-family: 'Killery Bentom', serif;
 }
 
-/* Apply font globally */
-body, h1, h2, h3, h4, h5, h6, p, span, a {
-  font-family: 'Killery Bentom', sans-serif;
-}
-
-/* Responsive tweaks for mobile devices */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
-  p {
-    font-size: 15px;
-  }
-}
 
 
     /* navbar */
@@ -309,24 +298,21 @@ button:hover {
 
 
 /* Comfirmation message to the user QUESTION contact-us */
-.message-container {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 999;
+.alert-box {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  color: #fff;
 }
 
-.toast-message {
-  background: #fff;
-  border-left: 4px solid #cc8e9e;
-  padding: 1rem 1.2rem;
-  margin-bottom: 0.5rem;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  font-weight: 500;
-  color: #333;
-  transition: opacity 0.5s ease;
-}
+/* Optional styling by tag */
+.alert-box.success { background-color: #28a745; }
+.alert-box.error { background-color: #dc3545; }
+.alert-box.warning { background-color: #ffc107; color: #212529; }
+.alert-box.info { background-color: #17a2b8; }
+
 
 
 </style>
@@ -393,10 +379,11 @@ button:hover {
 {% if messages %}
   <div class="message-container">
     {% for message in messages %}
-      <div class="toast-message">{{ message }}</div>
+      <div class="alert-box {{ message.tags }}">{{ message }}</div>
     {% endfor %}
   </div>
 {% endif %}
+
 
 
 <!-- Contact Banner Start -->
@@ -569,13 +556,13 @@ button:hover {
     });
 
     // Show toast if available
-    const toast = document.querySelector('.toast-message');
-    if (toast) {
-      setTimeout(() => {
-        toast.style.opacity = '0';
-      }, 5000);
-    }
-  });
+   const alerts = document.querySelectorAll('.alert-box');
+      alerts.forEach((alert) => {
+        setTimeout(() => {
+          alert.style.opacity = '0';
+        }, 5000);
+      });
+    });
 
 
 

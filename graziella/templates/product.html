@@ -24,6 +24,25 @@
 
 
 <style>
+
+
+/* Load Killery Bentom font */
+@font-face {
+  font-family: 'Killery Bentom';
+  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
+       url('/static/fonts/KilleryBentom.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Improves performance and fallback behavior */
+}
+
+/* Apply font to Graziella titles */
+strong.graziella-title,
+small.graziella-subtitle {
+  font-family: 'Killery Bentom', serif;
+}
+
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
   strong.graziella-title {
     font-size: 13px !important;
@@ -34,39 +53,9 @@
   }
 }
 
-
-
-@font-face {
-  font-family: 'Killery Bentom';
-  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
-       url('/static/fonts/KilleryBentom.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* Apply font globally */
-body, h1, h2, h3, h4, h5, h6, p, span, a {
-  font-family: 'Killery Bentom', sans-serif;
-}
-
-/* Responsive tweaks for mobile devices */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
-  p {
-    font-size: 15px;
-  }
+/* Optional: fallback styling for body to test font loading */
+body {
+  font-family: 'Killery Bentom', serif;
 }
 
 
@@ -335,7 +324,52 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
     font-size: 14px;
     margin-top: 8px;
   }
+
+  /* BANNER section */
+  .category-banner-split {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .banner-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .banner-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .banner-text h2,
+  .banner-text p {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .banner-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .banner-text p {
+    font-size: 1rem;
+  }
+
+  .category-banner-wrapper {
+    padding-bottom: 0.5rem;
+  }
+
+  .category-banner-split + div {
+    margin-top: 100px;
+  }
 }
+
 
 
 

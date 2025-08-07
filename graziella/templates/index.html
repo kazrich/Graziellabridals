@@ -27,6 +27,23 @@
 
   <style>
 
+/* Load Killery Bentom font */
+@font-face {
+  font-family: 'Killery Bentom';
+  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
+       url('/static/fonts/KilleryBentom.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Improves performance and fallback behavior */
+}
+
+/* Apply font to Graziella titles */
+strong.graziella-title,
+small.graziella-subtitle {
+  font-family: 'Killery Bentom', serif;
+}
+
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
   strong.graziella-title {
     font-size: 13px !important;
@@ -37,41 +54,10 @@
   }
 }
 
-
-
-@font-face {
-  font-family: 'Killery Bentom';
-  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
-       url('/static/fonts/KilleryBentom.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+/* Optional: fallback styling for body to test font loading */
+body {
+  font-family: 'Killery Bentom', serif;
 }
-
-/* Apply font globally */
-body, h1, h2, h3, h4, h5, h6, p, span, a {
-  font-family: 'Killery Bentom', sans-serif;
-}
-
-/* Responsive tweaks for mobile devices */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
-  p {
-    font-size: 15px;
-  }
-}
-
 
 
 
@@ -94,6 +80,7 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
     background-color: #d4af37;
     transition: all 0.4s ease;
     transform: translateX(-50%);
+    
   }
 
   .navbar-nav .nav-link:hover {
@@ -189,6 +176,11 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
         font-size: 10px;
       }
     }
+
+
+
+
+
 
 /* General Banner Layout */
 /* Large screen overlay blending */
@@ -399,7 +391,6 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
 
 /* === Bridal Collection Section === */
 #bridal-collection {
-  background-color: #fef6f8;
   padding: 60px 20px;
 }
 
@@ -496,6 +487,8 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
     max-height: 180px; } 
   }
 
+
+  
 
 /* Banner Area */
 .bridal-banner {
@@ -601,11 +594,18 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
 @media (max-width: 768px) {
   .banner-wrapper {
     flex-direction: column;
+    text-align: center;
+    align-items: center;
   }
 
   .banner-t, .banner-img {
     flex: 1 1 100%;
     text-align: center;
+  }
+
+  .banner-t h2{
+    font-family: 'Killery Bentom DEMO VERSION';
+    font-size: 30px;
   }
 
   .banner-img {
@@ -1503,6 +1503,23 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
       <a href="#" class="book-button" data-bs-toggle="modal" data-bs-target="#bookingModal" style="border-radius: 50px;">
         BOOK AN APPOINTMENT
       </a>
+      <!-- Navigation Dots -->
+      <div class="dot-controls">
+        <span class="dot active" onclick="changeSlide(0)"></span>
+        <span class="dot" onclick="changeSlide(1)"></span>
+        <span class="dot" onclick="changeSlide(2)"></span>
+      </div>
+    </div>
+
+    <!-- Image Area -->
+    <div class="banner-img">
+      <img src="{% static 'bridals/img/new.png' %}" alt="Bridal Image 1" class="slide active">
+      <img src="{% static 'bridals/img/new3.png' %}" alt="Bridal Image 2" class="slide">
+      <img src="{% static 'bridals/img/new2.png' %}" alt="Bridal Image 3" class="slide">
+    </div>
+  </div>
+</section>
+
 
 <!-- Booking Modal Step 1 -->
 <!-- Booking Modal -->
@@ -1644,28 +1661,6 @@ body, h1, h2, h3, h4, h5, h6, p, span, a {
     </div>
   </div>
 </div>
-
-
-
-
-
-
-      <!-- Navigation Dots -->
-      <div class="dot-controls">
-        <span class="dot active" onclick="changeSlide(0)"></span>
-        <span class="dot" onclick="changeSlide(1)"></span>
-        <span class="dot" onclick="changeSlide(2)"></span>
-      </div>
-    </div>
-
-    <!-- Image Area -->
-    <div class="banner-img">
-      <img src="{% static 'bridals/img/new.png' %}" alt="Bridal Image 1" class="slide active">
-      <img src="{% static 'bridals/img/new3.png' %}" alt="Bridal Image 2" class="slide">
-      <img src="{% static 'bridals/img/new2.png' %}" alt="Bridal Image 3" class="slide">
-    </div>
-  </div>
-</section>
 
 
 <!-- Bridal Gowns Section -->
