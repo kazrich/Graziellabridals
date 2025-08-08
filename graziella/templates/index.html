@@ -741,20 +741,67 @@ body {
 }
 
 /* Dots */
+/* 🌟 Dot Controls Container */
 .dot-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   margin-top: 20px;
 }
 
+/* ⚪ Base Dot Style */
 .dot {
-  display: inline-block;
   width: 12px;
   height: 12px;
-  border: 2px solid black;
   border-radius: 50%;
-  margin: 0 6px;
-  background-color: transparent;
-  transition: transform 0.3s ease;
+  background-color: #ccc;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+/* 🟡 Active Dot */
+.dot.active {
+  background-color: #f5b5d9; /* Soft blush tone for bridal elegance */
+  transform: scale(1.2);
+}
+
+/* 🔄 Spinner Animation */
+.dot.spinner::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid #f5b5d9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 🌀 Keyframes for Spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .dot {
+    width: 16px;
+    height: 16px;
+  }
+
+  .dot.spinner::after {
+    width: 24px;
+    height: 24px;
+    top: -4px;
+    left: -4px;
+  }
+}
+
 
 /* Image Area */
 .sent-img {
@@ -2221,25 +2268,40 @@ closePopup.addEventListener("click", () => {
 
       
   // banner Area DOTS_LOADING
-let slideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
+    // 📸 Banner Area DOTS + SLIDES
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
 
-function changeSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === index);
-    dots[i].classList.toggle('active', i === index);
-    dots[i].classList.toggle('spinner', i === index); // Add spinner only to active dot
-  });
-  slideIndex = index;
-}
+    // 🔄 Manual Slide Change
+    function changeSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
 
-function autoSlide() {
-  slideIndex = (slideIndex + 1) % slides.length;
-  changeSlide(slideIndex);
-}
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+        dot.classList.toggle('spinner', i === index); // Spinner only on active dot
+      });
 
-setInterval(autoSlide, 4000);
+      slideIndex = index;
+    }
+
+    // ⏱️ Auto Slide Every 4 Seconds
+    function autoSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      changeSlide(slideIndex);
+    }
+
+    // 🕒 Start Auto Slide
+    setInterval(autoSlide, 4000);
+
+    // 🖱️ Optional: Add click listeners to dots
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => changeSlide(i));
+    });
+
+
 
 
   // js for closing the small screen button
