@@ -24,6 +24,31 @@
 
 
 <style>
+/* Footer TEXT SIZE FOR MOBILE SCREENS */
+ @media screen and (max-width: 600px) {
+  .footer h2,
+  .footer h3,
+  .footer h4 {
+    font-size: 24px !important;
+  }
+
+  .footer p {
+    font-size: 14px !important;
+  }
+
+  .footer .social-icons {
+    font-size: 24px !important;
+  }
+
+  .footer .contact-info strong {
+    font-size: 14px !important;
+  }
+
+  .footer div:last-child p {
+    font-size: 13px !important;
+  }
+}
+ 
 
 
 /* Load Killery Bentom font */
@@ -1076,8 +1101,8 @@ body {
             <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
               <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'product' %}">Products</a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="#product">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
               <li class="nav-item d-lg-none mt-4">
                 <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
               </li>
@@ -1101,7 +1126,7 @@ body {
 <section class="product-section" style="padding-top: 120px;">
     <section class="product-section">
       <div class="filter-heading">
-          <h3 style="font-family: 'Killery Bentom DEMO VERSION'; color: #d4af37; font-size: 60px;">Filter</h3>
+          <h3 style="font-family: 'Killery Bentom DEMO VERSION'; color: #d4af37; font-size: 55px;">Filter</h3>
       </div>
 
       
@@ -1643,7 +1668,7 @@ body {
       
       <!-- Left Section: Working Days & Hours -->
       <div class="footer-left" style="flex: 1; min-width: 250px;">
-        <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Working Hours</h2>
+        <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px; color: #ffffff;">Working Hours</h2>
         <p style="font-size: 18px;">Monday - Friday: <span style="color: #ffffff;">08:00 AM – 6:00 PM</span></p>
         <p style="font-size: 18px;">Saturday: <span style="color: #ffffff;">10:00 AM – 6:00 PM</span></p>
         <p style="font-size: 18px;">Sunday: <span style="color: #ffffff;">for only those with bookings</span></p>
@@ -1652,7 +1677,7 @@ body {
 
       <!-- Middle Section: Social Media Icons -->
         <div  class="footer-middle" style="flex: 1; min-width: 250px; text-align: center;">
-          <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px; color: #ffffff;">Follow Us</h2>
+          <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px; color: #ffffff;">Follow Us</h2>
           <div class="social-icons" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 30px;">
             <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
             <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
