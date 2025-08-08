@@ -669,6 +669,7 @@ body {
 
   
 
+
 /* Bridal Banner Area */
 /* Bridal Banner Area */
 .bridal-banner {
@@ -699,7 +700,7 @@ body {
 }
 
 .banner-t h2 span {
-  font-size: clamp(24px, 6vw, 40px); /* Responsive scaling */
+  font-size: clamp(24px, 6vw, 40px);
   color: #d4af37;
   font-family: 'Georgia', serif;
   display: inline-block;
@@ -796,13 +797,19 @@ body {
   .banner-wrapper {
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
 
   .banner-t, .banner-img {
     flex: 1 1 100%;
-    text-align: center;
     padding: 10px 20px;
+    text-align: left; /* Align text left on mobile */
+  }
+
+  .banner-t h2,
+  .banner-t h2 span,
+  .banner-t p,
+  .book-button {
+    text-align: left;
   }
 
   .banner-t h2 {
@@ -820,6 +827,7 @@ body {
   .book-button {
     font-size: 16px;
     padding: 10px 24px;
+    display: inline-block;
   }
 
   .banner-img {
