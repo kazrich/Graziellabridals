@@ -464,8 +464,6 @@ body {
 }
 
 
-
-
 /* === Main Image Block === */
 .main-container {
   flex: 1 1 40%;
@@ -673,12 +671,12 @@ body {
 
 /* Bridal Banner Area */
 /* Bridal Banner Area */
-.bridal-banner {
+.book-sets {
   background-color: #fef6f8;
   padding: 50px 20px;
 }
 
-.banner-wrapper {
+.waps-sets {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -686,13 +684,13 @@ body {
 }
 
 /* Text Area */
-.banner-t {
+.sets-t {
   flex: 1 1 45%;
   padding: 20px;
   text-align: left;
 }
 
-.banner-t h2 {
+.sets-t h2 {
   margin-bottom: 15px;
   color: #d4af37;
   font-family: 'Killery Bentom DEMO VERSION';
@@ -700,14 +698,14 @@ body {
   line-height: 1.2;
 }
 
-.banner-t h2 span {
+.sets-t h2 span {
   font-size: clamp(24px, 6vw, 40px);
   color: #d4af37;
   font-family: 'Georgia', serif;
   display: inline-block;
 }
 
-.banner-t p {
+.sets-t p {
   font-size: 1rem;
   margin-bottom: 1rem;
   color: #222;
@@ -715,11 +713,11 @@ body {
   padding: 0 10px;
 }
 
-.banner-t p:nth-of-type(1) {
+.sets-t p:nth-of-type(1) {
   font-family: 'Courier New', monospace;
 }
 
-.banner-t p:nth-of-type(2) {
+.sets-t p:nth-of-type(2) {
   font-family: 'Killery Bentom DEMO VERSION';
   font-size: 28px;
 }
@@ -735,6 +733,7 @@ body {
   border-radius: 50px;
   font-weight: bold;
   font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .book-button:hover {
@@ -757,25 +756,15 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Spinner Animation */
-.spinner {
-  border-top-color: transparent;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
 /* Image Area */
-.banner-img {
+.sent-img {
   flex: 1 1 50%;
   position: relative;
   height: 500px;
   min-width: 300px;
 }
 
-.banner-img .slide {
+.sent-img .slide {
   position: absolute;
   top: 0;
   left: 0;
@@ -788,40 +777,33 @@ body {
   transition: opacity 0.5s ease-in-out;
 }
 
-.banner-img .slide.active {
+.sent-img .slide.active {
   opacity: 1;
   pointer-events: auto;
 }
 
 /* Responsive - Small Screens */
 @media (max-width: 768px) {
-  .banner-wrapper {
+  .waps-sets {
     flex-direction: column;
     align-items: center;
   }
 
-  .banner-t, .banner-img {
+  .sets-t, .sent-img {
     flex: 1 1 100%;
     padding: 10px 20px;
-    text-align: left; /* Align text left on mobile */
-  }
-
-  .banner-t h2,
-  .banner-t h2 span,
-  .banner-t p,
-  .book-button {
     text-align: left;
   }
 
-  .banner-t h2 {
+  .sets-t h2 {
     font-size: 30px;
   }
 
-  .banner-t h2 span {
+  .sets-t h2 span {
     font-size: 24px;
   }
 
-  .banner-t p {
+  .sets-t p {
     font-size: 16px;
   }
 
@@ -831,18 +813,18 @@ body {
     display: inline-block;
   }
 
-  .banner-img {
+  .sent-img {
     position: relative;
     height: 300px;
     margin-top: 30px;
   }
 
-  .banner-img .slide {
+  .sent-img .slide {
     position: absolute;
     opacity: 0;
   }
 
-  .banner-img .slide.active {
+  .sent-img .slide.active {
     opacity: 1;
     position: relative;
   }
@@ -1720,7 +1702,35 @@ body {
 </section>
 
 
+<!-- banner Area -->
+<section class="book-sets">
+  <div class="waps-sets">
+    <!-- Text Area -->
+    <div class="sets-t">
+      <h2 style="color: rgb(0, 0, 0);">Let us Help You Make a <br> <span style="font-size: 60px; color: #d4af37; font-family: 'Georgia', serif; text-align: left;">Statement</span> <br> on Your Special Day</h2>
+      <p style="font-family: 'Courier New'; font-size: 18px;">
+        We’re all about making bridal dreams shinefrom the stunning styles already on our racks to that one-of-a-kind gown with your name all over it. Your trust inspires us, and we can’t wait to help you glow through every unforgettable moment!
+      </p>
+      <p style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 28px;">Say to YES to Graziella Bridals & we serve you</p>
+      <a href="#" class="book-button" data-bs-toggle="modal" data-bs-target="#bookingModal" style="border-radius: 50px;">
+        BOOK AN APPOINTMENT
+      </a>
+      <!-- Navigation Dots -->
+      <div class="dot-controls">
+        <span class="dot active" onclick="changeSlide(0)"></span>
+        <span class="dot" onclick="changeSlide(1)"></span>
+        <span class="dot" onclick="changeSlide(2)"></span>
+      </div>
+    </div>
 
+    <!-- Image Area -->
+    <div class="sent-img">
+      <img src="{% static 'bridals/img/new.png' %}" alt="Bridal Image 1" class="slide active">
+      <img src="{% static 'bridals/img/new3.png' %}" alt="Bridal Image 2" class="slide">
+      <img src="{% static 'bridals/img/new2.png' %}" alt="Bridal Image 3" class="slide">
+    </div>
+  </div>
+</section>
 
 
 <!-- Booking Modal Step 1 -->
@@ -1967,17 +1977,6 @@ body {
 
 
 
-
-
-
-
-<!-- Space between blurred columns and gold rates section -->
-<div class="my-5"></div> <!-- Adds vertical space -->
-
-
-
-
-<div class="my-5"></div> <!-- Adds vertical space -->
 
 
 
