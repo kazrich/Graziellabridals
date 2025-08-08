@@ -1803,6 +1803,8 @@ setTimeout(() => {
 }, 50); // slight delay ensures layout is complete
 
 
+
+
   // Setup Show More container
   const showMoreContainer = document.createElement("div");
   showMoreContainer.id = "show-more-container";
@@ -1889,21 +1891,31 @@ setTimeout(() => {
     }
   }
 
-  // 🔁 Toggle Show More / Show Less
-  showMoreBtn.addEventListener("click", () => {
-    const filteredCards = getFilteredCards();
+showMoreBtn.addEventListener("click", () => {
+  const filteredCards = getFilteredCards();
 
-    if (isExpanded) {
-      filteredCards.forEach(card => card.style.display = "none");
-      filteredCards.slice(0, previewLimit).forEach(card => card.style.display = "block");
-      showMoreBtn.textContent = "Show More";
-      isExpanded = false;
-    } else {
-      filteredCards.forEach(card => card.style.display = "block");
-      showMoreBtn.textContent = "Show Less";
-      isExpanded = true;
-    }
-  });
+  if (isExpanded) {
+    // Collapse view
+    filteredCards.forEach(card => card.style.display = "none");
+    filteredCards.slice(0, previewLimit).forEach(card => card.style.display = "block");
+    showMoreBtn.textContent = "Show More";
+    isExpanded = false;
+
+    // ⏳ Wait for layout to settle, then scroll
+    setTimeout(() => {
+      const anchor = document.getElementById("product-anchor");
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100); // 100ms is usually enough — tweak if needed
+  } else {
+    // Expand view
+    filteredCards.forEach(card => card.style.display = "block");
+    showMoreBtn.textContent = "Show Less";
+    isExpanded = true;
+  }
+});
+
 
   // 🎯 Filter buttons click logic
   filterButtons.forEach(btn => {
