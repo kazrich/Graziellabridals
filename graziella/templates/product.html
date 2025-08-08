@@ -460,32 +460,6 @@ body {
 
 /* RESPONSIVE: Small Screens */
 @media screen and (max-width: 600px) {
-  /* FILTER section */
-  .filter-heading h3 {
-    font-size: 1rem;
-  }
-
-  .filter-btn span {
-    font-size: 12px;
-  }
-
-  .filter-bar {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    gap: 16px;
-    justify-content: flex-start;
-    padding: 0 10px;
-  }
-
-  .filter-bar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .filter-bar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
   /* PRODUCT section */
   .product-grid {
     grid-template-columns: repeat(2, 1fr); /* Override only columns */
@@ -547,9 +521,76 @@ body {
   .category-banner-split + div {
     margin-top: 100px;
   }
+}
 
 
-  
+/* FILTERS */
+@media screen and (max-width: 600px) {
+
+    /* FILTER section */
+  .filter-heading h3 {
+    font-size: 1rem;
+  }
+
+  .filter-btn span {
+    font-size: 12px;
+  }
+
+
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .filter-bar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 16px;
+    padding: 6px 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-bar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .filter-btn {
+    flex: 0 0 calc(20% - 10px); /* ~5 items per row */
+    scroll-snap-align: start;
+    text-align: center;
+    border: none;
+    background: none;
+    padding: 0.2rem;
+    transition: transform 0.2s ease;
+  }
+
+  .filter-btn img {
+    width: 45px;
+    height: auto;
+    display: block;
+    margin: 0 auto 3px;
+  }
+
+  .filter-btn span {
+    font-size: 10px;
+    color: #333;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .filter-btn:active {
+    transform: scale(0.95);
+  }
 }
 
 
