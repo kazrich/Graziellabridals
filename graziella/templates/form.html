@@ -5,801 +5,577 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact|Graziella Bridals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login|Graziella Bridals</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-      <!-- Favicon (Browser tab icon) -->
-      <link rel="icon" type="image/png" href="{% static 'bridals/img/logo.png' %}" />
+    <!-- Favicon (Browser tab icon) -->
+  <link rel="icon" type="image/png" href="{% static 'bridals/img/logo.png' %}" />
 
-      <!-- Open Graph Meta Tags -->
-        <meta property="og:title" content="Graziella Bridals – A Legacy of Excellence">
-        <meta property="og:description" content="Discover timeless bridal gowns and elegant accessories with heart-crafted services.">
-        <meta property="og:image" content="https://graziellabridals.onrender.com/static/bridals/img/logo.png">
-        <meta property="og:url" content="https://graziellabridals.onrender.com">
-        <meta property="og:type" content="website">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Graziella Bridals – A Legacy of Excellence">
+    <meta property="og:description" content="Discover timeless bridal gowns and elegant accessories with heart-crafted services.">
+    <meta property="og:image" content="https://graziellabridals.onrender.com/static/bridals/img/logo.png">
+    <meta property="og:url" content="https://graziellabridals.onrender.com">
+    <meta property="og:type" content="website">
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
-
-
-<style>
-  
-/* Load Killery Bentom font */
-@font-face {
-  font-family: 'Killery Bentom';
-  src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
-       url('/static/fonts/KilleryBentom.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; /* Improves performance and fallback behavior */
-}
-
-/* Apply font to Graziella titles */
-strong.graziella-title,
-small.graziella-subtitle {
-  font-family: 'Killery Bentom', serif;
-}
-
-/* Mobile-specific adjustments */
-@media (max-width: 768px) {
-  strong.graziella-title {
-    font-size: 13px !important;
-  }
-
-  small.graziella-subtitle {
-    font-size: 10px !important;
-  }
-}
-
-/* Optional: fallback styling for body to test font loading */
-body {
-  font-family: 'Killery Bentom', serif;
-}
-
-
-/* ================================
-   GRAZIELLA BRIDALS NAVBAR STYLES
-   ================================ */
-
-.top-contact-bar {
-  transition: top 0.4s ease-in-out, padding 0.3s ease;
-}
-
-
-/* === Top Contact Bar === */
-.top-contact-bar {
-  font-size: 1em;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 10;
-  background-color: #000;
-  transition: top 0.3s ease, padding 0.3s ease;
-  border-bottom: 1px solid #222;
-}
-
-.top-contact-bar .contact-item {
-  color: #f5f5f5;
-  padding: 1px 10px;
-  display: flex;
-  align-items: center;
-}
-
-.gold-icon {
-  color: gold;
-  margin-right: 6px;
-}
-
-.shrink-contact-bar {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 0.9em;
-}
-
-/* === Navbar === */
-.navbar {
-  margin-top: 30px;
-  transition: padding 0.3s ease, height 0.3s ease;
-}
-
-.navbar-expand-lg {
-  padding: 20px 0;
-}
-
-.navbar.shrink {
-  padding: 10px 0;
-}
-
-/* === Nav Links === */
-.navbar-nav .nav-link {
-  position: relative;
-  color: #ffffff;
-  padding: 8px 15px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  background-color: #d4af37;
-  transition: all 0.4s ease;
-  transform: translateX(-50%);
-}
-
-.navbar-nav .nav-link:hover {
-  color: #d4af37;
-}
-
-.navbar-nav .nav-link:hover::after {
-  width: 80%;
-}
-
-/* === Navbar Icons (User & Cart) === */
-.navbar-icons {
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-  gap: 15px;
-}
-
-.nav-icon {
-  font-size: 20px;
-  color: #fff;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.nav-icon:hover {
-  color: #d4af37;
-}
-
-/* === Cart Drawer === */
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  max-width: 420px;
-  height: 100vh;
-  background-color: #fff;
-  box-shadow: -6px 0 20px rgba(0, 0, 0, 0.3);
-  z-index: 1050;
-  transition: right 0.4s ease;
-  padding: 30px 25px;
-  overflow-y: auto;
-  border-left: 4px solid #d4af37;
-}
-
-.cart-drawer.open {
-  right: 0;
-}
-
-.cart-drawer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: #222;
-  margin-bottom: 25px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-
-.cart-close-btn {
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: #555;
-  transition: color 0.3s ease;
-}
-
-.cart-close-btn:hover {
-  color: #d4af37;
-}
-
-.cart-drawer p {
-  font-size: 1rem;
-  color: #444;
-  margin-top: 10px;
-}
-
-/* === Responsive Adjustments === */
-@media (max-width: 768px) {
-  .top-contact-bar .contact-item {
-    margin-right: 5px;
-    padding: 4px 0;
-    font-size: 10px;
-  }
-
-  .top-contact-bar .container {
-    gap: 5px;
-  }
-
-  .top-contact-bar {
-    padding-top: 10px;
-    padding-bottom: 5px;
-  }
-
-  .navbar-toggler {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    border: none;
-    background-color: #ffffff;
-  }
-
-  .brand-name {
-    font-size: 14px;
-  }
-
-  .brand-tagline {
-    font-size: 10px;
-  }
-
-  .navbar-icons {
-    margin-top: 90px;
-    justify-content: center;
-  }
-
-  .nav-icon {
-    font-size: 22px;
-  }
-}
-
-/* Ensure mobile icons are centered and spaced */
-.navbar-icons.d-lg-none {
-  margin-top: 10px;
-}
-
-.navbar-nav .nav-item.text-center.mt-4 {
-  margin-bottom: 10px;
-}
-
-/* === Hide Top Bar === */
-.hide-top-bar {
-  top: -100px;
-  opacity: 0;
-  transition: top 0.4s ease, opacity 0.3s ease;
-}
-
-/* === Shift Navbar Up === */
-.navbar-at-top {
-  margin-top: 0 !important;
-  transition: margin-top 0.4s ease;
-}
-
-
-/* Smooth transition for top bar */
-.top-contact-bar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  transition: top 0.4s ease, opacity 0.3s ease;
-  z-index: 1000;
-}
-
-/* Shrink navbar (your existing logic) */
-.navbar.shrink {
-  padding: 10px 20px;
-  transition: padding 0.3s ease;
-}
-
-/* Shift navbar up when top bar hides */
-.navbar-at-top {
-  margin-top: 0 !important;
-  transition: margin-top 0.4s ease;
-}
-
-.navbar {
-  margin-top: 30px; /* default space when top bar is visible */
-}
-
-/* Align nav links and icons in a single row on desktop */
-.navbar-collapse > .d-lg-flex {
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-}
-
-/* Nav links in horizontal row */
-.navbar-nav {
-  flex-direction: row;
-  gap: 10px;
-}
-
-/* Remove default vertical spacing */
-.navbar-nav .nav-item {
-  margin-bottom: 0;
-}
-
-/* Icons spacing and alignment */
-.navbar-icons.d-lg-flex {
-  gap: 15px;
-  align-items: center;
-}
-
-
-
-
-
-
-
-
-/* ================================
-   FOOTER CSS CODE 
-   ================================ */
-/* social media...links in the footer */
-  .social-icons a {
-    color: #6d6868;
-    transition: color 0.3s ease;
-  }
-  .social-icons a:hover {
-    color: #ffffff;
-  }
-
-@media (max-width: 768px) {
-  .footer-left,
-  .footer-middle,
-  .footer-right {
-    margin-bottom: 30px;
-  }
-}
-
-
-
-
-
-
-
-
-
-/* =========================== 
-    CONTACT BANNER CONTAINER
-  =========================== */
-  .contact-banner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 40px 5%;
-  color: #fff;
-  width: 100%;
-  margin-top: 150px; /* Default spacing for larger screens */
-}
-
-
-.banner-left, .banner-right {
-  flex: 1 1 300px;
-}
-
-.banner-left h2, .banner-left h3, .banner-left h4,
-.form-header h1, .thank-you {
-  color: goldenrod;
-  font-size: 'Courier New';
-}
-
-.banner-left p, .form-header p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.banner-left a {
-  color: goldenrod;
-  text-decoration: none;
-}
-
-.banner-right iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 300px;
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.form-section {
-  padding: 50px 5%;
-  background-color: #fff;
-}
-
-.form-overlay {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 30px;
-  border-radius: 12px;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.privacy-note {
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 10px;
-  color: #333;
-}
-
-button {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  background-color: goldenrod;
-  color: rgb(0, 0, 0);
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  margin-top: 15px;
-
-}
-
-button:hover {
-  background-color: #ffffff;
-  box-shadow:  rgba(0, 0, 0, 0.05);
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .contact-banner {
-    flex-direction: column;
-  }
-}
-
-
-/* social media...links in the footer */
-  .social-icons a {
-    color: #6d6868;
-    transition: color 0.3s ease;
-  }
-  .social-icons a:hover {
-    color: #ffffff;
-  }
-
-@media (max-width: 768px) {
-  .footer-left,
-  .footer-middle,
-  .footer-right {
-    margin-bottom: 30px;
-  }
-}
-
-
-
-
-/* Comfirmation message to the user QUESTION contact-us */
-.alert-box {
-  transition: opacity 0.5s ease-in-out;
-  opacity: 1;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
-  color: #fff;
-}
-
-/* Optional styling by tag */
-.alert-box.success { background-color: #28a745; }
-.alert-box.error { background-color: #dc3545; }
-.alert-box.warning { background-color: #ffc107; color: #212529; }
-.alert-box.info { background-color: #17a2b8; }
-
-
-
-
-</style>
-
-  
-</head>
-<body>
-
-<!-- Top Contact Bar -->
-    <div class="top-contact-bar text-light py-1" style="background-color: #000000;">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center">
-        <div class="contact-item">
-            <i class="fas fa-phone-alt gold-icon"></i> +256 772 463889
-        </div>
-        <div class="contact-item">
-            <i class="fas fa-envelope gold-icon"></i> graziellab889@gmail.com
-        </div>
-        </div>
-    </div>
-  
-  <!-- Navbar Start -->
-  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #000000;">
-    <div class="container d-flex justify-content-between align-items-center">
-      <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}" style="gap: 10px;">
-        <img src="{% static 'bridals/img/logo.png' %}" alt="Logo" style="height: 60px; width: auto;">
-      <div style="display: flex; flex-direction: column;">
-        <strong class="graziella-title" style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold;">
-          Graziella Bridals
-        </strong>
-        <small class="graziella-subtitle" style="font-size: 12px; color: #d4af37;">
-          A Legacy Of Excellence
-        </small>
-      </div>
-      </a>
-      
-      <div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" style="margin: 0 auto;">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      
-  
-        <div class="collapse navbar-collapse" id="mainNavbar">
-
-        <!-- 👤 User Icon on Top (Mobile Only) -->
-        <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
-            <a href="#" class="nav-icon user-icon">
-            <i class="fas fa-user"></i>
-            </a>
-        </div>
-
-        <!-- 📌 Navigation + Icons (Desktop Row / Mobile Column) -->
-        <div class="d-lg-flex align-items-center w-100 justify-content-end flex-column flex-lg-row">
-
-            <!-- 📌 Navigation Links -->
-            <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#about" id="aboutLink">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'product' %}">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact Us</a>
-            </li>
-
-            <!-- 🛒 Cart Icon on Bottom (Mobile Only) -->
-            <li class="nav-item d-lg-none mt-4">
-                <button class="nav-icon cart-icon" onclick="toggleCartDrawer()">
-                <i class="fas fa-shopping-cart"></i>
-                </button>
-            </li>
-            </ul>
-
-            <!-- 🖥️ Icons Inline (Desktop Only) -->
-            <div class="navbar-icons d-none d-lg-flex ms-3">
-            <a href="#" class="nav-icon user-icon">
-                <i class="fas fa-user"></i>
-            </a>
-            <button class="nav-icon cart-icon" onclick="toggleCartDrawer()">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-            </div>
-        </div>
-        </div>
-
-     
-    </div>
-  </nav>
-  <!-- Navbar End -->
-
-
-
-
-
-<!-- Contact Banner Start -->
-<section class="contact-banner">
-  <!-- Left: Contact Info -->
-  <div class="banner-left" style="color: #000000;">
-    <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 60px;">Contact Us</h2>
-    <p>For more help, feel free to fill the form below. We’ll get to you in no time.</p>
-
-    <div class="contact-info">
-      <h3 style="font-family: 'Cinzel', serif;font-size: 20px; font-weight: bold;">GRAZIELLA BRIDALS</h3>
-      <p><strong>Phone:</strong> +256 772 463889</p>
-      <p><strong>Email:</strong> <a href="mailto:graziellab889@gmail.com">graziellab889@gmail.com</a></p>
-    </div>
-
-    <div class="address-info">
-      <h4 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Address</h4>
-      <p>Shop No.L16, Ivory Plaza,<br>Plot 4, 23 Wilson Rd, Kampala</p>
-    </div>
-  </div>
-
-  <!-- Right: Embedded Map -->
-  <div class="banner-right">
-    <iframe
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3849.4935045339353!2d32.57480281034807!3d0.31388266402877196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbdd4ddf594fd%3A0x5721d5a0a0b03ba2!2sGraziella&#39;S%20Fashion%20Hub!5e1!3m2!1sen!2sug!4v1753356434054!5m2!1sen!2sug"
-    ></iframe>
-  </div>
-</section>
-
-<!-- Form Section -->
-<section class="form-section">
-  <div class="form-overlay">
-    <div class="form-header">
-      <h1 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 60px;">Send Your Question</h1>
-      <p>Reach out for guidance, opportunities or assistance — we’re here for you.</p>
-    </div>
-    {% if name %}
-      <h3 class="thank-you">Thank you, {{ name }}!</h3>
-    {% endif %}
-    <form method="POST">
-      {% csrf_token %}
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <input type="tel" name="number" placeholder="Your Contact" required pattern="[0-9]{10}" title="Enter a 10-digit phone number">
-      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-
-      <p class="privacy-note">Client, your information is safe with us.</p>
-      <button type="submit">Send</button>
-    </form>
-  </div>
-</section>
-
-
-
-
-
-
-
-<!-- Footer -->
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-
-   // js for closing the small screen button
-    document.addEventListener('click', function (event) {
-    const navbarCollapse = document.getElementById('mainNavbar');
-    const isClickInsideNavbar = navbarCollapse.contains(event.target);
-    const isToggler = event.target.closest('.navbar-toggler');
-
-    if (!isClickInsideNavbar && !isToggler && navbarCollapse.classList.contains('show')) {
-      new bootstrap.Collapse(navbarCollapse).hide();
-    }
-  });
-
-  // js overlay form
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector(".contact-banner form");
-
-    form.addEventListener("submit", function (e) {
-      const name = form.querySelector('input[name="name"]').value.trim();
-      const email = form.querySelector('input[name="email"]').value.trim();
-      const number = form.querySelector('input[name="number"]').value.trim();
-      const message = form.querySelector('textarea[name="message"]').value.trim();
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const numberRegex = /^[0-9]{10}$/;
-
-      let errors = [];
-
-      if (!name || name.length < 2) {
-        errors.push("Please enter your name (at least 2 characters).");
-      }
-
-      if (!emailRegex.test(email)) {
-        errors.push("Please enter a valid email address.");
-      }
-
-      if (!numberRegex.test(number)) {
-        errors.push("Contact number must be exactly 10 digits.");
-      }
-
-      if (!message || message.length < 10) {
-        errors.push("Your message must be at least 10 characters.");
-      }
-
-      if (errors.length > 0) {
-        e.preventDefault();
-        alert(errors.join("\n"));
-        return;
-      }
-
-      // Let the form submit normally so Django can respond with a toast
-    });
-
-    // Show toast if available
-   const alerts = document.querySelectorAll('.alert-box');
-      alerts.forEach((alert) => {
-        setTimeout(() => {
-          alert.style.opacity = '0';
-        }, 5000);
-      });
-    });
-
-
-
-
-
-
-
-  window.addEventListener('scroll', function () {
-    const topBar = document.querySelector('.top-contact-bar');
-    const navbar = document.querySelector('.navbar');
-
-    if (window.scrollY > 50) {
-      // Hide top bar
-      topBar.style.top = '-100px';
-      topBar.style.opacity = '0';
-
-      // Shrink navbar and shift it up
-      navbar.classList.add('shrink');
-      navbar.classList.add('navbar-at-top');
-    } else {
-      // Show top bar
-      topBar.style.top = '0';
-      topBar.style.opacity = '1';
-
-      // Restore navbar
-      navbar.classList.remove('shrink');
-      navbar.classList.remove('navbar-at-top');
-    }
-  });
-
-
-    // navbar
-    // Get elements
-    const contactBar = document.querySelector('.top-contact-bar');
-    const navbar = document.querySelector('.navbar');
-    let prevScrollPos = window.pageYOffset;
-
-    // Event listener for scroll
-    window.onscroll = function () {
-        let currentScrollPos = window.pageYOffset;
-
-        // Check if the user scrolls down
-        if (currentScrollPos > prevScrollPos) {
-        // When scrolling down, shrink both the top contact bar and the navbar
-        contactBar.classList.add('shrink-contact-bar');
-        navbar.classList.add('shrink');
-        } else {
-        // When scrolling up, reset both to normal size
-        contactBar.classList.remove('shrink-contact-bar');
-        navbar.classList.remove('shrink');
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
         }
 
-        prevScrollPos = currentScrollPos;
-    };
+        .close-button {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 24px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 300;
+        }
 
+        .form-wrapper {
+            width: 100%;
+            max-width: 480px;
+            padding: 60px 40px;
+            box-sizing: border-box;
+        }
 
-function toggleCartDrawer() {
-  const drawer = document.getElementById('cartDrawer');
-  const backdrop = document.getElementById('cartBackdrop');
-  drawer.classList.toggle('open');
-  backdrop.classList.toggle('visible');
+        h1 {
+            font-family: 'Georgia', serif;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 24px;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -16px;
+            margin-bottom: 24px;
+        }
+
+        .forgot-password a {
+            font-size: 13px;
+            color: #000;
+            text-decoration: underline;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .create-account {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .create-account a {
+            color: #000;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+/* Overlay behind the pop-up */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1); /* very light transparent white */
+    backdrop-filter: blur(6px);           /* soft blur effect */
+    z-index: 999;
+    display: none;
 }
 
-</script>
+/* Pop-up form container */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;               /* crisp white form */
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+}
+
+/* Heading */
+.popup h2 {
+    font-family: 'Georgia', serif;
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #000;
+}
+
+/* Close button inside pop-up */
+.popup .close-popup {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 22px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 300;
+}
+
+/* Input fields */
+.popup input[type="text"],
+.popup input[type="email"],
+.popup input[type="password"] {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 24px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Labels */
+.popup label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: #000;
+}
+
+/* Submit button */
+.popup button {
+    width: 100%;
+    padding: 14px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* Forgot Password Pop-up */
+#forgot-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+}
+
+#forgot-popup h2 {
+    font-family: 'Georgia', serif;
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000;
+}
+
+#forgot-popup p {
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #333;
+}
+
+#forgot-popup label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: #000;
+}
+
+#forgot-popup input[type="email"] {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 24px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#forgot-popup button {
+    width: 100%;
+    padding: 14px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.cancel-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.cancel-link a {
+    font-size: 13px;
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Overlay for Forgot Password */
+#forgot-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    z-index: 999;
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .form-wrapper {
+        padding: 40px 20px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+
+    label {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        padding: 12px;
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    .forgot-password {
+        margin-top: -12px;
+        margin-bottom: 20px;
+    }
+
+    .forgot-password a {
+        font-size: 12px;
+    }
+
+    .create-account {
+        font-size: 12px;
+        margin-top: 20px;
+    }
+
+    .popup,
+    #forgot-popup {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .popup h2,
+    #forgot-popup h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .popup .close-popup,
+    .close-button,
+    #forgot-popup .close-popup {
+        top: 15px;
+        right: 20px;
+        font-size: 20px;
+    }
+
+    #forgot-popup p {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .cancel-link a {
+        font-size: 12px;
+    }
+}
 
 
-<!-- Cart Drawer -->
-<div id="cartDrawer" class="cart-drawer">
-  <div class="cart-drawer-header">
-    Your Cart
-    <button class="cart-close-btn" onclick="toggleCartDrawer()">&times;</button>
-  </div>
-  <p>Your cart is currently empty.</p>
+@keyframes flyIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -80%) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes bounceOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    40% {
+        transform: translate(-50%, -48%) scale(1.05);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -80%) scale(0.9);
+    }
+}
+
+
+.popup-show {
+    animation: flyIn 0.4s ease-out forwards;
+}
+
+.popup-hide {
+    animation: bounceOut 0.3s ease-in forwards;
+}
+
+
+
+    </style>
+</head>
+<body>
+<a href="/" class="close-button">&times;</a>
+
+<div class="form-wrapper" id="login-form">
+    <h1>LOGIN</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+
+        <!-- Forgot Password Trigger -->
+        <div class="forgot-password">
+            <a onclick="showPopup('forgot-popup', 'forgot-overlay')">Forgot password?</a>
+        </div>
+
+        <button type="submit">SIGN IN</button>
+    </form>
+
+    <div class="create-account">
+        <span>Don't have an account? <a onclick="showPopup('popup-form', 'overlay')">Create account</a></span>
+    </div>
 </div>
+
+<!-- Overlay for Create Account -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Create Account Pop-up -->
+<div class="popup" id="popup-form">
+    <a class="close-popup" onclick="hidePopup('popup-form', 'overlay')">&times;</a>
+    <h2>CREATE ACCOUNT</h2>
+    <p style="font-size: 13px; color: #555; margin-bottom: 20px;">
+        ⚠️ Please enter a valid Google email address. It will be used for password recovery, and your info is safe with us.
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" name="first_name" placeholder="First name">
+
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="last_name" placeholder="Last name">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email address">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create password">
+
+        <button type="submit">CREATE</button>
+    </form>
+</div>
+
+<!-- Overlay for Forgot Password -->
+<div class="overlay" id="forgot-overlay"></div>
+
+<!-- Forgot Password Pop-up -->
+<div class="popup" id="forgot-popup">
+    <a class="close-popup" onclick="hidePopup('forgot-popup', 'forgot-overlay')">&times;</a>
+    <h2>RESET YOUR PASSWORD</h2>
+    <p>We will send you an email to reset your password.</p>
+    <p style="font-size: 13px; color: #555; margin-bottom: 20px;">
+        ⚠️ Please enter the same email you used when creating your account. It must be valid on Google.
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <label for="forgot-email">Email</label>
+        <input type="email" id="forgot-email" name="email" placeholder="Enter your email">
+        <button type="submit">SUBMIT</button>
+        <div class="cancel-link">
+            <a onclick="hidePopup('forgot-popup', 'forgot-overlay')">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    // ─── POP-UP DISPLAY CONTROLS ─────────────────────────────
+
+    function showPopup(popupId, overlayId) {
+        const popup = document.getElementById(popupId);
+        const overlay = document.getElementById(overlayId);
+
+        popup.classList.remove('popup-hide');
+        popup.classList.add('popup-show');
+        popup.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+
+    function hidePopup(popupId, overlayId) {
+        const popup = document.getElementById(popupId);
+        const overlay = document.getElementById(overlayId);
+
+        popup.classList.remove('popup-show');
+        popup.classList.add('popup-hide');
+
+        setTimeout(() => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }, 300); // Match bounceOut duration
+    }
+
+    // ─── LEGACY POP-UP CONTROLS (Login ↔ Popups) ─────────────
+
+    function openPopup() {
+        showPopup('popup-form', 'overlay');
+        document.getElementById('login-form').style.display = 'none';
+    }
+
+    function closePopup() {
+        hidePopup('popup-form', 'overlay');
+        document.getElementById('login-form').style.display = 'block';
+    }
+
+    function openForgot() {
+        showPopup('forgot-popup', 'forgot-overlay');
+        document.getElementById('login-form').style.display = 'none';
+    }
+
+    function closeForgot() {
+        hidePopup('forgot-popup', 'forgot-overlay');
+        document.getElementById('login-form').style.display = 'block';
+    }
+
+    // ─── FORM VALIDATION ─────────────────────────────────────
+
+    function validateCreateForm(event) {
+        const firstName = document.getElementById('first_name').value.trim();
+        const lastName = document.getElementById('last_name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!firstName || !lastName || !email || !password) {
+            alert("All fields are important and they are needed.");
+            event.preventDefault();
+        } else if (!email.endsWith("@gmail.com")) {
+            alert("Please enter a valid Google email address. It will be used for password recovery and your info is safe with us.");
+            event.preventDefault();
+        }
+    }
+
+    function validateForgotForm(event) {
+        const email = document.getElementById('forgot-email').value.trim();
+
+        if (!email) {
+            alert("All fields are important and they are needed.");
+            event.preventDefault();
+        } else if (!email.endsWith("@gmail.com")) {
+            alert("Please enter the recent email used when creating your account. It must be valid on Google.");
+            event.preventDefault();
+        }
+    }
+
+    // ─── EVENT BINDING ───────────────────────────────────────
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Form validation
+        const createForm = document.querySelector('#popup-form form');
+        const forgotForm = document.querySelector('#forgot-popup form');
+
+        if (createForm) {
+            createForm.addEventListener('submit', validateCreateForm);
+        }
+
+        if (forgotForm) {
+            forgotForm.addEventListener('submit', validateForgotForm);
+        }
+
+        // Overlay click-to-close
+        document.getElementById('overlay').addEventListener('click', () => closePopup());
+        document.getElementById('forgot-overlay').addEventListener('click', () => closeForgot());
+    });
+</script>
 
 </body>
 </html>

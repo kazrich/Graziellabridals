@@ -1735,7 +1735,9 @@ body {
         <div class="collapse navbar-collapse" id="mainNavbar">
           <!-- Mobile Icons -->
           <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
-            <a href="#" class="nav-icon"><i class="fas fa-user"></i></a>
+              <a href="{% url 'form' %}" class="nav-icon" aria-label="User Form">
+                  <i class="fas fa-user"></i>
+              </a>
           </div>
 
           <!-- Nav Links + Desktop Icons -->
@@ -1745,6 +1747,7 @@ body {
               <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'product' %}">Products</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+
               <li class="nav-item d-lg-none mt-4">
                 <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
               </li>
@@ -1752,7 +1755,7 @@ body {
 
             <!-- Desktop Icons -->
             <div class="navbar-icons d-none d-lg-flex ms-3">
-              <a href="#" class="nav-icon"><i class="fas fa-user"></i></a>
+              <a href="{% url 'form' %}" class="nav-icon"><i class="fas fa-user"></i></a>
               <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
             </div>
           </div>

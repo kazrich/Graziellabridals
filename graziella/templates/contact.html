@@ -535,10 +535,12 @@ textarea {
 
         <!-- Collapsible Nav Content -->
         <div class="collapse navbar-collapse" id="mainNavbar">
-          <!-- Mobile Icons -->
-          <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
-            <a href="#" class="nav-icon"><i class="fas fa-user"></i></a>
-          </div>
+            <!-- Mobile: triggers drawer -->
+            <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
+              <a href="{% url 'form' %}" style="color: white; font-size: 24px;">
+                <i class="fas fa-user" id="userIconMobile"></i>
+              </a>
+            </div>
 
           <!-- Nav Links + Desktop Icons -->
           <div class="d-lg-flex align-items-center w-100 justify-content-end flex-column flex-lg-row">
@@ -554,7 +556,7 @@ textarea {
 
             <!-- Desktop Icons -->
             <div class="navbar-icons d-none d-lg-flex ms-3">
-              <a href="#" class="nav-icon"><i class="fas fa-user"></i></a>
+              <a href="{% url 'form' %}" class="nav-icon"><i class="fas fa-user"></i></a>
               <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
             </div>
           </div>
@@ -774,6 +776,8 @@ document.addEventListener("DOMContentLoaded", function () {
     backdrop.classList.toggle("visible");
   };
 });
+
+
 </script>
 
 

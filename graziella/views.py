@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from .models import Inquiry
+from django.contrib.auth.models import User
+from .forms import RegistrationForm
 
 
 # Home view
@@ -114,6 +116,18 @@ def form(request):
     return render(request, 'form.html')
 
 
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  # Hash the password
+            user.save()
+            return redirect('login')  # Redirect to login page after registration
+    else:
+        form = RegistrationForm()
+    return render(request, 'form.html', {'form': form, 'form_title': 'Register'})
 
 
 
