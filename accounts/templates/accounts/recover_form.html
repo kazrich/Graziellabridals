@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+body{
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+
+}
+
+.recover-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.recover-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 50px goldenrod;
+    text-align: center;
+    animation: flyIn 0.8s ease-out;
+}
+
+.recover-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.recover-subtext {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.recover-message {
+    font-size: 14px;
+    color: #555;
+
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #444;
+}
+
+input[type="password"] {
+    width: 70%; /* Reduced width */
+    max-width: 300px; /* Optional: cap it for large screens */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    transition: border-color 0.3s ease;
+    text-align: center; /* Optional: center text inside input */
+}
+
+input[type="password"]:focus {
+    border-color: #ff0000;
+    outline: none;
+}
+
+.reset-button {
+    background-color: goldenrod;
+    color: rgb(0, 0, 0);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.reset-button:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
+
+.cancel-link {
+    margin-top: 20px;
+}
+
+.cancel-link a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.cancel-link a:hover {
+    color: goldenrod;
+}
+
+/* ✨ Fly-in animation */
+@keyframes flyIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .recover-box {
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 30px goldenrod;
+    }
+
+    .recover-title {
+        font-size: 22px;
+    }
+
+    .recover-subtext,
+    .recover-message {
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+
+    input[type="password"] {
+        width: 90%;
+        max-width: none;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .reset-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .cancel-link {
+        margin-top: 15px;
+    }
+
+    .cancel-link a {
+        font-size: 13px;
+    }
+}
+
+</style>
+</head>
+<body>
+    <!-- accounts/templates/accounts/recover_form.html -->
+
+<div class="recover-container">
+    <div class="recover-box">
+        <h2 class="recover-title">
+            {% if token %}Reset Your Password{% else %}Forgot Your Password?{% endif %}
+        </h2>
+        <p class="recover-subtext">
+            {% if token %}
+                Let’s help you set a new password and get back in.
+            {% else %}
+                We’re here to help you get back on track.
+            {% endif %}
+        </p>
+        <p class="recover-message">
+            {% if token %}
+                We’re truly sorry for the inconvenience of losing access. But don’t worry—this reset will guide you back. <br>
+                Thank you for trusting us to help you recover your account.
+            {% else %}
+                Enter your email below and we’ll send you a secure link to reset your password. <br>
+                We’re honored to help you return to your Graziella experience.
+            {% endif %}
+        </p>
+
+        {% if token %}
+            <!-- 🔐 Password Reset Form -->
+            <form method="post" action="{% url 'reset_password' token=token %}">
+                {% csrf_token %}
+                <label for="new-password" style="font-size: 20px; font-weight: 600;">New Password</label>
+                <input type="password" id="new-password" name="password" placeholder="Enter new password" required><br>
+                <button type="submit" class="reset-button">Reset Password</button>
+            </form>
+        {% else %}
+            <!-- 📧 Email Recovery Form -->
+            <form method="post" action="{% url 'recover_password' %}">
+                {% csrf_token %}
+                <label for="email" style="font-size: 20px; font-weight: 600;">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required><br>
+                <button type="submit" class="reset-button">Send Recovery Email</button>
+            </form>
+        {% endif %}
+
+        <div class="cancel-link">
+            <a href="{% url 'login' %}">Back to Login</a>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

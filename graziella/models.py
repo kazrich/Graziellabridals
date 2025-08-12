@@ -1,4 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 class Appointment(models.Model):
     full_name = models.CharField(max_length=100)
@@ -25,4 +31,5 @@ class Inquiry(models.Model):
 
     def __str__(self):
         return f"Inquiry from {self.name}"
+
 

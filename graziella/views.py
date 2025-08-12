@@ -1,14 +1,20 @@
-from django.shortcuts import render, redirect
+# graziella/views.py
+from accounts.models import UserRegistration  # adjust import if needed
+from django.shortcuts import render
 from django.core.mail import send_mail
-from django.conf import settings
 from django.contrib import messages
-from .models import Inquiry
-from django.contrib.auth.models import User
-from .forms import RegistrationForm
 
-
-# Home view
+# 🏠 Home view
 def home(request):
+    profile = None
+    user_id = request.session.get('user_id')
+
+    if user_id:
+        try:
+            profile = UserRegistration.objects.get(id=user_id)
+        except UserRegistration.DoesNotExist:
+            profile = None
+
     if request.method == "POST":
         full_name = request.POST.get("userName")
         email = request.POST.get("userEmail")
@@ -41,7 +47,6 @@ Warm regards,
 Graziella Bridals Website
 """
 
-        # 🛡️ Safe email logic with feedback
         try:
             send_mail(
                 subject=f"New Booking from {full_name}",
@@ -55,14 +60,18 @@ Graziella Bridals Website
             messages.error(request, "⚠️ We couldn’t send the booking email. Please try again or contact us directly.")
             print("Email send error:", e)
 
-        return render(request, 'index.html')
-
-    return render(request, 'index.html')
-
-
-
-# Contact view
+    return render(request, 'index.html', {'profile': profile})
+# 📬 Contact view
 def contact(request):
+    profile = None
+    user_id = request.session.get('user_id')
+
+    if user_id:
+        try:
+            profile = UserRegistration.objects.get(id=user_id)
+        except UserRegistration.DoesNotExist:
+            profile = None
+
     name = None
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -70,7 +79,6 @@ def contact(request):
         number = request.POST.get('number')
         message_text = request.POST.get('message')
 
-        # Compose the email
         email_subject = "Question from Contact-us page"
         email_body = f"""
 Hello Graziella Bridals,
@@ -92,7 +100,7 @@ Graziella Bridals Website
             send_mail(
                 subject=email_subject,
                 message=email_body,
-                from_email=email,  # Optional: use a default sender if needed
+                from_email=email,
                 recipient_list=['graziellab889@gmail.com'],
                 fail_silently=False
             )
@@ -101,34 +109,16 @@ Graziella Bridals Website
             messages.error(request, "⚠️ We couldn’t send your message by email. Please try again or contact us directly.")
             print("Email send error:", e)
 
-    return render(request, 'contact.html', {'name': name})
-
-
-
-
-# product views
+    return render(request, 'contact.html', {'name': name, 'profile': profile})
+# 👗 Product view
 def product(request):
-    return render(request, 'product.html')
+    profile = None
+    user_id = request.session.get('user_id')
 
+    if user_id:
+        try:
+            profile = UserRegistration.objects.get(id=user_id)
+        except UserRegistration.DoesNotExist:
+            profile = None
 
-# form views
-def form(request):
-    return render(request, 'form.html')
-
-
-
-def register_view(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])  # Hash the password
-            user.save()
-            return redirect('login')  # Redirect to login page after registration
-    else:
-        form = RegistrationForm()
-    return render(request, 'form.html', {'form': form, 'form_title': 'Register'})
-
-
-
-
+    return render(request, 'product.html', {'profile': profile})

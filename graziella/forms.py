@@ -16,3 +16,18 @@ class RegistrationForm(forms.ModelForm):
 
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match")
+
+# accounts/forms.py
+
+from django import forms
+from django.contrib.auth.models import User
+
+class RegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'password']
+
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField()

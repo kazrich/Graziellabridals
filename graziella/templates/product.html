@@ -25,6 +25,17 @@
 
 
 <style>
+
+.nav-icon.user-name {
+  font-weight: 700; /* Makes it bold */
+  color: goldenrod; /* A warm luxury tone (like rose gold or champagne) */
+  font-size: 22px; /* Slightly larger than other icons */
+  text-transform: uppercase; /* Optional: adds presence */
+  letter-spacing: 0.5px; /* Optional: adds polish */
+  text-decoration: underline;
+}
+
+
 /* Footer TEXT SIZE FOR MOBILE SCREENS */
  @media screen and (max-width: 600px) {
   .footer h2,
@@ -82,6 +93,8 @@ small.graziella-subtitle {
 /* Optional: fallback styling for body to test font loading */
 body {
   font-family: 'Killery Bentom', serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+
 }
 
 
@@ -103,17 +116,18 @@ body {
   border-bottom: 1px solid #222;
   font-size: 1em;
   transition: top 0.4s ease, padding 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 20px 13px goldenrod;
 }
 
 .top-contact-bar .contact-item {
-  color: #f5f5f5;
+  color: #ffffff;
   padding: 1px 10px;
   display: flex;
   align-items: center;
 }
 
 .gold-icon {
-  color: gold;
+  color: goldenrod;
   margin-right: 6px;
 }
 
@@ -132,6 +146,7 @@ body {
 .navbar {
   margin-top: 30px;
   transition: padding 0.3s ease, height 0.3s ease, margin-top 0.4s ease;
+  box-shadow: 0 2px 0px goldenrod;
 }
 
 .navbar-expand-lg {
@@ -182,8 +197,8 @@ body {
 .navbar-nav .nav-link {
   white-space: nowrap; /* Prevents line breaks like "About" / "Us" */
   padding: 8px 20px;    /* Slightly wider padding for elegance */
-  font-weight: 500;
-  color: #ffffff;
+  font-weight: bold;
+  color: #000000;
   position: relative;
   transition: color 0.3s ease;
 }
@@ -201,7 +216,7 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-  color: #d4af37;
+  color: #000000;
 }
 
 .navbar-nav .nav-link:hover::after {
@@ -225,9 +240,10 @@ body {
   justify-content: center;
 }
 
+
 .nav-icon {
   font-size: 20px;
-  color: #fff;
+  color: #000000;
   background: none;
   border: none;
   cursor: pointer;
@@ -276,7 +292,7 @@ body {
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #555;
+  color: #ff0000;
   transition: color 0.3s ease;
 }
 
@@ -352,6 +368,7 @@ body {
     margin-bottom: 10px;
   }
 }
+
 
 
 
@@ -1104,19 +1121,19 @@ body {
 <body>
 
 <!-- Top Contact Bar -->
-    <div class="top-contact-bar text-light py-1" style="background-color: #000000;">
+    <div class="top-contact-bar text-light py-1" style="background-color: #ffffff;">
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
-        <div class="contact-item">
+        <div class="contact-item" style="color: black;">
             <i class="fas fa-phone-alt gold-icon"></i> +256 772 463889
         </div>
-        <div class="contact-item">
+        <div class="contact-item" style="color: black;">
             <i class="fas fa-envelope gold-icon"></i> graziellab889@gmail.com
         </div>
         </div>
     </div>
   
 <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg fixed-top bg-black">
+    <nav class="navbar navbar-expand-lg fixed-top bg-white">
       <div class="container">
         <!-- Logo + Brand + Toggler in one flex row -->
         <div class="d-flex align-items-center justify-content-between w-100">
@@ -1137,7 +1154,20 @@ body {
         <div class="collapse navbar-collapse" id="mainNavbar">
           <!-- Mobile Icons -->
           <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
-            <a href="{% url 'form' %}" class="nav-icon"><i class="fas fa-user"></i></a>
+            {% if profile %}
+              <div class="user-dropdown">
+                <span class="nav-icon user-name" onclick="toggleDropdown(this)">
+                  {{ profile.first_name }}
+                </span>
+                <div class="dropdown-menu">
+                  <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
+                </div>
+              </div>
+            {% else %}
+              <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
+                <i class="fas fa-user"></i>
+              </a>
+            {% endif %}
           </div>
 
           <!-- Nav Links + Desktop Icons -->
@@ -1154,7 +1184,20 @@ body {
 
             <!-- Desktop Icons -->
             <div class="navbar-icons d-none d-lg-flex ms-3">
-              <a href="{% url 'form' %}" class="nav-icon"><i class="fas fa-user"></i></a>
+                {% if profile %}
+                  <div class="user-dropdown">
+                    <span class="nav-icon user-name" onclick="toggleDropdown(this)">
+                      {{ profile.first_name }}
+                    </span>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
+                    </div>
+                  </div>
+                {% else %}
+                  <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
+                    <i class="fas fa-user"></i>
+                  </a>
+                {% endif %}
               <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
             </div>
           </div>
@@ -1737,7 +1780,11 @@ body {
         <p>If you have any questions regarding our products or our service, please contact our customer service.</p>
         <div class="contact-info">
           <h3 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Contact Us</h3>
-          <p><strong>Phone:</strong><span style="color: #ffffff;">+256 772 463889</span></p>
+          <p><strong>Phone:</strong> 
+            <a href="tel:+256772463889" style="color: #ffffff; text-decoration: none;">
+              +256 772 463889
+            </a>
+          </p>
           <p><strong>Email:</strong> 
             <a href="mailto:graziellab889@gmail.com" style="color: #ffffff; text-decoration: none;">
               graziellab889@gmail.com

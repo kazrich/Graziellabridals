@@ -25,6 +25,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  
     <style>
+
+.message-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.alert.success {
+    background-color: #e6ffed;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+.alert.error {
+    background-color: #ffe6e6;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+.close-alert {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #999;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
         body {
             margin: 0;
             padding: 0;
@@ -407,6 +452,16 @@
 <a href="/" class="close-button">&times;</a>
 
 <div class="form-wrapper" id="login-form">
+    {% if messages %}
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                    <span class="close-alert" onclick="this.parentElement.style.display='none';">&times;</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <h1>LOGIN</h1>
     <form method="post">
         {% csrf_token %}
@@ -434,50 +489,61 @@
 
 <!-- Create Account Pop-up -->
 <div class="popup" id="popup-form">
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
     <a class="close-popup" onclick="hidePopup('popup-form', 'overlay')">&times;</a>
     <h2>CREATE ACCOUNT</h2>
     <p style="font-size: 13px; color: #555; margin-bottom: 20px;">
         ⚠️ Please enter a valid Google email address. It will be used for password recovery, and your info is safe with us.
     </p>
-    <form method="post">
+    <form method="post" action="{% url 'register_client' %}" class="registration-form">
         {% csrf_token %}
-        <label for="first_name">First Name</label>
-        <input type="text" id="first_name" name="first_name" placeholder="First name">
-
-        <label for="last_name">Last Name</label>
-        <input type="text" id="last_name" name="last_name" placeholder="Last name">
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Email address">
-
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Create password">
-
+        <input type="text" name="first_name" placeholder="First name">
+        <input type="text" name="last_name" placeholder="Last name">
+        <input type="email" name="email" placeholder="Email address">
+        <input type="password" name="password" placeholder="Create password">
         <button type="submit">CREATE</button>
     </form>
+
 </div>
 
 <!-- Overlay for Forgot Password -->
 <div class="overlay" id="forgot-overlay"></div>
 
 <!-- Forgot Password Pop-up -->
-<div class="popup" id="forgot-popup">
-    <a class="close-popup" onclick="hidePopup('forgot-popup', 'forgot-overlay')">&times;</a>
-    <h2>RESET YOUR PASSWORD</h2>
-    <p>We will send you an email to reset your password.</p>
-    <p style="font-size: 13px; color: #555; margin-bottom: 20px;">
+<div class="popup" id="forgot-popup" role="dialog" aria-labelledby="forgot-title" aria-modal="true">
+    <a class="close-popup" onclick="hidePopup('forgot-popup', 'forgot-overlay')" aria-label="Close popup">&times;</a>
+
+    <h2 id="forgot-title">Reset Your Password</h2>
+    <p class="popup-description">
+        We’ll send you an email to reset your password.
+    </p>
+    <p class="popup-note">
         ⚠️ Please enter the same email you used when creating your account. It must be valid on Google.
     </p>
-    <form method="post">
+
+    <form method="post" action="{% url 'recover_password' %}" novalidate>
         {% csrf_token %}
-        <label for="forgot-email">Email</label>
-        <input type="email" id="forgot-email" name="email" placeholder="Enter your email">
-        <button type="submit">SUBMIT</button>
+        
+        <label for="forgot-email">Email Address</label>
+        <input type="email" id="forgot-email" name="email" placeholder="you@example.com" required>
+
+        <button type="submit" class="submit-button">Send Reset Link</button>
+
         <div class="cancel-link">
-            <a onclick="hidePopup('forgot-popup', 'forgot-overlay')">Cancel</a>
+            <a href="#" onclick="hidePopup('forgot-popup', 'forgot-overlay')">Cancel</a>
         </div>
     </form>
 </div>
+
 
 <script>
     // ─── POP-UP DISPLAY CONTROLS ─────────────────────────────

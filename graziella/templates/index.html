@@ -28,6 +28,104 @@
 
   <style>
 
+/* ..Toast msg pop up Logout.. */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%);
+  background: #000000;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 999;
+}
+.toast.show {
+  opacity: 1;
+}
+
+
+/* ..Logout.. */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.user-name {
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-icon.user-name {
+  font-weight: 700; /* Makes it bold */
+  color: goldenrod; /* A warm luxury tone (like rose gold or champagne) */
+  font-size: 22px; /* Slightly larger than other icons */
+  text-transform: uppercase; /* Optional: adds presence */
+  letter-spacing: 0.5px; /* Optional: adds polish */
+  text-decoration: underline;
+}
+
+
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgb(255, 255, 255);
+  border-radius: 50px;
+  padding: 0.5rem;
+  z-index: 100;
+  min-width: 140px;
+  box-shadow: 0 5px 12px  goldenrod;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dropdown-menu:hover{
+  background-color: white;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 1rem;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile-friendly dropdown */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    right: auto;
+    left: 0;
+    min-width: 100%;
+  }
+}
+
+
+
+
+
+
+
 @media (max-width: 768px) {
   #mobile-collection-display {
     row-gap: 0.5rem; /* Even tighter than gy-2 */
@@ -77,12 +175,11 @@
 
 /* Load Killery Bentom font */
 @font-face {
-  font-family: 'Killery Bentom';
+  font-family: 'KilleryBentom';
   src: url('/static/fonts/KilleryBentom.woff2') format('woff2'),
        url('/static/fonts/KilleryBentom.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-  font-display: swap; /* Improves performance and fallback behavior */
 }
 
 /* Apply font to Graziella titles */
@@ -105,6 +202,9 @@ small.graziella-subtitle {
 /* Optional: fallback styling for body to test font loading */
 body {
   font-family: 'Killery Bentom', serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+
+
 }
 
 
@@ -125,17 +225,18 @@ body {
   border-bottom: 1px solid #222;
   font-size: 1em;
   transition: top 0.4s ease, padding 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 20px 13px goldenrod;
 }
 
 .top-contact-bar .contact-item {
-  color: #f5f5f5;
+  color: #ffffff;
   padding: 1px 10px;
   display: flex;
   align-items: center;
 }
 
 .gold-icon {
-  color: gold;
+  color: goldenrod;
   margin-right: 6px;
 }
 
@@ -154,6 +255,7 @@ body {
 .navbar {
   margin-top: 30px;
   transition: padding 0.3s ease, height 0.3s ease, margin-top 0.4s ease;
+  box-shadow: 0 2px 0px goldenrod;
 }
 
 .navbar-expand-lg {
@@ -204,8 +306,8 @@ body {
 .navbar-nav .nav-link {
   white-space: nowrap; /* Prevents line breaks like "About" / "Us" */
   padding: 8px 20px;    /* Slightly wider padding for elegance */
-  font-weight: 500;
-  color: #ffffff;
+  font-weight: bold;
+  color: #000000;
   position: relative;
   transition: color 0.3s ease;
 }
@@ -247,9 +349,10 @@ body {
   justify-content: center;
 }
 
+
 .nav-icon {
   font-size: 20px;
-  color: #fff;
+  color: #000000;
   background: none;
   border: none;
   cursor: pointer;
@@ -257,7 +360,7 @@ body {
 }
 
 .nav-icon:hover {
-  color: #d4af37;
+  color: #000000;
 }
 
 /* === Cart Drawer === */
@@ -298,7 +401,7 @@ body {
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #555;
+  color: #ff0000;
   transition: color 0.3s ease;
 }
 
@@ -1702,19 +1805,19 @@ body {
 
 
 <!-- Top Contact Bar -->
-    <div class="top-contact-bar text-light py-1" style="background-color: #000000;">
+    <div class="top-contact-bar text-light py-1" style="background-color: #ffffff;">
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
-        <div class="contact-item">
+        <div class="contact-item" style="color: black;">
             <i class="fas fa-phone-alt gold-icon"></i> +256 772 463889
         </div>
-        <div class="contact-item">
+        <div class="contact-item" style="color: black;">
             <i class="fas fa-envelope gold-icon"></i> graziellab889@gmail.com
         </div>
         </div>
     </div>
   
 <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg fixed-top bg-black">
+    <nav class="navbar navbar-expand-lg fixed-top bg-white">
       <div class="container">
         <!-- Logo + Brand + Toggler in one flex row -->
         <div class="d-flex align-items-center justify-content-between w-100">
@@ -1732,13 +1835,25 @@ body {
         </div>
 
         <!-- Collapsible Nav Content -->
-        <div class="collapse navbar-collapse" id="mainNavbar">
+        <div class="collapse navbar-collapse" id="mainNavbar" >
           <!-- Mobile Icons -->
           <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
-              <a href="{% url 'form' %}" class="nav-icon" aria-label="User Form">
-                  <i class="fas fa-user"></i>
+            {% if profile %}
+              <div class="user-dropdown">
+                <span class="nav-icon user-name" onclick="toggleDropdown(this)">
+                  {{ profile.first_name }}
+                </span>
+                <div class="dropdown-menu">
+                  <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
+                </div>
+              </div>
+            {% else %}
+              <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
+                <i class="fas fa-user"></i>
               </a>
+            {% endif %}
           </div>
+
 
           <!-- Nav Links + Desktop Icons -->
           <div class="d-lg-flex align-items-center w-100 justify-content-end flex-column flex-lg-row">
@@ -1755,14 +1870,37 @@ body {
 
             <!-- Desktop Icons -->
             <div class="navbar-icons d-none d-lg-flex ms-3">
-              <a href="{% url 'form' %}" class="nav-icon"><i class="fas fa-user"></i></a>
+              {% if profile %}
+                <div class="user-dropdown">
+                  <span class="nav-icon user-name" onclick="toggleDropdown(this)">
+                    {{ profile.first_name }}
+                  </span>
+                  <div class="dropdown-menu">
+                    <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
+                  </div>
+                </div>
+              {% else %}
+                <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
+                  <i class="fas fa-user"></i>
+                </a>
+              {% endif %}
               <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
             </div>
           </div>
         </div>
       </div>
     </nav>
+
+<div id="logout-toast" class="toast">You’ve been logged out successfully.</div>
+
+<!-- User LOGOUT code -->
+<!-- Hidden logout form -->
+<form id="logout-form" method="POST" action="{% url 'logout' %}" style="display: none;">
+  {% csrf_token %}
+</form>
+
 <!-- Navbar End -->
+
 
 {% if messages %}
   <div class="message-container">
@@ -2149,9 +2287,6 @@ body {
 
 
 
-
-
-
 <!-- Footer -->
 <footer class="text-white py-4 mt-5" style="background-color: #1a1a1a; border-top: 1px solid #444;">
   <div class="footer" style="display: flex; flex-direction: column;padding: 40px; color: #6d6868;">
@@ -2185,7 +2320,11 @@ body {
         <p>If you have any questions regarding our products or our service, please contact our customer service.</p>
         <div class="contact-info">
           <h3 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">Contact Us</h3>
-          <p><strong>Phone:</strong><span style="color: #ffffff;">+256 772 463889</span></p>
+          <p><strong>Phone:</strong> 
+            <a href="tel:+256772463889" style="color: #ffffff; text-decoration: none;">
+              +256 772 463889
+            </a>
+          </p>
           <p><strong>Email:</strong> 
             <a href="mailto:graziellab889@gmail.com" style="color: #ffffff; text-decoration: none;">
               graziellab889@gmail.com
@@ -2213,7 +2352,57 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  
+
+
+  function toggleDropdown(element) {
+    const dropdown = element.parentElement;
+    dropdown.classList.toggle('active');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function confirmLogout() {
+    if (confirm("Are you sure you want to log out?")) {
+      // Set flag to show toast after reload
+      sessionStorage.setItem("showLogoutToast", "true");
+
+      // Animate and submit
+      document.body.style.transition = 'opacity 0.5s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('logout-form').submit();
+      }, 500);
+    }
+  }
+
+window.addEventListener('load', () => {
+  const toast = document.getElementById('logout-toast');
+  const shouldShow = sessionStorage.getItem('showLogoutToast');
+
+  if (toast && shouldShow === 'true') {
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+
+    // Clear the flag so it doesn't show again
+    sessionStorage.removeItem('showLogoutToast');
+  }
+});
+
+
+  // Optional: close dropdown when clicking outside
+  document.addEventListener('click', function (e) {
+    const dropdowns = document.querySelectorAll('.user-dropdown');
+    dropdowns.forEach(dropdown => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) menu.style.display = 'none';
+      }
+    });
+  });
 
 
 // BOOKING SECTION step by step booking
