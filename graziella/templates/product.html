@@ -26,6 +26,186 @@
 
 <style>
 
+.product-image-wrapper {
+  position: relative;
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.wishlist-btn:hover {
+  background: goldenrod;
+}
+
+.wishlist-btn i {
+  color: #e91e63;
+  font-size: 1rem;
+}
+
+
+
+.wishlist-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #e91e63;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.wishlist-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #fff;
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 9999;
+}
+
+.wishlist-toast.show {
+  opacity: 1;
+}
+
+
+
+.cart-drawer {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 320px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  z-index: 999;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+.cart-drawer-header {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wishlist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.wishlist-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.wishlist-item span {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.wishlist-item button {
+  background: #e91e63;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.wishlist-item button:hover {
+  background: #d81b60;
+}
+
+
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+  color: #e91e63;
+}
+
+.wishlist-btn i {
+  font-size: 16px;
+  color: #999;
+}
+
+
+
+
+/* ..Toast msg pop up Logout.. */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%);
+  background: #000000;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 999;
+}
+.toast.show {
+  opacity: 1;
+}
+
+
 .nav-icon.user-name {
   font-weight: 700; /* Makes it bold */
   color: goldenrod; /* A warm luxury tone (like rose gold or champagne) */
@@ -1132,79 +1312,106 @@ body {
         </div>
     </div>
   
-<!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg fixed-top bg-white">
-      <div class="container">
-        <!-- Logo + Brand + Toggler in one flex row -->
-        <div class="d-flex align-items-center justify-content-between w-100">
-          <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
-            <img src="{% static 'bridals/img/logo.png' %}" alt="Logo" class="logo-img">
-            <div class="brand-text">
-              <strong class="graziella-title">Graziella Bridals</strong>
-              <small class="graziella-subtitle">A Legacy Of Excellence</small>
-            </div>
-          </a>
+<nav class="navbar navbar-expand-lg fixed-top bg-white">
+  <div class="container">
+    <!-- Logo + Brand + Toggler -->
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
+        <img src="{% static 'bridals/img/logo.png' %}" alt="Logo" class="logo-img">
+        <div class="brand-text">
+          <strong class="graziella-title">Graziella Bridals</strong>
+          <small class="graziella-subtitle">A Legacy Of Excellence</small>
+        </div>
+      </a>
 
-          <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <!-- Collapsible Nav Content -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <!-- Mobile Icons (Top Centered) -->
+      <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
+        {% if profile %}
+          <div class="user-dropdown">
+            <span class="nav-icon user-name" onclick="toggleDropdown(this)">
+              {{ profile.first_name }}
+            </span>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
+            </div>
+          </div>
+        {% else %}
+          <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
+            <i class="fas fa-user"></i>
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Nav Links + Desktop Icons -->
+      <div class="d-lg-flex align-items-center w-100 justify-content-end flex-column flex-lg-row">
+        <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#home">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+
+          <!-- Mobile Wishlist Icon (Bottom of Nav Links) -->
+          <li class="nav-item d-lg-none mt-4">
+            <button class="nav-icon position-relative" onclick="toggleCartDrawer()">
+              <i class="fas fa-heart"></i>
+              <span id="wishlist-count-mobile" class="wishlist-badge">0</span>
+            </button>
+          </li>
+        </ul>
+
+        <!-- Desktop Icons (Right-Aligned) -->
+        <div class="navbar-icons d-none d-lg-flex ms-3">
+          {% if profile %}
+            <div class="user-dropdown">
+              <span class="nav-icon user-name" onclick="toggleDropdown(this)">
+                {{ profile.first_name }}
+              </span>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
+              </div>
+            </div>
+          {% else %}
+            <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
+              <i class="fas fa-user"></i>
+            </a>
+          {% endif %}
+
+          <!-- Desktop Wishlist Icon -->
+          <button class="nav-icon position-relative" onclick="toggleCartDrawer()">
+            <i class="fas fa-heart"></i>
+            <span id="wishlist-count" class="wishlist-badge">0</span>
           </button>
         </div>
-
-        <!-- Collapsible Nav Content -->
-        <div class="collapse navbar-collapse" id="mainNavbar">
-          <!-- Mobile Icons -->
-          <div class="navbar-icons d-flex justify-content-center mb-3 d-lg-none">
-            {% if profile %}
-              <div class="user-dropdown">
-                <span class="nav-icon user-name" onclick="toggleDropdown(this)">
-                  {{ profile.first_name }}
-                </span>
-                <div class="dropdown-menu">
-                  <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
-                </div>
-              </div>
-            {% else %}
-              <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
-                <i class="fas fa-user"></i>
-              </a>
-            {% endif %}
-          </div>
-
-          <!-- Nav Links + Desktop Icons -->
-          <div class="d-lg-flex align-items-center w-100 justify-content-end flex-column flex-lg-row">
-            <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
-              <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="#product">Products</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
-              <li class="nav-item d-lg-none mt-4">
-                <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
-              </li>
-            </ul>
-
-            <!-- Desktop Icons -->
-            <div class="navbar-icons d-none d-lg-flex ms-3">
-                {% if profile %}
-                  <div class="user-dropdown">
-                    <span class="nav-icon user-name" onclick="toggleDropdown(this)">
-                      {{ profile.first_name }}
-                    </span>
-                    <div class="dropdown-menu">
-                      <button class="dropdown-item" onclick="confirmLogout()">Logout</button>
-                    </div>
-                  </div>
-                {% else %}
-                  <a href="{% url 'login' %}" class="nav-icon" aria-label="User Form">
-                    <i class="fas fa-user"></i>
-                  </a>
-                {% endif %}
-              <button class="nav-icon" onclick="toggleCartDrawer()"><i class="fas fa-shopping-cart"></i></button>
-            </div>
-          </div>
-        </div>
       </div>
-    </nav>
+    </div>
+  </div>
+
+  <!-- Hidden Logout Form for JS Submission -->
+  <form id="logout-form" method="POST" action="{% url 'logout' %}" style="display: none;">
+    {% csrf_token %}
+  </form>
+</nav>
 <!-- Navbar End -->
+
+{% if profile %}
+  <script>
+    sessionStorage.setItem("userFirstName", "{{ profile.first_name|escapejs }}");
+  </script>
+{% endif %}
+
+
+
+
+<form id="logout-form" action="/logout/" method="POST" style="display:none;">
+  {% csrf_token %}
+</form>
 
 
 
@@ -1275,407 +1482,716 @@ body {
 <div id="product-anchor"></div>
   <div class="product-grid">
 
-    <!-- Second Looks -->
+        <!-- Second Looks -->
     <div class="product-card dresses">
-      <img src="{% static 'bridals/img/maid5.jpeg' %}" alt="Graziella Maids" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/maid5.jpeg' %}" alt="Graziella Maids" />
+        <button class="wishlist-btn" onclick="addToWishlist('dresses1', 'Maids Outfit', '{% static 'bridals/img/maid5.jpeg' %}')">
+          <i class="fas fa-heart"></i>
+        </button>
+      </div>
       <h3>Maids Outfit</h3>
     </div>
+
     <div class="product-card dresses">
-      <img src="{% static 'bridals/img/maid4.jpeg' %}" alt="Graziella Maids" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/maid4.jpeg' %}" alt="Graziella Maids" />
+        <button class="wishlist-btn" onclick="addToWishlist('dresses2', 'Maids Outfit', '{% static 'bridals/img/maid4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Maids Outfit</h3>
     </div>
+
     <div class="product-card dresses">
-      <img src="{% static 'bridals/img/maid3.jpeg' %}" alt="Graziella Maids" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/maid3.jpeg' %}" alt="Graziella Maids" />
+        <button class="wishlist-btn" onclick="addToWishlist('dresses3', 'Maids Outfit', '{% static 'bridals/img/maid3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Maids Outfit</h3>
     </div>
+
     <div class="product-card dresses">
-      <img src="{% static 'bridals/img/maid2.jpeg' %}" alt="Graziella Maids" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/maid2.jpeg' %}" alt="Graziella Maids" />
+        <button class="wishlist-btn" onclick="addToWishlist('dresses4', 'Maids Outfit', '{% static 'bridals/img/maid2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Maids Outfit</h3>
     </div>
+
     <div class="product-card dresses">
-      <img src="{% static 'bridals/img/maid1.jpeg' %}" alt="Graziella Maids" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/maid1.jpeg' %}" alt="Graziella Maids" />
+        <button class="wishlist-btn" onclick="addToWishlist('dresses5', 'Maids Outfit', '{% static 'bridals/img/maid1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Maids Outfit</h3>
     </div>
 
 
 
 
-      <!-- Dresses -->
-    <div class="product-card dresses">
-      <img src="{% static 'bridals/img/evening4.jpeg' %}" alt="Graziella Evening" />
-      <h3>Dresses Outfits</h3>
-    </div>
-    <div class="product-card dresses">
-      <img src="{% static 'bridals/img/evening1.jpeg' %}" alt="Graziella Evening" />
-      <h3>Dresses Outfits</h3>
-    </div>
-    <div class="product-card dresses">
-      <img src="{% static 'bridals/img/evening3.jpeg' %}" alt="Graziella Evening" />
-      <h3>Dresses Outfits</h3>
-    </div>
-
-    <div class="product-card bra">
-      <img src="{% static 'bridals/img/evening2.jpeg' %}" alt="Graziella Evening" />
-      <h3>Dresses Outfits</h3>
-    </div>
-    <div class="product-card dresses">
-      <img src="{% static 'bridals/img/evening5.jpeg' %}" alt="Graziella Evening" />
-      <h3>Dresses Outfits</h3>
-    </div>
 
     <!-- Dresses -->
     <div class="product-card dresses">
-      <img src="{% static 'bridals/img/prom1.jpeg' %}" alt="Graziella Dresses" />
-      <h3>Dresses Outfits</h3>
-    </div>
-    <div class="product-card dresses">
-      <img src="{% static 'bridals/img/prom5.jpeg' %}" alt="Graziella Dresses" />
-      <h3>Dresses Outfits</h3>
-    </div>
-    <div class="product-card dresses">
-      <img src="{% static 'bridals/img/prom4.jpeg' %}" alt="Graziella Dresses" />
-      <h3>Dresses Outfits</h3>
-    </div>
-    <div class="product-card dresses">
-      <img src="{% static 'bridals/img/prom3.jpeg' %}" alt="Graziella Dresses" />
-      <h3>Dresses Outfits</h3>
-    </div>
-    <div class="product-card ">
-      <img src="{% static 'bridals/img/prom2.jpeg' %}" alt="Graziella Dresses" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/evening4.jpeg' %}" alt="Graziella Evening" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses6', 'Graziella Evening', '{% static 'bridals/img/evening4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Dresses Outfits</h3>
     </div>
 
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/evening1.jpeg' %}" alt="Graziella Evening" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses7', 'Graziella Evening', '{% static 'bridals/img/evening1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/evening3.jpeg' %}" alt="Graziella Evening" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses8', 'Graziella Evening', '{% static 'bridals/img/evening3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/evening2.jpeg' %}" alt="Graziella Evening" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses9', 'Graziella Evening', '{% static 'bridals/img/evening2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/evening5.jpeg' %}" alt="Graziella Evening" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses10', 'Graziella Evening', '{% static 'bridals/img/evening5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <!-- Prom Dresses -->
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/prom1.jpeg' %}" alt="Graziella Prom" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses11', 'Graziella Prom', '{% static 'bridals/img/prom1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/prom5.jpeg' %}" alt="Graziella Prom" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses12', 'Graziella Prom', '{% static 'bridals/img/prom5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/prom4.jpeg' %}" alt="Graziella Prom" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses13', 'Graziella Prom', '{% static 'bridals/img/prom4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/prom3.jpeg' %}" alt="Graziella Prom" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses14', 'Graziella Prom', '{% static 'bridals/img/prom3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
+
+    <div class="product-card dresses">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/prom2.jpeg' %}" alt="Graziella Prom" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('dresses15', 'Graziella Prom', '{% static 'bridals/img/prom2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Dresses Outfits</h3>
+    </div>
 
 
 
     <!-- Cosmetics -->
-         <!-- perfume -->
+    <!-- Perfume -->
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/perfumes6.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Perfume</h3>
-    </div>
-    <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/perfumes1.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Perfume</h3>
-    </div>
-
-    <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/perfumes4.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Perfume</h3>
-    </div>
-    <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/perfumes3.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Perfume</h3>
-    </div>
-    <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/perfumes5.jpeg' %}" alt="Graziella cosmetics" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/perfumes6.jpeg' %}" alt="Graziella Perfume" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Perfume1', 'Graziella Perfume', '{% static 'bridals/img/perfumes6.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Perfume</h3>
     </div>
 
-
-         <!-- lip stick -->
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/lip2.jpeg' %}" alt="Graziella cosmetics" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/perfumes1.jpeg' %}" alt="Graziella Perfume" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Perfume2', 'Graziella Perfume', '{% static 'bridals/img/perfumes1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Perfume</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/perfumes4.jpeg' %}" alt="Graziella Perfume" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Perfume3', 'Graziella Perfume', '{% static 'bridals/img/perfumes4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Perfume</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/perfumes3.jpeg' %}" alt="Graziella Perfume" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Perfume4', 'Graziella Perfume', '{% static 'bridals/img/perfumes3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Perfume</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/perfumes5.jpeg' %}" alt="Graziella Perfume" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Perfume5', 'Graziella Perfume', '{% static 'bridals/img/perfumes5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Perfume</h3>
+    </div>
+
+    <!-- Lipstick -->
+    <div class="product-card cosmetics">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/lip2.jpeg' %}" alt="Graziella Lipstick" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipstick1', 'Graziella Lipstick', '{% static 'bridals/img/lip2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Lipstick</h3>
     </div>
+
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/lip1.jpeg' %}" alt="Graziella cosmetics" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/lip1.jpeg' %}" alt="Graziella Lipstick" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipstick2', 'Graziella Lipstick', '{% static 'bridals/img/lip1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Lipstick</h3>
     </div>
 
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/lip4.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Lipstick</h3>
-    </div>
-    <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/lip3.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Lipstick</h3>
-    </div>
-    <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/lip5.jpeg' %}" alt="Graziella cosmetics" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/lip4.jpeg' %}" alt="Graziella Lipstick" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipstick3', 'Graziella Lipstick', '{% static 'bridals/img/lip4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Lipstick</h3>
     </div>
 
-         <!-- Lip Gloss -->
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/Lipg2.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Lipgloss</h3>
-    </div>
-    <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/Lipg1.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Lipgloss</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/lip3.jpeg' %}" alt="Graziella Lipstick" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipstick4', 'Graziella Lipstick', '{% static 'bridals/img/lip3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Lipstick</h3>
     </div>
 
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/Lipg4.jpeg' %}" alt="Graziella cosmetics" />
-      <h3>Lipgloss</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/lip5.jpeg' %}" alt="Graziella Lipstick" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipstick5', 'Graziella Lipstick', '{% static 'bridals/img/lip5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Lipstick</h3>
     </div>
+
+    <!-- Lip Gloss -->
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/Lipg3.jpeg' %}" alt="Graziella cosmetics" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Lipg2.jpeg' %}" alt="Graziella Lipgloss" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipgloss1', 'Graziella Lipgloss', '{% static 'bridals/img/Lipg2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Lipgloss</h3>
     </div>
+
     <div class="product-card cosmetics">
-      <img src="{% static 'bridals/img/Lipg5.jpeg' %}" alt="Graziella cosmetics" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Lipg1.jpeg' %}" alt="Graziella Lipgloss" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipgloss2', 'Graziella Lipgloss', '{% static 'bridals/img/Lipg1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Lipgloss</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Lipg4.jpeg' %}" alt="Graziella Lipgloss" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipgloss3', 'Graziella Lipgloss', '{% static 'bridals/img/Lipg4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Lipgloss</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Lipg3.jpeg' %}" alt="Graziella Lipgloss" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipgloss4', 'Graziella Lipgloss', '{% static 'bridals/img/Lipg3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Lipgloss</h3>
+    </div>
+
+    <div class="product-card cosmetics">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Lipg5.jpeg' %}" alt="Graziella Lipgloss" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Lipgloss5', 'Graziella Lipgloss', '{% static 'bridals/img/Lipg5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Lipgloss</h3>
     </div>
 
 
 
-    <!-- intimates -->
-         <!-- Nickers -->
+    <!-- Intimates -->
+    <!-- Nickers -->
     <div class="product-card int">
-      <img src="{% static 'bridals/img/nic1.jpeg' %}" alt="Graziella Nickers" />
-      <h3>Nickers</h3>
-    </div>
-    <div class="product-card int">
-      <img src="{% static 'bridals/img/nic2.jpeg' %}" alt="Graziella Nickers" />
-      <h3>Nickers</h3>
-    </div>
-
-    <div class="product-card int">
-      <img src="{% static 'bridals/img/nic4.jpeg' %}" alt="Graziella Nickers" />
-      <h3>Nickers</h3>
-    </div>
-    <div class="product-card int">
-      <img src="{% static 'bridals/img/nic3.jpeg' %}" alt="Graziella Nickers" />
-      <h3>Nickers</h3>
-    </div>
-    <div class="product-card int">
-      <img src="{% static 'bridals/img/nic5.jpeg' %}" alt="Graziella Nickers" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nic1.jpeg' %}" alt="Graziella Nickers" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nickers1', 'Graziella Nickers', '{% static 'bridals/img/nic1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Nickers</h3>
     </div>
 
-         <!-- Nickers & Bras -->
     <div class="product-card int">
-      <img src="{% static 'bridals/img/nite1.jpeg' %}" alt="Graziella Nights" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nic2.jpeg' %}" alt="Graziella Nickers" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nickers2', 'Graziella Nickers', '{% static 'bridals/img/nic2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Nickers</h3>
+    </div>
+
+    <div class="product-card int">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nic4.jpeg' %}" alt="Graziella Nickers" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nickers3', 'Graziella Nickers', '{% static 'bridals/img/nic4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Nickers</h3>
+    </div>
+
+    <div class="product-card int">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nic3.jpeg' %}" alt="Graziella Nickers" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nickers4', 'Graziella Nickers', '{% static 'bridals/img/nic3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Nickers</h3>
+    </div>
+
+    <div class="product-card int">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nic5.jpeg' %}" alt="Graziella Nickers" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nickers5', 'Graziella Nickers', '{% static 'bridals/img/nic5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Nickers</h3>
+    </div>
+
+    <!-- Nickers & Bras (Nights) -->
+    <div class="product-card int">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nite1.jpeg' %}" alt="Graziella Nights" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nights1', 'Graziella Nights', '{% static 'bridals/img/nite1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Nights</h3>
     </div>
+
     <div class="product-card int">
-      <img src="{% static 'bridals/img/nite2.jpeg' %}" alt="Graziella Nights" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nite2.jpeg' %}" alt="Graziella Nights" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nights3', 'Graziella Nights', '{% static 'bridals/img/nite2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Nights</h3>
     </div>
 
     <div class="product-card int">
-      <img src="{% static 'bridals/img/nite4.jpeg' %}" alt="Graziella Nights" />
-      <h3>Nights</h3>
-    </div>
-    <div class="product-card int">
-      <img src="{% static 'bridals/img/nite3.jpeg' %}" alt="Graziella Nights" />
-      <h3>Nights</h3>
-    </div>
-    <div class="product-card int">
-      <img src="{% static 'bridals/img/nite5.jpeg' %}" alt="Graziella Nights" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nite4.jpeg' %}" alt="Graziella Nights" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nights2', 'Graziella Nights', '{% static 'bridals/img/nite4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Nights</h3>
     </div>
 
     <div class="product-card int">
-      <img src="{% static 'bridals/img/bras1.jpeg' %}" alt="Graziella Bra" />
-      <h3>Bra</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nite3.jpeg' %}" alt="Graziella Nights" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nights4', 'Graziella Nights', '{% static 'bridals/img/nite3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Nights</h3>
     </div>
+
     <div class="product-card int">
-      <img src="{% static 'bridals/img/bras2.jpeg' %}" alt="Graziella Bra" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/nite5.jpeg' %}" alt="Graziella Nights" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Nights5', 'Graziella Nights', '{% static 'bridals/img/nite5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Nights</h3>
+    </div>
+
+    <!-- Bras -->
+    <div class="product-card int">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bras1.jpeg' %}" alt="Graziella Bra" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bra1', 'Graziella Bra', '{% static 'bridals/img/bras1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Bra</h3>
     </div>
 
     <div class="product-card int">
-      <img src="{% static 'bridals/img/bras4.jpeg' %}" alt="Graziella Bra" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bras2.jpeg' %}" alt="Graziella Bra" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bra2', 'Graziella Bra', '{% static 'bridals/img/bras2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Bra</h3>
     </div>
+
     <div class="product-card int">
-      <img src="{% static 'bridals/img/bras3.jpeg' %}" alt="Graziella Bra" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bras4.jpeg' %}" alt="Graziella Bra" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bra3', 'Graziella Bra', '{% static 'bridals/img/bras4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Bra</h3>
     </div>
+
     <div class="product-card int">
-      <img src="{% static 'bridals/img/bras5.jpeg' %}" alt="Graziella Bra" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bras3.jpeg' %}" alt="Graziella Bra" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bra4', 'Graziella Bra', '{% static 'bridals/img/bras3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Bra</h3>
+    </div>
+
+    <div class="product-card int">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bras5.jpeg' %}" alt="Graziella Bra" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bra5', 'Graziella Bra', '{% static 'bridals/img/bras5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Bra</h3>
     </div>
 
 
-    <!-- Serenity Sets/ Jewlerry -->
-         <!-- Rings -->
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/a.jpeg' %}" alt="Graziella rings" />
-      <h3>Ring</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/ring2.jpeg' %}" alt="Graziella Ring" />
-      <h3>Ring</h3>
-    </div>
+    <!-- Serenity Sets / Jewellery -->
 
+    <!-- Rings -->
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/ring4.jpeg' %}" alt="Graziella Ring" />
-      <h3>Ring</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/ring3.jpeg' %}" alt="Graziella Ring" />
-      <h3>Ring</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/ring5.jpeg' %}" alt="Graziella Ring" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/a.jpeg' %}" alt="Graziella Ring" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Ring1', 'Graziella Ring', '{% static 'bridals/img/a.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Ring</h3>
     </div>
 
-
-         <!-- Earrings -->
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/ear1.jpeg' %}" alt="Graziella Earrings" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ring2.jpeg' %}" alt="Graziella Ring" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Ring2', 'Graziella Ring', '{% static 'bridals/img/ring2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Ring</h3>
+    </div>
+
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ring4.jpeg' %}" alt="Graziella Ring" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Ring3', 'Graziella Ring', '{% static 'bridals/img/ring4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Ring</h3>
+    </div>
+
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ring3.jpeg' %}" alt="Graziella Ring" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Ring4', 'Graziella Ring', '{% static 'bridals/img/ring3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Ring</h3>
+    </div>
+
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ring5.jpeg' %}" alt="Graziella Ring" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Ring5', 'Graziella Ring', '{% static 'bridals/img/ring5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Ring</h3>
+    </div>
+
+    <!-- Earrings -->
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ear1.jpeg' %}" alt="Graziella Earrings" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Earrings1', 'Graziella Earrings', '{% static 'bridals/img/ear1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Earrings</h3>
     </div>
+
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/ear2.jpeg' %}" alt="Graziella Earrings" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ear2.jpeg' %}" alt="Graziella Earrings" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Earrings2', 'Graziella Earrings', '{% static 'bridals/img/ear2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Earrings</h3>
     </div>
 
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/ear4.jpeg' %}" alt="Graziella Earrings" />
-      <h3>Earrings</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/ear3.jpeg' %}" alt="Graziella Earrings" />
-      <h3>Earrings</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/a3.jpeg' %}" alt="Graziella Earrings" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ear4.jpeg' %}" alt="Graziella Earrings" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Earrings3', 'Graziella Earrings', '{% static 'bridals/img/ear4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Earrings</h3>
     </div>
 
-         <!-- Necklaces -->
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/neck1.jpeg' %}" alt="Graziella Necklace" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/ear3.jpeg' %}" alt="Graziella Earrings" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Earrings4', 'Graziella Earrings', '{% static 'bridals/img/ear3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Earrings</h3>
+    </div>
+
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/a3.jpeg' %}" alt="Graziella Earrings" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Earrings5', 'Graziella Earrings', '{% static 'bridals/img/a3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Earrings</h3>
+    </div>
+
+    <!-- Necklaces -->
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/neck1.jpeg' %}" alt="Graziella Necklace" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Necklace1', 'Graziella Necklace', '{% static 'bridals/img/neck1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Necklace</h3>
     </div>
+
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/neck2.jpeg' %}" alt="Graziella Necklace" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/neck2.jpeg' %}" alt="Graziella Necklace" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Necklace2', 'Graziella Necklace', '{% static 'bridals/img/neck2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Necklace</h3>
     </div>
 
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/neck4.jpeg' %}" alt="Graziella Necklace" />
-      <h3>Necklace</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/neck3.jpeg' %}" alt="Graziella Necklace" />
-      <h3>Necklace</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/neck5.jpeg' %}" alt="Graziella Necklace" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/neck4.jpeg' %}" alt="Graziella Necklace" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Necklace3', 'Graziella Necklace', '{% static 'bridals/img/neck4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Necklace</h3>
     </div>
 
-         <!-- Bracelets and B -->
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/brace1.jpeg' %}" alt="Graziella Bracelets" />
-      <h3>Bracelets</h3>
-    </div>
-    <div class="product-card sets">
-      <img src="{% static 'bridals/img/brace2.jpeg' %}" alt="Graziella Bracelets" />
-      <h3>Bracelets</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/neck3.jpeg' %}" alt="Graziella Necklace" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Necklace4', 'Graziella Necklace', '{% static 'bridals/img/neck3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Necklace</h3>
     </div>
 
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/brace4.jpeg' %}" alt="Graziella Bracelets" />
-      <h3>Bracelets</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/neck5.jpeg' %}" alt="Graziella Necklace" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Necklace5', 'Graziella Necklace', '{% static 'bridals/img/neck5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Necklace</h3>
     </div>
+
+
+    <!-- Bracelets -->
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/brace3.jpeg' %}" alt="Graziella Bracelets" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/brace1.jpeg' %}" alt="Graziella Bracelet" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bracelet1', 'Graziella Bracelet', '{% static 'bridals/img/brace1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Bracelets</h3>
     </div>
+
     <div class="product-card sets">
-      <img src="{% static 'bridals/img/brace5.jpeg' %}" alt="Graziella Bracelets" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/brace2.jpeg' %}" alt="Graziella Bracelet" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bracelet2', 'Graziella Bracelet', '{% static 'bridals/img/brace2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Bracelets</h3>
     </div>
 
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/brace4.jpeg' %}" alt="Graziella Bracelet" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bracelet3', 'Graziella Bracelet', '{% static 'bridals/img/brace4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Bracelets</h3>
+    </div>
 
-    <!-- Signature Details -->
-         <!-- Gloves -->
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/brace3.jpeg' %}" alt="Graziella Bracelet" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bracelet4', 'Graziella Bracelet', '{% static 'bridals/img/brace3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Bracelets</h3>
+    </div>
+
+    <div class="product-card sets">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/brace5.jpeg' %}" alt="Graziella Bracelet" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Bracelet5', 'Graziella Bracelet', '{% static 'bridals/img/brace3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Bracelets</h3>
+    </div>
+
+    <!-- Gloves -->
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/glove1.jpeg' %}" alt="Graziella Glove" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/glove1.jpeg' %}" alt="Graziella Glove" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Glove1', 'Graziella Glove', '{% static 'bridals/img/glove1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Glove</h3>
     </div>
+
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/glove2.jpeg' %}" alt="Graziella Glove" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/glove2.jpeg' %}" alt="Graziella Glove" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Glove2', 'Graziella Glove', '{% static 'bridals/img/glove2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Glove</h3>
     </div>
 
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/glove4.jpeg' %}" alt="Graziella Glove" />
-      <h3>Glove</h3>
-    </div>
-    <div class="product-card sign">
-      <img src="{% static 'bridals/img/glove3.jpeg' %}" alt="Graziella Glove" />
-      <h3>Glove</h3>
-    </div>
-    <div class="product-card sign">
-      <img src="{% static 'bridals/img/glove5.jpeg' %}" alt="Graziella Glove" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/glove4.jpeg' %}" alt="Graziella Glove" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Glove3', 'Graziella Glove', '{% static 'bridals/img/glove4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Glove</h3>
     </div>
 
-         <!-- Clutch-->
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Clutch1.jpeg' %}" alt="Graziella Clutch" />
-      <h3>Clutch</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/glove3.jpeg' %}" alt="Graziella Glove" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Glove4', 'Graziella Glove', '{% static 'bridals/img/glove3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Glove</h3>
     </div>
+
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Clutch2.jpeg' %}" alt="Graziella Clutch" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/glove5.jpeg' %}" alt="Graziella Glove" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Glove5', 'Graziella Glove', '{% static 'bridals/img/glove5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Glove</h3>
+    </div>
+
+    <!-- Clutches -->
+    <div class="product-card sign">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Clutch1.jpeg' %}" alt="Graziella Clutch" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Clutch1', 'Graziella Clutch', '{% static 'bridals/img/Clutch1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Clutch</h3>
     </div>
 
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Clutch4.jpeg' %}" alt="Graziella Clutch" />
-      <h3>Clutch</h3>
-    </div>
-    <div class="product-card sign">
-      <img src="{% static 'bridals/img/Clutch3.jpeg' %}" alt="Graziella Clutch" />
-      <h3>Clutch</h3>
-    </div>
-    <div class="product-card sign">
-      <img src="{% static 'bridals/img/Clutch5.jpeg' %}" alt="Graziella Clutch" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Clutch2.jpeg' %}" alt="Graziella Clutch" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Clutch2', 'Graziella Clutch', '{% static 'bridals/img/Clutch2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Clutch</h3>
     </div>
 
-         <!-- Bags -->
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/bag1.jpeg' %}" alt="Graziella Hand bag" />
-      <h3>Hand bag</h3>
-    </div>
-    <div class="product-card sign">
-      <img src="{% static 'bridals/img/bag2.jpeg' %}" alt="Graziella Hand bag" />
-      <h3>Hand bag</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Clutch4.jpeg' %}" alt="Graziella Clutch" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Clutch3', 'Graziella Clutch', '{% static 'bridals/img/Clutch4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Clutch</h3>
     </div>
 
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/bag4.jpeg' %}" alt="Graziella Hand bag" />
-      <h3>Hand bag</h3>
-    </div>
-    <div class="product-card sign">
-      <img src="{% static 'bridals/img/bag3.jpeg' %}" alt="Graziella Hand bag" />
-      <h3>Hand bag</h3>
-    </div>
-    <div class="product-card sign">
-      <img src="{% static 'bridals/img/bag5.jpeg' %}" alt="Graziella Hand bag" />
-      <h3>Hand bag</h3>
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Clutch3.jpeg' %}" alt="Graziella Clutch" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Clutch4', 'Graziella Clutch', '{% static 'bridals/img/Clutch3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Clutch</h3>
     </div>
 
-         <!-- Shades -->
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Shade1.jpeg' %}" alt="Graziella Shades" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Clutch5.jpeg' %}" alt="Graziella Clutch" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Clutch5', 'Graziella Clutch', '{% static 'bridals/img/Clutch5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Clutch</h3>
+    </div>
+
+    <!-- Bags -->
+    <div class="product-card sign">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bag1.jpeg' %}" alt="Graziella Handbag" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Handbag1', 'Graziella Handbag', '{% static 'bridals/img/bag1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Handbag</h3>
+    </div>
+
+    <div class="product-card sign">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bag2.jpeg' %}" alt="Graziella Handbag" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Handbag2', 'Graziella Handbag', '{% static 'bridals/img/bag2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Handbag</h3>
+    </div>
+
+    <div class="product-card sign">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bag4.jpeg' %}" alt="Graziella Handbag" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Handbag3', 'Graziella Handbag', '{% static 'bridals/img/bag4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Handbag</h3>
+    </div>
+
+    <div class="product-card sign">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bag3.jpeg' %}" alt="Graziella Handbag" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Handbag4', 'Graziella Handbag', '{% static 'bridals/img/bag3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Handbag</h3>
+    </div>
+
+    <div class="product-card sign">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/bag5.jpeg' %}" alt="Graziella Handbag" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Handbag5', 'Graziella Handbag', '{% static 'bridals/img/bag5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
+      <h3>Handbag</h3>
+    </div>
+
+    <!-- Shades -->
+    <div class="product-card sign">
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Shade1.jpeg' %}" alt="Graziella Shades" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Shades1', 'Graziella Shades', '{% static 'bridals/img/Shade1.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Shades</h3>
     </div>
+
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Shade2.jpeg' %}" alt="Graziella Shades" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Shade2.jpeg' %}" alt="Graziella Shades" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Shades2', 'Graziella Shades', '{% static 'bridals/img/Shade2.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Shades</h3>
     </div>
 
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Shade4.jpeg' %}" alt="Graziella Shades" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Shade4.jpeg' %}" alt="Graziella Shades" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Shades3', 'Graziella Shades', '{% static 'bridals/img/Shade4.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Shades</h3>
     </div>
+
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Shade3.jpeg' %}" alt="Graziella Shades" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Shade3.jpeg' %}" alt="Graziella Shades" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Shades4', 'Graziella Shades', '{% static 'bridals/img/Shade3.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Shades</h3>
     </div>
+
     <div class="product-card sign">
-      <img src="{% static 'bridals/img/Shade5.jpeg' %}" alt="Graziella Shades" />
+      <div class="product-image-wrapper">
+        <img src="{% static 'bridals/img/Shade5.jpeg' %}" alt="Graziella Shades" />
+        <button class="wishlist-btn" aria-label="Add to Wishlist" onclick="addToWishlist('Shades5', 'Graziella Shades', '{% static 'bridals/img/Shade5.jpeg' %}')"><i class="fas fa-heart"></i></button>
+      </div>
       <h3>Shades</h3>
     </div>
 
@@ -1810,7 +2326,189 @@ body {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+
+{% if csrf_token %}
 <script>
+// 🔐 Get CSRF token from cookies
+function getCSRFToken() {
+  const name = "csrftoken";
+  const cookies = document.cookie.split(";");
+  for (let cookie of cookies) {
+    const [key, value] = cookie.trim().split("=");
+    if (key === name) return decodeURIComponent(value);
+  }
+  console.warn("⚠️ CSRF token not found.");
+  return "";
+}
+
+// ➕ Add to Wishlist (local + backend)
+function addToWishlist(productId, productName, productImage) {
+  const userFirstName = sessionStorage.getItem("userFirstName");
+  if (!userFirstName) {
+    alert("Please log in to add items to your wishlist.");
+    return;
+  }
+
+  const wishlistKey = `wishlist_${userFirstName}`;
+  let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+  const alreadyExists = wishlist.some(item => item.id === productId);
+  if (alreadyExists) {
+    showWishlistToast(`${productName} is already in your wishlist 💫`);
+    return;
+  }
+
+  wishlist.push({ id: productId, name: productName, image: productImage });
+  localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+
+  updateCartDrawer(userFirstName);
+  updateWishlistCount();
+
+  fetch('/accounts/add-to-wishlist/', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken()
+    },
+    credentials: "same-origin",
+    body: JSON.stringify({
+      product_id: productId,
+      product_name: productName,
+      product_image: productImage,
+      user_first_name: userFirstName
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      showWishlistToast(`${productName} added to your wishlist 💖`);
+    } else {
+      console.warn("⚠️ Wishlist sync issue:", data.error || "Unknown error");
+      showWishlistToast(`Saved locally, but sync failed 💔`);
+    }
+  })
+  .catch(err => {
+    console.error("❌ Backend wishlist save failed:", err);
+    showWishlistToast(`Saved locally, but couldn't sync 💔`);
+  });
+}
+
+// ❌ Remove from Wishlist
+function removeFromWishlist(productId) {
+  const user = sessionStorage.getItem("userFirstName");
+  let wishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
+  wishlist = wishlist.filter(item => item.id !== productId);
+  localStorage.setItem(`wishlist_${user}`, JSON.stringify(wishlist));
+  updateCartDrawer(user);
+  updateWishlistCount();
+}
+
+// 🔢 Update Wishlist Count Badge
+function updateWishlistCount() {
+  const user = sessionStorage.getItem("userFirstName");
+  const wishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
+  const badge = document.getElementById("wishlist-count");
+  if (badge) badge.innerText = wishlist.length;
+}
+
+// 🧾 Update Cart Drawer with Wishlist Items
+function updateCartDrawer(user) {
+  const drawer = document.getElementById("cartDrawer");
+  const wishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
+
+  drawer.innerHTML = `
+    <div class="cart-drawer-header">
+      ${user}'s Wishlist
+      <button class="cart-close-btn" onclick="toggleCartDrawer()">&times;</button>
+    </div>
+    ${wishlist.length === 0 ? "<p>Your wishlist is currently empty.</p>" : ""}
+    <div class="wishlist-items">
+      ${wishlist.map(item => `
+        <div class="wishlist-item">
+          <img src="${item.image}" alt="${item.name}" />
+          <span>${item.name}</span>
+          <button onclick="removeFromWishlist('${item.id}')">Remove</button>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+// 🛍️ Toggle Cart Drawer
+function toggleCartDrawer() {
+  const drawer = document.getElementById("cartDrawer");
+  const user = sessionStorage.getItem("userFirstName");
+
+  if (!user) {
+    alert("Please log in to view your wishlist.");
+    return;
+  }
+  updateCartDrawer(user);
+  drawer.classList.toggle("open");
+}
+
+// 💖 Show Toast Message
+function showWishlistToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "wishlist-toast show";
+  toast.innerText = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// 🚪 Confirm Logout (no backend sync)
+function confirmLogout() {
+  const user = sessionStorage.getItem("userFirstName");
+
+  sessionStorage.clear();
+  localStorage.removeItem(`wishlist_${user}`);
+
+  sessionStorage.setItem('showLogoutToast', 'true');
+  window.location.href = "/accounts/logout/";
+}
+
+// 🍞 Show Logout Toast + Update Wishlist Count
+window.addEventListener('load', () => {
+  updateWishlistCount();
+  const user = sessionStorage.getItem("userFirstName");
+  if (user) updateCartDrawer(user);
+
+  const toast = document.getElementById('logout-toast');
+  if (toast && sessionStorage.getItem('showLogoutToast') === 'true') {
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+    sessionStorage.removeItem('showLogoutToast');
+  }
+});
+
+// 👤 Toggle Logout Dropdown
+function toggleDropdown(element) {
+  const dropdown = element.parentElement;
+  dropdown.classList.toggle('active');
+  const menu = dropdown.querySelector('.dropdown-menu');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+
+
+
+  // Optional: close dropdown when clicking outside
+  document.addEventListener('click', function (e) {
+    const dropdowns = document.querySelectorAll('.user-dropdown');
+    dropdowns.forEach(dropdown => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) menu.style.display = 'none';
+      }
+    });
+  });
+
+
+
+
+
+
 
 
 // ASK pop up js code
@@ -2070,7 +2768,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </script>
-
+{% endif %}
 
 <!-- Cart Drawer -->
 <div id="cartDrawer" class="cart-drawer">
@@ -2078,7 +2776,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Your Cart
     <button class="cart-close-btn" onclick="toggleCartDrawer()">&times;</button>
   </div>
-  <p>Your cart is currently empty.</p>
+  <p>Your wishlist is currently empty.</p>
 </div>
   
 </body>

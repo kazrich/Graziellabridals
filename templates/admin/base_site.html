@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom.css' %}">
+{% endblock %}
+
+{% block branding %}
+    <div id="graziella-branding">
+        <img src="{% static 'admin/images/logo.png' %}" alt="Graziella Logo" class="graziella-logo">
+        <div class="graziella-text">
+            <h1>Graziella Bridals</h1>
+            <p>A Legacy Of Excellence</p>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,12 +1,7 @@
-from .models import UserRegistration
+from accounts.models import UserRegistration
 
 def user_profile(request):
     profile = None
-    if request.user.is_authenticated:
-        try:
-            profile = UserRegistration.objects.get(user=request.user)
-        except UserRegistration.DoesNotExist:
-            pass
+    if request.user.is_authenticated and isinstance(request.user, UserRegistration):
+        profile = request.user  # Already a UserRegistration instance
     return {'profile': profile}
-
-

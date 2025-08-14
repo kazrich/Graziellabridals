@@ -1,12 +1,13 @@
-from django.contrib import admin
+from django.contrib import admin  # You can keep this if needed elsewhere
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from graziella.admin import admin_site  # ✅ Custom admin site
 
 urlpatterns = [
     path('', include('graziella.urls')),
     path('accounts/', include('accounts.urls')),
-    path('admin/', admin.site.urls), 
+    path('admin/', admin_site.urls),  # ✅ Use Graziella-branded admin
 ]
 
 # Serve media files during development

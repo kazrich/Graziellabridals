@@ -66,6 +66,17 @@ input[type="password"] {
     text-align: center; /* Optional: center text inside input */
 }
 
+input[type="email"]{
+    width: 70%; /* Reduced width */
+    max-width: 300px; /* Optional: cap it for large screens */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    transition: border-color 0.3s ease;
+    text-align: center; /* Optional: center text inside input */    
+}
+
 input[type="password"]:focus {
     border-color: #ff0000;
     outline: none;
@@ -193,7 +204,9 @@ input[type="password"]:focus {
             <form method="post" action="{% url 'recover_password' %}">
                 {% csrf_token %}
                 <label for="email" style="font-size: 20px; font-weight: 600;">Email Address</label>
+                <br>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required><br>
+                <br>
                 <button type="submit" class="reset-button">Send Recovery Email</button>
             </form>
         {% endif %}
