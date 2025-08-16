@@ -65,13 +65,15 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # 🗄️ Database (PostgreSQL via DATABASE_URL)
 # --------------------------------------------------
 
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'graziella_db',
         'USER': 'graziella_db_user',
         'PASSWORD': 'uy1OAk4kNghl6sha1pPUcHBEhZpss',
-        'HOST': 'dpg-d2g5ft8d1b3ps73etkan0-a.internal.render.com',
+        'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': '5432',
         'OPTIONS': {
             'sslmode': 'require',
