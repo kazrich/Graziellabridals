@@ -71,10 +71,11 @@ DATABASES = {
         'NAME': 'graziella_db',
         'USER': 'graziella_db_user',
         'PASSWORD': 'uy1OAk4kNghl6sha1pPUcHBEhZpss',
-        'HOST': 'dpg-d2g5ft8d1b3ps73etkan0-a',
+        'HOST': 'dpg-d2g5ft8d1b3ps73etkan0-a.internal.render.com',
         'PORT': '5432',
     }
 }
+
 
 # --------------------------------------------------
 # 🔐 Password Validation
