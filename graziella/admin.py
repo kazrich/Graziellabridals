@@ -15,7 +15,7 @@ admin.site.unregister(Group)
 class GraziellaAdminSite(AdminSite):
     site_header = 'Graziella Bridals'
     site_title = 'Graziella Admin'
-    index_title = 'Boutique Dashboard'
+    index_title = 'Grazilla Dashboard panel'
 
     def each_context(self, request):
         context = super().each_context(request)

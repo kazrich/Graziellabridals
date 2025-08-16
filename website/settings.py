@@ -1,6 +1,5 @@
 from pathlib import Path
 import os
-import dj_database_url  # Make sure this is installed
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-h2eus7w^sdufy2r4k=jun2b6m_i&w^*ajc08mxb_w!&=c78mm+')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['*']  # You can restrict this later
+ALLOWED_HOSTS = ['*']  # For local dev; restrict in production
 
 # --------------------------------------------------
 # 🧩 Installed Apps
@@ -45,10 +44,10 @@ LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # For static file serving
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Static file serving
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',  # CSRF protection
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -62,17 +61,15 @@ ROOT_URLCONF = 'website.urls'
 WSGI_APPLICATION = 'website.wsgi.application'
 
 # --------------------------------------------------
-# 🗄️ Database (PostgreSQL via DATABASE_URL)
+# 🗄️ Database (SQLite for local dev)
 # --------------------------------------------------
 
-# Use DATABASE_URL if available (preferred on Render)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # --------------------------------------------------
 # 🔐 Password Validation
@@ -105,6 +102,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -142,3 +140,9 @@ EMAIL_HOST_PASSWORD = 'aets wwjw pydn fvqa'  # App password
 # --------------------------------------------------
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# --------------------------------------------------
+# 🛡️ CSRF Settings (Optional for AJAX)
+# --------------------------------------------------
+
+CSRF_COOKIE_HTTPONLY = False  # Allows JS to read CSRF token if needed
