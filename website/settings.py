@@ -66,7 +66,14 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # --------------------------------------------------
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'graziella_db',
+        'USER': 'graziella_db_user',
+        'PASSWORD': 'uy1OAk4kNghl6sha1pPUcHBEhZpss',
+        'HOST': 'dpg-d2g5ft8d1b3ps73etkan0-a',
+        'PORT': '5432',
+    }
 }
 
 # --------------------------------------------------
