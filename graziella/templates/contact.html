@@ -26,6 +26,38 @@
 
 <style>
 
+.message-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.alert {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.6s ease-in-out;
+  opacity: 1;
+}
+
+.alert.success {
+  background-color: #e6f7f1;
+  color: #2e7d32;
+  border: 1px solid #b2dfdb;
+}
+
+.alert.error {
+  background-color: #fdecea;
+  color: #c62828;
+  border: 1px solid #f5c6cb;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 
 .wishlist-badge {
   position: absolute;
@@ -786,18 +818,17 @@ textarea {
 
 
 
-{% if messages %}
+<!-- Contact Banner Start -->
+<section class="contact-banner">
+  {% if messages %}
   <div class="message-container">
     {% for message in messages %}
-      <div class="alert-box {{ message.tags }}">{{ message }}</div>
+      <div class="alert {{ message.tags }}">
+        {{ message }}
+      </div>
     {% endfor %}
   </div>
 {% endif %}
-
-
-
-<!-- Contact Banner Start -->
-<section class="contact-banner">
   <!-- Left: Contact Info -->
   <div class="banner-left" style="color: #000000;">
     <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px;">Contact Us</h2>
@@ -830,23 +861,26 @@ textarea {
   <div class="form-overlay">
     <div class="form-header">
       <h1 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px;">Send Your Question</h1>
-      <p>Reach out for guidance, opportunities or assistance — we’re here for you.</p>
+      <p>{{ help_text|default:"Reach out for guidance, opportunities or assistance — we’re here for you." }}</p>
     </div>
+
     {% if name %}
-      <h3 class="thank-you">Thank you, {{ name }}!</h3>
+      <h3 class="thank-you" style="animation: fadeIn 1s ease-in-out;">Thank you, {{ name }}!</h3>
     {% endif %}
+
     <form method="POST">
       {% csrf_token %}
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <input type="tel" name="number" placeholder="Your Contact" required pattern="[0-9]{10}" title="Enter a 10-digit phone number">
+      <input type="text" name="name" placeholder="Your Name" required value="{{ profile.name|default:'' }}">
+      <input type="email" name="email" placeholder="Your Email" required value="{{ profile.email|default:'' }}">
+      <input type="tel" name="number" placeholder="Your Contact" required pattern="[0-9]{10}" title="Enter a 10-digit phone number" value="{{ profile.phone|default:'' }}">
       <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
 
       <p class="privacy-note">Client, your information is safe with us.</p>
-      <btn class="btn" type="submit" style="text-align: center;">Send</btn>
+      <button class="btn" type="submit" style="text-align: center;">Send</button>
     </form>
   </div>
 </section>
+
 
 
 
@@ -919,6 +953,19 @@ textarea {
 
 {% if csrf_token %}
 <script>
+
+  // Wait 3 seconds, then fade out messages
+  setTimeout(function() {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+      alert.style.transition = 'opacity 0.6s ease-out';
+      alert.style.opacity = '0';
+      setTimeout(() => alert.remove(), 600); // Remove from DOM after fade
+    });
+  }, 3000);
+
+
+
 
 // 🔐 Get CSRF token from cookies
 function getCSRFToken() {

@@ -1476,7 +1476,6 @@ body {
 </form>
 
 
-
 <div class="prodct_selection"></div>
 <!-- Product -->
 <section class="product-section" style="padding-top: 120px;">
@@ -1485,7 +1484,16 @@ body {
           <h3 style="font-family: 'Killery Bentom DEMO VERSION'; color: #d4af37; font-size: 55px;">Filter</h3>
       </div>
 
+
+      {% if messages %}
+        <div class="message-container">
+          {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
       
+
 
       <div class="filter-bar" style="font-family: 'Georgia', serif;">
           <button class="filter-btn active" data-filter="all">
@@ -2287,38 +2295,42 @@ body {
 <div id="askPopup" class="popup-overlay">
   <div class="popup-content">
     <span class="close-btn" id="closePopup">&times;</span>
-    <form>
-      <h1 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 30px;">Feel Free And Ask Us</h1>
-      <p style=" font-size: 'Courier New'; text-align: center; font-size: 15px;">...We will answer you back in no time...</p>
+
+    <form method="POST" action="{% url 'ask_popup' %}">
+      {% csrf_token %}
       
-    <div style="font-family: 'Georgia';">
-            <input type="text" name="name" placeholder="Name" required>
-          <input type="email" name="email" placeholder="Email (optional)">
-          <input type="text" name="contact" placeholder="Contact" required>
+      <h1 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 30px;">Feel Free And Ask Us</h1>
+      <p style="font-family: 'Courier New'; text-align: center; font-size: 15px;">...We will answer you back in no time...</p>
 
-          <select name="questionType" required>
-            <option value="" disabled selected>Choose question type</option>
-            <option>Bridal gowns</option>
-            <option>Prom Dresses</option>
-            <option>Maids Dresses</option>
-            <option>Evening Dresses</option>
-            <option>Changing Dresses</option>
-            <option>Second looks</option>
-            <option>Cosmetics</option>
-            <option>Intimates</option>
-            <option>Serenity set</option>
-            <option>Signature details</option>
-          </select>
+      <div style="font-family: 'Georgia';">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email (optional)">
+        <input type="text" name="contact" placeholder="Contact" required>
 
-          <textarea name="message" placeholder="Tell us more..." rows="4" required></textarea>
-    </div>
+        <select name="questionType" required>
+          <option value="" disabled selected>Choose question type</option>
+          <option>Bridal gowns</option>
+          <option>Prom Dresses</option>
+          <option>Maids Dresses</option>
+          <option>Evening Dresses</option>
+          <option>Changing Dresses</option>
+          <option>Second looks</option>
+          <option>Cosmetics</option>
+          <option>Intimates</option>
+          <option>Serenity set</option>
+          <option>Signature details</option>
+        </select>
 
-      <p style=" font-size: 'Courier New'; text-align: center;">Customer your Information is safe with us</p>
+        <textarea name="message" placeholder="Tell us more..." rows="4" required></textarea>
+      </div>
+
+      <p style="font-family: 'Courier New'; text-align: center;">Customer, your information is safe with us</p>
 
       <button type="submit" class="btn btn-submit">Submit</button>
     </form>
   </div>
 </div>
+
 
 
 
@@ -2391,6 +2403,15 @@ body {
 
 {% if csrf_token %}
 <script>
+
+  setTimeout(function() {
+    document.querySelectorAll('.alert').forEach(function(alert) {
+      alert.style.transition = 'opacity 0.6s ease-out';
+      alert.style.opacity = '0';
+      setTimeout(() => alert.remove(), 600);
+    });
+  }, 3000);
+
 // 🔐 Get CSRF token from cookies
 function getCSRFToken() {
   const name = "csrftoken";
