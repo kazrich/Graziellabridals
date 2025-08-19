@@ -60,6 +60,19 @@ body {
     animation: pulseHeader 3s infinite;
 }
 
+/* Style the index title header */
+.dashboard #content h1 {
+  background: linear-gradient(to right, #fbe4d5, #f8d7da); /* soft peach gradient */
+  color: black !important;
+  font-family: 'Georgia', serif;
+  font-size: 28px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  letter-spacing: 0.5px;
+}
 
 
 /* 📦 Module Styling */
