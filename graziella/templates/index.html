@@ -1926,6 +1926,136 @@ body {
 
 
 
+/* Booking form display for tablets */
+@media (max-width: 991px) {
+  .gb-booking-step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gb-info-panel,
+  .gb-date-panel,
+  .gb-time-panel {
+    float: none !important;
+    width: 100% !important;
+    padding: 1.5rem !important;
+    text-align: center !important;
+  }
+
+  .gb-info-panel img {
+    margin: 0 auto 1rem;
+    display: block;
+  }
+
+  .gb-info-panel h2,
+  .gb-info-panel p {
+    text-align: center;
+  }
+
+  .gb-date-panel input.gb-date-input,
+  .gb-time-panel select.gb-time-select {
+    width: 80%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+
+
+@media (max-width: 991px) {
+  #askPopup .popup-content {
+    width: 90% !important;
+    max-width: 500px !important;
+    margin: auto;
+    padding: 2rem !important;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+
+  #askPopup form h1 {
+    font-size: 24px !important;
+    text-align: center;
+  }
+
+  #askPopup form p {
+    font-size: 14px !important;
+    text-align: center;
+  }
+
+  #askPopup input,
+  #askPopup select,
+  #askPopup textarea {
+    width: 100% !important;
+    max-width: 400px;
+    margin: 0.5rem auto;
+    display: block;
+    padding: 0.6rem;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  #askPopup .btn-submit {
+    display: block;
+    margin: 1.5rem auto 0;
+    padding: 0.7rem 2rem;
+    font-size: 16px;
+    background-color: #DAA520;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #askPopup .close-btn {
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .photo {
+    justify-content: space-between !important;
+    gap: 0.5rem !important;
+  }
+
+  .photo-item {
+    width: 48% !important;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .photo-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .wishlist-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    padding: 0.3rem;
+    font-size: 0.9rem;
+    color: #DAA520;
+    z-index: 2;
+  }
+
+  .wishlist-btn i {
+    font-size: 1rem;
+  }
+}
+
+
 
 
   </style>
@@ -1991,7 +2121,7 @@ body {
       <div class="d-lg-flex align-items-center w-100 justify-content-end flex-column flex-lg-row">
         <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
           <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'about-us' %}">About Us</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'product' %}">Products</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
 
@@ -3110,7 +3240,7 @@ function toggleCartDrawer() {
 <!-- Cart Drawer -->
 <div id="cartDrawer" class="cart-drawer">
   <div class="cart-drawer-header">
-    Your Cart
+    Your Wishlist
     <button class="cart-close-btn" onclick="toggleCartDrawer()">&times;</button>
   </div>
   <p>Your wishlist is currently empty.</p>

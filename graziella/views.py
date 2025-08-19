@@ -122,3 +122,16 @@ def product(request):
             profile = None
 
     return render(request, 'product.html', {'profile': profile})
+
+# 👗 About-us view
+def about_us(request):
+    profile = None
+    user_id = request.session.get('user_id')
+
+    if user_id:
+        try:
+            profile = UserRegistration.objects.get(id=user_id)
+        except UserRegistration.DoesNotExist:
+            profile = None
+
+    return render(request, 'about-us.html', {'profile': profile})
