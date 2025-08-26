@@ -14,6 +14,7 @@ urlpatterns = [
     # -------------------------------
     path('recover-password/', views.recover_password, name='recover_password'),
     path('reset-password/<str:token>/', views.reset_password, name='reset_password'),
+    
 
     # -------------------------------
     # 💖 Wishlist

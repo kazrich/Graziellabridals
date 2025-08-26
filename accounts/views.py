@@ -284,3 +284,7 @@ def logout_view(request):
             pass
     django_logout(request)
     return redirect('/')
+
+
+
+
