@@ -1025,7 +1025,6 @@ body {
 /* Bridal Banner Area */
 /* Bridal Banner Area */
 .book-sets {
-  background-color: #fef6f8;
   padding: 50px 20px;
 }
 
@@ -1081,16 +1080,17 @@ body {
   margin-top: 1.5rem;
   padding: 10px 24px;
   background-color: #d4af37;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   text-decoration: none;
   border-radius: 50px;
-  font-weight: bold;
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
 .book-button:hover {
   background-color: #ffffff;
+  color: #000;
+  border: 1px solid black;
 }
 
 /* Dots */
@@ -1108,7 +1108,7 @@ body {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #000000;
   cursor: pointer;
   position: relative;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -1116,7 +1116,7 @@ body {
 
 /* 🟡 Active Dot */
 .dot.active {
-  background-color: #f5b5d9; /* Soft blush tone for bridal elegance */
+  background-color: #d4af37; /* Soft blush tone for bridal elegance */
   transform: scale(1.2);
 }
 
@@ -1129,7 +1129,7 @@ body {
   width: 20px;
   height: 20px;
   border: 2px solid transparent;
-  border-top: 2px solid #f5b5d9;
+  border-top: 2px solid #d4af37;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -2244,7 +2244,7 @@ function saveThenLogout() {
   <div class="banner-text">
     <h1 class="about-heading" style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px; font-weight: lighter;">Welcome to <span style="font-size: 50px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold;"> <br>Graziella Bridals</span></h1>
     <h2 style="font-family: 'Georgia', serif; font-size: 20px; font-weight: bold;">Where dreams meet elegance</h2>
-    <p style="font-size: 'Courier New'; font-weight: bold;">
+    <p style="font-family: 'Segoe UI', sans-serif;">
       We’re thrilled to have you here! At <strong style="font-size: 20px; color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold;">Graziella Bridals</strong>, every bride is a queen—
       and we’re devoted to making your special day unforgettable.<br>
       Explore our collection of timeless gowns, accessories, and bridal services tailored with love and detail.<br><br>
@@ -2271,17 +2271,17 @@ function saveThenLogout() {
 
 
 <!-- Premier Designers Section -->
-<section id="bridal-collection" style="background-color: #fef6f8; padding: 40px 20px;">
+<section id="bridal-collection" style="background-color: #000000; padding: 40px 20px;">
   <div class="container">
-    <h2 class="text-center mb-5" style="font-family: 'Killery Bentom DEMO VERSION', cursive; font-size: 60px; color: #222;">
+    <h2 class="text-center mb-5" style="font-family: 'Killery Bentom DEMO VERSION', cursive; font-size: 40px; color: #ffffff;">
       Our Collections<br>
-      <span style="font-size: 42px; font-weight: 500; font-family: 'Georgia', serif;">
-        ...Beyond Bridal: Explore More...
+      <span style="font-size: 30px; font-weight: 500; font-family: 'Georgia', serif;">
+        Beyond Bridal: Explore More
       </span>
-      <p style="font-size: 15px; line-height: 1.6; color: #000000; font-family: 'Courier New'; max-width: 800px; margin: 0 auto; font-weight: bold;">
+      <p style="font-size: 18px; line-height: 1.6; color: #ffffff; font-family: 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto;">
         While bridal gowns may be our signature, we’re here for every dazzling moment. Browse through our <strong>Serenity Sets</strong> collection for stylish bags, sparkling jewelry, and more. For our prom queens and elegant evening looks, explore <strong>Second Looks</strong>  tailored to turn heads. Planning with your bridal squad? Our <strong>Prom, Changing, Evening Dresses</strong> & <strong>Maids Package</strong> are ready to make the prep just as picture-perfect.
       </p>
-      <p style="font-size: 20px; line-height: 1.6; color: #000000; font-family: 'Courier New'; max-width: 800px; margin: 0 auto; font-weight: bolder;">...much more...</p>
+      <p style="font-size: 20px; line-height: 1.6; color: #ffffff; font-family: 'Courier New'; max-width: 800px; margin: 0 auto; font-weight: bolder;">...much more...</p>
     </h2>
 
     <div id="mobile-collection-display" class="row justify-content-center align-items-stretch gy-5">
@@ -2296,7 +2296,7 @@ function saveThenLogout() {
             <img src="{% static 'bridals/img/brace2.jpeg' %}" class="gallery-image" alt="Prom 3" />
           </div>
           <div class="text-container">
-            <h4 class="gallery-title" style="font-family: 'Georgia', serif;">Serenity Sets</h4>
+            <h4 class="gallery-title" style="font-family: 'Georgia', serif; color: white; font-size: 15px;">Serenity Sets</h4>
           </div>
         </div>
       </div>
@@ -2310,7 +2310,7 @@ function saveThenLogout() {
             <img src="{% static 'bridals/img/evening3.jpeg' %}" class="gallery-image" alt="Prom 3" />
           </div>
           <div class="text-container">
-            <h4 class="gallery-title" style="font-family: 'Georgia', serif;">Second Looks</h4>
+            <h4 class="gallery-title" style="font-family: 'Georgia', serif; color: white; font-size: 15px;">Second Looks</h4>
           </div>
         </div>
       </div>
@@ -2324,7 +2324,7 @@ function saveThenLogout() {
             <img src="{% static 'bridals/img/Lipg5.jpeg' %}" alt="Evening 3" class="gallery-image" />
           </div>
           <div class="text-container">
-            <h4 class="gallery-title" style="font-family: 'Georgia', serif;">Cosmetics</h4>
+            <h4 class="gallery-title" style="font-family: 'Georgia', serif; color: white; font-size: 15px;">Cosmetics</h4>
           </div>
         </div>
       </div>
@@ -2345,10 +2345,10 @@ function saveThenLogout() {
     <!-- Text Area -->
     <div class="sets-t">
       <h2 style="color: rgb(0, 0, 0);">Let us Help You Make a <br> <span style="font-size: 60px; color: #d4af37; font-family: 'Georgia', serif; text-align: left;">Statement</span> <br> on Your Special Day</h2>
-      <p style="font-family: 'Courier New'; font-size: 18px; font-weight: bold;">
+      <p style="font-family: 'Segoe UI', sans-serif; font-size: 18px;">
         We’re all about making bridal dreams shinefrom the stunning styles already on our racks to that one-of-a-kind gown with your name all over it. Your trust inspires us, and we can’t wait to help you glow through every unforgettable moment!
       </p>
-      <p style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 28px; font-weight: bold;">Say to YES to Graziella Bridals & we serve you</p>
+      <p style="font-family: 'Segoe UI', sans-serif; font-size: 20px; font-weight: bold;">Say to YES to Graziella Bridals & we serve you</p>
       <a href="#" class="book-button" data-bs-toggle="modal" data-bs-target="#bookingModal" style="border-radius: 50px;">
         BOOK AN APPOINTMENT
       </a>
@@ -2362,7 +2362,7 @@ function saveThenLogout() {
 
     <!-- Image Area -->
     <div class="sent-img">
-      <img src="{% static 'bridals/img/new.png' %}" alt="Bridal Image 1" class="slide active">
+      <img src="{% static 'bridals/img/13.jpg' %}" alt="Bridal Image 1" class="slide active">
       <img src="{% static 'bridals/img/new3.png' %}" alt="Bridal Image 2" class="slide">
       <img src="{% static 'bridals/img/new2.png' %}" alt="Bridal Image 3" class="slide">
     </div>
@@ -2527,7 +2527,7 @@ function saveThenLogout() {
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
         <div class="text-card p-4 text-center">
           <h3 class="category-title mb-2" style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 40px;">OUR GOWNS</h3>
-          <p class="product-count" style="color: #000; font-family: 'Courier New'; font-weight: bold;">
+          <p class="product-count" style="color: #000; font-family: 'Segoe UI', sans-serif; font-size: 15px;">
             Unveil your forever in a gown woven with dreams. Our bridal collection is a symphony of luxurious fabrics and timeless elegance, designed to make your walk down the aisle unforgettable. Whether you're ready to fall in love with a gown to call your own or wish to hire your perfect match for the day it’s all here, waiting to be part of your story.
           </p>
         </div>
