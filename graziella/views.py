@@ -5,6 +5,8 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from django.shortcuts import redirect
+from django.http import JsonResponse
+import datetime  # ✅ This line fixes the error
 
 # 🏠 Home view
 def home(request):
@@ -147,6 +149,54 @@ def about_us(request):
             profile = None
 
     return render(request, 'about-us.html', {'profile': profile})
+
+
+
+
+# Optional: import your payment gateway SDKs or API clients here
+# from .payment_gateways import momo_api, airtel_api, visa_api
+
+def payment_page(request):
+    if request.method == 'GET':
+        return render(request, 'payment.html')
+
+    elif request.method == 'POST':
+        # Capture booking form data
+        full_name = request.POST.get('userName')
+        email = request.POST.get('userEmail')
+        phone = request.POST.get('userPhone')
+        address = request.POST.get('userAddress')
+        event_date = request.POST.get('eventDate')
+        message = request.POST.get('userMessage')
+        selected_date = request.POST.get('selectedDateText')
+        selected_time = request.POST.get('selectedTimeText')
+
+        # Validate required fields
+        if not all([full_name, email, phone, selected_date, selected_time]):
+            messages.error(request, "Please fill in all required fields.")
+            return redirect('payment_page')
+
+        # Prepare booking object or payload
+        booking_data = {
+            'name': full_name,
+            'email': email,
+            'phone': phone,
+            'address': address,
+            'event_date': event_date,
+            'message': message,
+            'appointment_date': selected_date,
+            'appointment_time': selected_time,
+            'timestamp': datetime.datetime.now()
+        }
+
+        # TODO: Trigger payment gateway logic here
+        # Example: response = momo_api.initiate_payment(phone, amount)
+
+        # For now, simulate success
+        messages.success(request, "Booking submitted! Please proceed to payment to confirm.")
+        return render(request, 'payment.html', {'booking': booking_data})
+
+
 
 
 

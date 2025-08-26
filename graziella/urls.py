@@ -12,5 +12,6 @@ urlpatterns = [
         # ... your other paths
     path('logout/', LogoutView.as_view(), name='logout'),
     path('about-us/', views.about_us, name='about-us'),
+    path('payment/', views.payment_page, name='payment_page'),  # Payment page route
  
 ]
