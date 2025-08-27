@@ -672,15 +672,50 @@ body {
     gap: 5px;
   }
 
-  .logo-img {
-    height: 90px; /* Ideal range: 40–60px */
-    width: auto;
-    padding: 1px 0; /* Reduces top/bottom space */
-  }
-
   .top-contact-bar {
     padding-top: 10px;
     padding-bottom: 5px;
+  }
+
+  .logo-img {
+    height: 70px; /* Reduced for better alignment */
+    width: auto;
+    flex-shrink: 0;
+    padding: 1px 0;
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 0;
+    max-width: 70%; /* Prevents pushing collapse button */
+  }
+
+  .graziella-title,
+  .navbar.shrink .graziella-title {
+    font-size: 22px !important;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    transition: font-size 0.3s ease;
+  }
+
+  .graziella-subtitle,
+  .navbar.shrink .graziella-subtitle {
+    font-size: 14px !important;
+    font-style: italic;
+    letter-spacing: 0.4px;
+    transition: font-size 0.3s ease;
   }
 
   .navbar-toggler {
@@ -690,6 +725,8 @@ body {
     background-color: white;
     outline: none;
     box-shadow: none;
+    flex-shrink: 0;
+    margin-left: auto;
   }
 
   .navbar-toggler-icon {
@@ -700,14 +737,6 @@ body {
 
   .navbar-toggler:hover .navbar-toggler-icon {
     filter: brightness(1.2);
-  }
-
-  .graziella-title {
-    font-size: 16px;
-  }
-
-  .graziella-subtitle {
-    font-size: 10px;
   }
 
   .navbar-icons {
@@ -728,7 +757,6 @@ body {
     margin-bottom: 10px;
   }
 }
-
 
 
 
@@ -983,9 +1011,9 @@ body {
       <!-- Left Section: Working Days & Hours -->
       <div class="footer-left" style="flex: 1; min-width: 250px;">
         <h2 style="font-family: 'Killery Bentom DEMO VERSION'; font-size: 50px; color: #ffffff;">Working Hours</h2>
-        <p style="font-size: 18px;">Monday - Friday: <span style="color: #ffffff;">08:00 AM – 6:00 PM</span></p>
-        <p style="font-size: 18px;">Saturday: <span style="color: #ffffff;">10:00 AM – 6:00 PM</span></p>
-        <p style="font-size: 18px;">Sunday: <span style="color: #ffffff;">for only those with bookings</span></p>
+        <p style="font-size: 18px;">Monday - Friday: <span style="color: #ffffff;">08:00 AM – 08:00 PM</span></p>
+        <p style="font-size: 18px;">Saturday: <span style="color: #ffffff;">08:00 AM – 08:00 PM</span></p>
+        <p style="font-size: 18px;">Sunday: <span style="color: #ffffff;">Sorry Client!!, but we dont work/open the shop on this day, but you can make/press your booking on this very website</span></p>
 
       </div>
 
@@ -1010,6 +1038,11 @@ body {
           <p><strong>Phone:</strong> 
             <a href="tel:+256772463889" style="color: #ffffff; text-decoration: none;">
               +256 772 463889
+            </a>
+          </p>
+          <p><strong>Phone:</strong>
+            <a href="tel:+256702463889" style="color: #ffffff; text-decoration: none;">
+              +256 702 463889
             </a>
           </p>
           <p><strong>Email:</strong> 
